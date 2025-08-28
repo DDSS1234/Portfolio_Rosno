@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Ring</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css_styles.css">
+</head>
+<body class="bg-white text-ink overflow-hidden">
+  <div id="room" class="relative w-screen h-screen flex flex-col justify-center items-center">
+    <div id="ring" class="relative w-full h-full flex justify-center items-center perspective-1000">
+      <ul id="cardRing" class="absolute list-none m-0 p-0" role="listbox" aria-activedescendant="">
+        <!-- Cards injected by JavaScript -->
+      </ul>
+    </div>
+    <div id="caption" role="status" class="caption-rail fixed left-0 bottom-0 w-full flex items-center justify-center pointer-events-none">
+      <p id="captionText" class="mx-auto text-center"></p>
+    </div>
+    <div id="overlay" class="hidden fixed inset-0 bg-white/95 z-10 overflow-auto" role="dialog" aria-modal="true">
+      <div class="overlay-grid p-8 grid gap-4"></div>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+</html>

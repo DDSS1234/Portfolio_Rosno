@@ -1,0 +1,66 @@
+:root {
+  --ring-step: 18deg;
+  --card-focus-scale: 1.03;
+  --caption-h-d: 68px;
+  --caption-h-m: 60px;
+  --white: #ffffff;
+  --ink: #0f0f0f;
+  --hairline: rgba(0,0,0,0.06);
+  --dim: rgba(0,0,0,0.15);
+}
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+#ring {
+  perspective: 1000px;
+}
+
+#cardRing {
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30vw;
+  height: calc(30vw * 4 / 3);
+  background: var(--white);
+  box-shadow: 0 0 0 1px var(--hairline);
+  transform-style: preserve-3d;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0.8;
+  transition: transform 0.12s ease, opacity 0.2s ease;
+}
+
+.card.active {
+  opacity: 1;
+  transform: scale(var(--card-focus-scale));
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.caption-rail {
+  height: var(--caption-h-d);
+  background: var(--white);
+  border-top: 1px solid var(--hairline);
+  color: var(--ink);
+  font-size: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #cardRing, .card {
+    transition: none;
+  }
+}
