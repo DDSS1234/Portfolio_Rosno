@@ -1,6 +1,3 @@
-+118
--0
-
 const state = {
   currentIndex: 0,
   isDetailOpen: false,
@@ -8,14 +5,15 @@ const state = {
 };
 
 let projects = [];
+const boot = () => { initRing(); updateCaption(); bindEvents(); };
 
-fetch('data/projects.json')
-  .then(res => res.json())
-  .then(data => {
-    projects = data;
-    initRing();
-    updateCaption();
-    bindEvents();
+fetch('data/projects.json' + (window.ASSET_REV ? `?rev=${window.ASSET_REV}` : ''))
+  .then(r => { if (!r.ok) throw new Error(r.statusText); return r.json(); })
+  .then(data => { projects = data; boot(); })
+  .catch(err => {
+    console.error('Failed to load projects.json', err);
+    projects = [{ id:'placeholder', title:'Hello', year:'—', hook:'Data failed to load.', linework:'' }];
+    boot();
   });
 
 function initRing() {
