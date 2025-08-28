@@ -4,8 +4,8 @@
   --caption-h-d: 68px;
   --caption-h-m: 60px;
   --white: #eeeeee;
-  --ink: #2a2a2a;
-  --hairline: rgba(0,0,0,0.06);
+  --ink: #9f9f9f;
+  --hairline: #9f9f9f;
   --dim: rgba(0,0,0,0.15);
   --card-w: clamp(260px, 35dvw, 420px);
   --card-h: clamp(340px, 55dvh, 560px);
@@ -64,8 +64,8 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 30dvw;
-  height: calc(30dvw * 4 / 3);
+  width: 40dvw;
+  height: calc(40dvw * 4 / 3);
   background: var(--white);
   box-shadow: 0 0 0 1px var(--hairline);
   transform-style: preserve-3d;
@@ -196,7 +196,7 @@ body {
   transform: translate3d(-50%,-50%,0);
   border-radius: 16px;
   background: #eeeeee;
-  border: #2a2a2a, 2px;
+  border: 2px solid, #9f9f9f;
   box-shadow: 0 12px 40px rgba(0,0,0,.35);
   overflow: clip;
   opacity: 0;            /* hidden by default; JS reveals prev/current/next */
@@ -213,7 +213,6 @@ body {
   width: 100%;
   height: 60%;
   object-fit: contain;
-  background: #0f1115;
 }
 #cardRing .card .card-body{
   padding: 14px 16px 18px;
