@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio Ring</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css" />
+  <script>window.ASSET_REV = '1';</script>
 </head>
 <body>
   <div id="room">
@@ -13,14 +14,17 @@
         <!-- Cards injected by JavaScript -->
       </ul>
     </div>
+
     <div id="caption" role="status" class="caption-rail">
       <p id="captionText"></p>
     </div>
+
     <div id="overlay" class="hidden" role="dialog" aria-modal="true">
       <div class="overlay-grid"></div>
     </div>
   </div>
-  <script>window.ASSET_REV = '1';</script>
-  <script src="js/main.js"></script>
+
+  <!-- Use the actual filename you have; from your repo it’s js_main.js -->
+  <script src="js_main.js" defer></script>
 </body>
 </html>

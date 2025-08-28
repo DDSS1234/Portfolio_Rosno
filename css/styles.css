@@ -139,3 +139,88 @@ body {
     transition: none;
   }
 }
+:root{
+  --card-w: clamp(260px, 35vw, 420px);
+  --card-h: clamp(340px, 55vh, 560px);
+  --anim-ms: 360ms;
+}
+
+/* Stage */
+#room{
+  position: relative;
+  min-height: 100dvh;
+  overflow: hidden;
+  background: #0e0f12; /* keep/override as you like */
+}
+
+/* Soft vignettes to encapsulate space */
+#room::before,
+#room::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: min(22vw, 320px);
+  pointer-events: none;
+  z-index: 5;
+}
+#room::before{
+  left: 0;
+  background: linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,0));
+}
+#room::after{
+  right: 0;
+  background: linear-gradient(to left, rgba(0,0,0,.55), rgba(0,0,0,0));
+}
+
+/* Ring and list root */
+#ring,
+#cardRing{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#cardRing{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cards centered; JS offsets left/right for prev/next */
+#cardRing .card{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--card-w);
+  height: var(--card-h);
+  transform: translate3d(-50%,-50%,0);
+  border-radius: 16px;
+  background: #16181d;
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  overflow: hidden;
+  opacity: 0;            /* hidden by default; JS reveals prev/current/next */
+  visibility: hidden;
+  transition:
+    transform var(--anim-ms) cubic-bezier(.2,.8,0,1),
+    opacity var(--anim-ms) ease,
+    filter var(--anim-ms) ease;
+  will-change: transform, opacity, filter;
+}
+
+#cardRing .card .thumb{
+  display: block;
+  width: 100%;
+  height: 60%;
+  object-fit: contain;
+  background: #0f1115;
+}
+#cardRing .card .card-body{
+  padding: 14px 16px 18px;
+  color: #e9eef5;
+}
+#cardRing .card .card-title{ margin: 0 0 6px; font-weight: 600; }
+#cardRing .card .card-year{ margin: 0 0 8px; opacity: .7; font-variant-numeric: tabular-nums; }
+#cardRing .card .card-hook{ margin: 0; opacity: .9; }
+
+/* Reduced motion support */
+.reduced-motion #cardRing .card{ transition: none; }
