@@ -7,6 +7,9 @@
   --ink: #0f0f0f;
   --hairline: rgba(0,0,0,0.06);
   --dim: rgba(0,0,0,0.15);
+  --card-w: clamp(260px, 35dvw, 420px);
+  --card-h: clamp(340px, 55dvh, 560px);
+  --anim-ms: 360ms;
 }
 
 body {
@@ -18,12 +21,14 @@ body {
 
 #room {
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  width: 100dvw;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  background: #0e0f12;
 }
 
 #ring {
@@ -49,8 +54,8 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 30vw;
-  height: calc(30vw * 4 / 3);
+  width: 30dvw;
+  height: calc(30dvw * 4 / 3);
   background: var(--white);
   box-shadow: 0 0 0 1px var(--hairline);
   transform-style: preserve-3d;
@@ -139,28 +144,13 @@ body {
     transition: none;
   }
 }
-:root{
-  --card-w: clamp(260px, 35vw, 420px);
-  --card-h: clamp(340px, 55vh, 560px);
-  --anim-ms: 360ms;
-}
-
-/* Stage */
-#room{
-  position: relative;
-  min-height: 100dvh;
-  overflow: hidden;
-  background: #0e0f12; /* keep/override as you like */
-}
-
-/* Soft vignettes to encapsulate space */
 #room::before,
 #room::after{
   content: "";
   position: absolute;
   top: 0;
   bottom: 0;
-  width: min(22vw, 320px);
+  width: min(22dvw, 320px);
   pointer-events: none;
   z-index: 5;
 }
