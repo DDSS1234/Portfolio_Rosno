@@ -12,8 +12,18 @@
   --anim-ms: 360ms;
 }
 
-body {
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
   background: var(--white);
+}
+
+body {
+  margin: 0;
   color: var(--ink);
   font-family: ui-sans-serif, system-ui, sans-serif;
   overflow: clip;
@@ -21,7 +31,7 @@ body {
 
 #room {
   position: relative;
-  width: 100dvw;
+  width: 100%;
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
