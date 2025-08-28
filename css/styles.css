@@ -3,8 +3,8 @@
   --card-focus-scale: 1.03;
   --caption-h-d: 68px;
   --caption-h-m: 60px;
-  --white: #ffffff;
-  --ink: #0f0f0f;
+  --white: #eeeeee;
+  --ink: #2a2a2a;
   --hairline: rgba(0,0,0,0.06);
   --dim: rgba(0,0,0,0.15);
   --card-w: clamp(260px, 35dvw, 420px);
@@ -166,11 +166,11 @@ body {
 }
 #room::before{
   left: 0;
-  background: linear-gradient(to right, rgba(0,0,0,.55), rgba(0,0,0,0));
+  background: linear-gradient(to right, rgba(0,0,0,.35), var(--white));
 }
 #room::after{
   right: 0;
-  background: linear-gradient(to left, rgba(0,0,0,.55), rgba(0,0,0,0));
+  background: linear-gradient(to left, rgba(0,0,0,.35), var(--white));
 }
 
 /* Ring and list root */
