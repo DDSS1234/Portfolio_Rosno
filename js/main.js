@@ -46,7 +46,9 @@ function arrangeCards() {
   const radius = calcRadius(cards[0].offsetWidth, stepDeg);
   cards.forEach((card, i) => {
     const angle = stepDeg * i;
-    card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+    const base = `translate(-50%, -50%) rotateY(${angle}deg) translateZ(${radius}px)`;
+    card.dataset.baseTransform = base;
+    card.style.transform = base;
   });
   setRotation(radius, stepDeg);
 }
@@ -70,6 +72,8 @@ function updateCards() {
     card.setAttribute('aria-selected', active);
     card.tabIndex = active ? 0 : -1;
     card.classList.toggle('active', active);
+    const base = card.dataset.baseTransform || '';
+    card.style.transform = active ? `${base} scale(var(--card-focus-scale))` : base;
   });
   updateCaption();
 }

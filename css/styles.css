@@ -57,13 +57,14 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-radius: 1rem;
+  overflow: hidden;
   opacity: 0.8;
   transition: transform 0.12s ease, opacity 0.2s ease;
 }
 
 .card.active {
   opacity: 1;
-  transform: scale(var(--card-focus-scale));
 }
 
 .card img {
