@@ -16,7 +16,7 @@ body {
   background: var(--white);
   color: var(--ink);
   font-family: ui-sans-serif, system-ui, sans-serif;
-  overflow: hidden;
+  overflow: clip;
 }
 
 #room {
@@ -27,8 +27,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  background: #0e0f12;
+  overflow: clip;
+  background: #eeeeee;
 }
 
 #ring {
@@ -63,7 +63,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1rem;
-  overflow: hidden;
+  overflow: clip;
   opacity: 0.8;
   transition: transform 0.12s ease, opacity 0.2s ease;
 }
@@ -107,7 +107,7 @@ body {
   inset: 0;
   background: rgba(255,255,255,0.95);
   z-index: 10;
-  overflow: auto;
+  overflow: clip;
 }
 
 #overlay.hidden {
@@ -185,9 +185,10 @@ body {
   height: var(--card-h);
   transform: translate3d(-50%,-50%,0);
   border-radius: 16px;
-  background: #16181d;
+  background: #eeeeee;
+  border: #2a2a2a, 2px;
   box-shadow: 0 12px 40px rgba(0,0,0,.35);
-  overflow: hidden;
+  overflow: clip;
   opacity: 0;            /* hidden by default; JS reveals prev/current/next */
   visibility: hidden;
   transition:
