@@ -13,13 +13,34 @@ body {
   background: var(--white);
   color: var(--ink);
   font-family: ui-sans-serif, system-ui, sans-serif;
+  overflow: hidden;
+}
+
+#room {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #ring {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   perspective: 1000px;
 }
 
 #cardRing {
+  position: absolute;
+  list-style: none;
+  margin: 0;
+  padding: 0;
   transform-style: preserve-3d;
   transition: transform 0.2s ease;
 }
@@ -57,6 +78,59 @@ body {
   border-top: 1px solid var(--hairline);
   color: var(--ink);
   font-size: 1rem;
+}
+
+#caption {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+#captionText {
+  margin: 0 auto;
+  text-align: center;
+}
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.95);
+  z-index: 10;
+  overflow: auto;
+}
+
+#overlay.hidden {
+  display: none;
+}
+
+.overlay-grid {
+  padding: 2rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.card-year {
+  font-size: 0.875rem;
+  opacity: 0.7;
+}
+
+.card-hook {
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

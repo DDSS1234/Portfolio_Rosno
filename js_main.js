@@ -1,3 +1,6 @@
++118
+-0
+
 const state = {
   currentIndex: 0,
   isDetailOpen: false,
@@ -20,17 +23,17 @@ function initRing() {
   const step = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--ring-step'));
   projects.forEach((project, i) => {
     const li = document.createElement('li');
-    li.className = 'card flex flex-col';
+    li.className = 'card';
     li.id = `card-${project.id}`;
     li.setAttribute('role', 'option');
     li.setAttribute('aria-selected', i === state.currentIndex);
     li.tabIndex = i === state.currentIndex ? 0 : -1;
     li.innerHTML = `
       <img src="${project.linework}" alt="" class="thumb" />
-      <div class="p-4">
-        <h3 class="text-lg font-semibold">${project.title}</h3>
-        <p class="text-sm opacity-70">${project.year}</p>
-        <p class="text-sm mt-2">${project.hook}</p>
+      <div class="card-body">
+        <h3 class="card-title">${project.title}</h3>
+        <p class="card-year">${project.year}</p>
+        <p class="card-hook">${project.hook}</p>
       </div>`;
     ring.appendChild(li);
   });
