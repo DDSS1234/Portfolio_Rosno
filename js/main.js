@@ -26,11 +26,16 @@ function initRing() {
     li.setAttribute('aria-selected', i === state.currentIndex);
     li.tabIndex = i === state.currentIndex ? 0 : -1;
     li.innerHTML = `
-      <img src="${project.linework}" alt="" class="thumb" />
-      <div class="card-body">
-        <h3 class="card-title">${project.title}</h3>
-        <p class="card-year">${project.year}</p>
-        <p class="card-hook">${project.hook}</p>
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="${project.linework}" alt="" class="thumb" />
+          <div class="card-body">
+            <h3 class="card-title">${project.title}</h3>
+            <p class="card-year">${project.year}</p>
+            <p class="card-hook">${project.hook}</p>
+          </div>
+        </div>
+        <div class="card-back"></div>
       </div>`;
     ring.appendChild(li);
   });
@@ -120,6 +125,11 @@ function bindEvents() {
     if (e.deltaY > 0) rotate(1);
     else if (e.deltaY < 0) rotate(-1);
   });
+
+  document.getElementById('cardRing').addEventListener('click', e => {
+    const card = e.target.closest('.card');
+    if (card) flipCard(card);
+  });
 }
 
 function openDetail() {
@@ -132,4 +142,15 @@ function closeDetail() {
 
 function toggleOverlay() {
   // Overlay toggle placeholder
+}
+
+function flipCard(card) {
+  const inner = card.querySelector('.card-inner');
+  if (!inner) return;
+  const isFlipped = card.classList.contains('flipped');
+  card.classList.add(isFlipped ? 'flip-back-anim' : 'flip-anim');
+  inner.addEventListener('animationend', () => {
+    card.classList.remove('flip-anim', 'flip-back-anim');
+    card.classList.toggle('flipped');
+  }, { once: true });
 }
