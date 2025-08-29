@@ -7,8 +7,8 @@
   --ink: #9f9f9f;
   --hairline: #9f9f9f;
   --dim: rgba(0,0,0,0.15);
-  --card-w: clamp(260px, 35dvw, 420px);
-  --card-h: clamp(340px, 55dvh, 560px);
+  --card-w: clamp(260px, 35dvw, 520px);
+  --card-h: clamp(340px, 55dvh, 680px);
   --anim-ms: 360ms;
 }
 
@@ -43,14 +43,15 @@ body {
 
 #grid {
   position: absolute;
+  top: 50%;
+  left: 50%;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  --grid-size: clamp(20px, 5vw, 40px);
+  --grid-size: clamp(5dvw, 5vw, 5dvw);
   background-image:
-    repeating-linear-gradient(to right, #9f9f9f 0 1px, transparent 1px var(--grid-size)),
-    repeating-linear-gradient(to bottom, #9f9f9f 0 1px, transparent 1px var(--grid-size));
-  transform: perspective(1000px) rotateX(60deg);
+    repeating-linear-gradient(to right, #9f9f9f50 0 0.5px, transparent 1px var(--grid-size)),
+    repeating-linear-gradient(to bottom, #9f9f9f50 0 0.5px, transparent 1px var(--grid-size));
   transform-origin: top;
 }
 
