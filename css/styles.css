@@ -41,6 +41,19 @@ body {
   background: #eeeeee;
 }
 
+#grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  --grid-size: clamp(20px, 5vw, 40px);
+  background-image:
+    repeating-linear-gradient(to right, #9f9f9f 0 1px, transparent 1px var(--grid-size)),
+    repeating-linear-gradient(to bottom, #9f9f9f 0 1px, transparent 1px var(--grid-size));
+  transform: perspective(1000px) rotateX(60deg);
+  transform-origin: top;
+}
+
 #ring {
   position: relative;
   width: 100%;
