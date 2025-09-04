@@ -1,20 +1,46 @@
+* {
+  margin: 0;
+}
+
 :root {
   --card-width: 512px;
   --card-height: 512px;
   --overlap: 160px;
 }
+@font-face{
+  font-family: "Geist Variable";
+  src: url("/fonts/geist/Geist-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;   /* enables the full variable range */
+  font-style: normal;
+  font-display: swap;
+}
 
 body {
+  font-weight:200;
   margin: 0;
-  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-family: "Geist Variable", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background: #ffffff;
   color: #333;
 }
 
 h1 {
-  text-align: center;
+  font-weight:400;
+  text-align: left;
+  margin-left: 25px;
+  font-family: "Geist Variable", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin-top: 1rem;
   margin-bottom: 0.5rem;
+}
+
+h3 {
+  font-weight: 200;
+  text-align: left;
+  margin: 20px;
+}
+
+h4{
+  font-weight: 200;
+  text-align: center;
 }
 
 #filterSelect {

@@ -9,5 +9,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DDSS1234/Portfolio_Rosno.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DDSS1234/Portfolio_Rosno/issues"
+  },
+  "homepage": "https://github.com/DDSS1234/Portfolio_Rosno#readme",
+  "dependencies": {
+    "@fontsource-variable/geist": "^5.2.6"
+  }
 }
