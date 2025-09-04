@@ -9,7 +9,8 @@ const projects = [
 
 let currentIndex = 0;
 const catalog = document.getElementById('catalog');
-const filterSelect = document.getElementById('filterSelect');
+const filterBar = document.getElementById('filterBar');
+const selectedTypes = new Set(['architecture','product','material','uiux','art']);
 
 function renderCards() {
   const total = projects.length;
@@ -35,9 +36,8 @@ function renderCards() {
 }
 
 function applyFilter() {
-  const selected = Array.from(filterSelect.selectedOptions).map(o => o.value);
   Array.from(catalog.children).forEach(card => {
-    const show = selected.includes(card.dataset.type);
+    const show = selectedTypes.has(card.dataset.type);
     if (!show && card.style.display !== 'none') {
       card.classList.add('filtering-out');
       card.addEventListener('animationend', () => {
@@ -88,7 +88,19 @@ function updateMobilePosition() {
   }
 }
 
-filterSelect.addEventListener('change', applyFilter);
+filterBar.addEventListener('click', e => {
+  const btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  const type = btn.dataset.type;
+  if (selectedTypes.has(type)) {
+    selectedTypes.delete(type);
+    btn.classList.remove('active');
+  } else {
+    selectedTypes.add(type);
+    btn.classList.add('active');
+  }
+  applyFilter();
+});
 window.addEventListener('resize', updateMobilePosition);
 
 renderCards();
