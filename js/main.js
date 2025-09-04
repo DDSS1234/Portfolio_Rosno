@@ -1,156 +1,90 @@
-const state = {
-  currentIndex: 0,
-  isDetailOpen: false,
-  reducedMotion: window.matchMedia('(prefers-reduced-motion: reduce)').matches
-};
+const projects = [
+  { id: 'p1', title: 'Project One', type: 'architecture' },
+  { id: 'p2', title: 'Project Two', type: 'product' },
+  { id: 'p3', title: 'Project Three', type: 'material' },
+  { id: 'p4', title: 'Project Four', type: 'uiux' },
+  { id: 'p5', title: 'Project Five', type: 'art' },
+  { id: 'p6', title: 'Project Six', type: 'product' }
+];
 
-let projects = [];
-const boot = () => { initRing(); updateCaption(); bindEvents(); };
+let currentIndex = 0;
+const catalog = document.getElementById('catalog');
+const filterSelect = document.getElementById('filterSelect');
 
-fetch('data/projects.json' + (window.ASSET_REV ? `?rev=${window.ASSET_REV}` : ''))
-  .then(r => { if (!r.ok) throw new Error(r.statusText); return r.json(); })
-  .then(data => { projects = data; boot(); })
-  .catch(err => {
-    console.error('Failed to load projects.json', err);
-    projects = [{ id:'placeholder', title:'Hello', year:'—', hook:'Data failed to load.', linework:'' }];
-    boot();
-  });
-
-function initRing() {
-  const ring = document.getElementById('cardRing');
-  projects.forEach((project, i) => {
-    const li = document.createElement('li');
-    li.className = 'card';
-    li.id = `card-${project.id}`;
-    li.setAttribute('role', 'option');
-    li.setAttribute('aria-selected', i === state.currentIndex);
-    li.tabIndex = i === state.currentIndex ? 0 : -1;
-    li.innerHTML = `
-      <div class="card-inner">
-        <div class="card-front">
-          <img src="${project.linework}" alt="" class="thumb" />
-          <div class="card-body">
-            <h3 class="card-title">${project.title}</h3>
-            <p class="card-year">${project.year}</p>
-            <p class="card-hook">${project.hook}</p>
-          </div>
-        </div>
-        <div class="card-back"></div>
+function renderCards() {
+  projects.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.type = p.type;
+    card.style.zIndex = i + 1;
+    card.innerHTML = `
+      <div class="tag ${p.type}"></div>
+      <div class="thumb"></div>
+      <div class="info">
+        <h3>${p.title}</h3>
       </div>`;
-    ring.appendChild(li);
+    catalog.appendChild(card);
   });
-  arrangeCards();
 }
 
-function updateCaption() {
-  const cap = document.getElementById('captionText');
-  const p = projects[state.currentIndex];
-  if (cap && p) cap.textContent = `${p.title} · ${p.year} — ${p.hook}`;
+function applyFilter() {
+  const selected = Array.from(filterSelect.selectedOptions).map(o => o.value);
+  Array.from(catalog.children).forEach(card => {
+    const show = selected.includes(card.dataset.type);
+    if (!show && card.style.display !== 'none') {
+      card.classList.add('filtering-out');
+      card.addEventListener('animationend', () => {
+        card.style.display = 'none';
+        card.classList.remove('filtering-out');
+        updateMobilePosition();
+      }, { once: true });
+    } else if (show && card.style.display === 'none') {
+      card.style.display = '';
+      card.classList.add('returning');
+      card.addEventListener('animationend', () => {
+        card.classList.remove('returning');
+      }, { once: true });
+    }
+  });
+  currentIndex = Math.min(currentIndex, getVisibleCards().length - 1);
+  updateMobilePosition();
 }
 
-function signedDistance(from, to, len){
-  let d = to - from;
-  if (d >  len/2) d -= len;
-  if (d < -len/2) d += len;
-  return d;
+function getVisibleCards() {
+  return Array.from(catalog.children).filter(c => c.style.display !== 'none');
 }
 
-function arrangeCards() {
-  const cards = Array.from(document.querySelectorAll('#cardRing .card'));
-  const n = cards.length;
-  if (!n) return;
+function setupSwipe() {
+  let startX = 0;
+  catalog.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
 
-  // Horizontal spacing between visible cards (responsive)
-  const gap = Math.min(440, Math.max(260, window.innerWidth * 0.34)); // px
-  const sideScale = 0.92;
-  const sideOpacity = 0.95;
-
-  cards.forEach((card, i) => {
-    const d = signedDistance(state.currentIndex, i, n); // … -2,-1,0,+1,+2 …
-    const abs = Math.abs(d);
-
-    // Only show prev/current/next
-    if (abs <= 1){
-      const x = d * gap;
-      const scale = d === 0 ? 1 : sideScale;
-      const blur = d === 0 ? 0 : 0.5;
-
-      card.style.transform = `translate3d(calc(-50% + ${x}px), -50%, 0) scale(${scale})`;
-      card.style.opacity = d === 0 ? 1 : sideOpacity;
-      card.style.visibility = 'visible';
-      card.style.filter = `blur(${blur}px)`;
-      card.style.zIndex = String(1000 - abs);
-      card.setAttribute('aria-selected', d === 0);
-      card.tabIndex = d === 0 ? 0 : -1;
-      card.style.pointerEvents = 'auto';
-    } else {
-      card.style.opacity = 0;
-      card.style.visibility = 'hidden';
-      card.style.pointerEvents = 'none';
-      card.setAttribute('aria-selected', 'false');
-      card.tabIndex = -1;
-      card.style.transform = `translate3d(-200vw, -50%, 0) scale(${sideScale})`;
-      card.style.filter = 'blur(0px)';
-      card.style.zIndex = '0';
+  catalog.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) {
+      const dir = dx < 0 ? 1 : -1;
+      const visible = getVisibleCards();
+      currentIndex = Math.min(Math.max(currentIndex + dir, 0), visible.length - 1);
+      updateMobilePosition();
     }
   });
 }
 
-function rotate(delta){
-  const n = projects.length || 0;
-  if (!n) return;
-  state.currentIndex = (state.currentIndex + delta + n) % n;
-  arrangeCards();
-  updateCaption();
+function updateMobilePosition() {
+  if (window.matchMedia('(max-width: 600px)').matches) {
+    const visible = getVisibleCards();
+    const index = Math.min(currentIndex, visible.length - 1);
+    catalog.style.transform = `translateX(-${index * 100}%)`;
+  } else {
+    catalog.style.transform = '';
+  }
 }
 
-// Recompute positions on resize
-window.addEventListener('resize', arrangeCards);
+filterSelect.addEventListener('change', applyFilter);
+window.addEventListener('resize', updateMobilePosition);
 
-// Respect reduced motion
-if (state.reducedMotion) {
-  document.documentElement.classList.add('reduced-motion');
-}
+renderCards();
+setupSwipe();
+applyFilter();
 
-function bindEvents() {
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight') rotate(1);
-    if (e.key === 'ArrowLeft') rotate(-1);
-    if (e.key === 'Enter') openDetail();
-    if (e.key === 'Escape') closeDetail();
-    if (e.key === ' ') { toggleOverlay(); e.preventDefault(); }
-  });
-
-  document.addEventListener('wheel', e => {
-    if (e.deltaY > 0) rotate(1);
-    else if (e.deltaY < 0) rotate(-1);
-  });
-
-  document.getElementById('cardRing').addEventListener('click', e => {
-    const card = e.target.closest('.card');
-    if (card) flipCard(card);
-  });
-}
-
-function openDetail() {
-  // Detail view placeholder
-}
-
-function closeDetail() {
-  // Close detail placeholder
-}
-
-function toggleOverlay() {
-  // Overlay toggle placeholder
-}
-
-function flipCard(card) {
-  const inner = card.querySelector('.card-inner');
-  if (!inner) return;
-  const isFlipped = card.classList.contains('flipped');
-  card.classList.add(isFlipped ? 'flip-back-anim' : 'flip-anim');
-  inner.addEventListener('animationend', () => {
-    card.classList.remove('flip-anim', 'flip-back-anim');
-    card.classList.toggle('flipped');
-  }, { once: true });
-}

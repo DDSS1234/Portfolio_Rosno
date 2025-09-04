@@ -9,24 +9,19 @@
 </head>
 <body>
   <h1>RŌS-NŌ</h1>
-  <div id="room">
-    <div id="grid"></div>
-    <div id="ring">
-      <ul id="cardRing" role="listbox" aria-activedescendant="">
-        <!-- Cards injected by JavaScript -->
-      </ul>
-    </div>
 
-    <div id="caption" role="status" class="caption-rail">
-      <p id="captionText"></p>
-    </div>
+  <select id="filterSelect" multiple aria-label="Filter projects">
+    <option value="architecture" selected>Architecture</option>
+    <option value="product" selected>Product</option>
+    <option value="material" selected>Material</option>
+    <option value="uiux" selected>UI/UX</option>
+    <option value="art" selected>Art</option>
+  </select>
 
-    <div id="overlay" class="hidden" role="dialog" aria-modal="true">
-      <div class="overlay-grid"></div>
-    </div>
+  <div id="catalog" class="catalog" aria-live="polite">
+    <!-- Cards injected by JavaScript -->
   </div>
 
-  <!-- Use the actual filename you have; from your repo it's js/main.js -->
   <script src="js/main.js" defer></script>
 </body>
 </html>
