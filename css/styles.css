@@ -34,7 +34,7 @@ h1 {
 
 .card {
   position: relative;
-  padding: ;
+  z-index: var(--z);
   width: var(--card-width);
   height: var(--card-height);
   background: #ffffff;
@@ -44,11 +44,19 @@ h1 {
   overflow: hidden;
   margin-left: calc(var(--overlap) * -1);
   margin-right: calc(var(--overlap) * -1);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:first-child {
   margin-left: 0;
+}
+
+/* Lift hovered/focused card and bring it to the front */
+.card:hover,
+.card:focus {
+  transform: translateY(-10px);
+  z-index: 999;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
 .card .thumb {
@@ -97,6 +105,12 @@ h1 {
 @keyframes slideIn {
   from { transform: translateX(100%); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
 }
 
 /* Mobile layout */

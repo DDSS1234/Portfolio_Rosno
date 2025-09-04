@@ -12,11 +12,18 @@ const catalog = document.getElementById('catalog');
 const filterSelect = document.getElementById('filterSelect');
 
 function renderCards() {
+  const total = projects.length;
   projects.forEach((p, i) => {
     const card = document.createElement('div');
     card.className = 'card';
     card.dataset.type = p.type;
-    card.style.zIndex = i + 1;
+
+    // Assign higher z-index to leftmost card and decrease to the right
+    card.style.setProperty('--z', total - i);
+
+    // Make card focusable for keyboard users
+    card.tabIndex = 0;
+
     card.innerHTML = `
       <div class="tag ${p.type}"></div>
       <div class="thumb"></div>
