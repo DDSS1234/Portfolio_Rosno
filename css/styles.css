@@ -23,7 +23,7 @@ body {
   font-weight:200;
   margin: 0;
   font-family: var(--font);
-  background: #ffffff;
+  background: #f9f9f9;
   color: #333;
 }
 
@@ -99,12 +99,11 @@ h4{
 .card {
   position: relative;
   z-index: var(--z);
-  width: var(--card-width);
+  width: min(var(--card-width), 90%);
   height: var(--card-height);
-  background: #ffffff;
+  background: #f9f9f9;
   border: 1px solid #ccc;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   overflow: hidden;
   margin-left: calc(var(--overlap) * -1);
   margin-right: calc(var(--overlap) * -1);
@@ -112,7 +111,7 @@ h4{
 }
 
 .card:first-child {
-  margin-left: 0;
+  margin-left: 25px;
 }
 
 /* Lift hovered/focused card and bring it to the front */
@@ -120,12 +119,11 @@ h4{
 .card:focus {
   transform: translateY(-10px);
   z-index: 999;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-shadow: 8px 8px 8px rgba(0,0,0,0.2), -10px -10px 10px white;
 }
 
 .card .thumb {
   height: 80%;
-  background: #ffffff;
   padding-top: 3rem;
   padding-left: 1rem;
   padding-right: 1rem;
