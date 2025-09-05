@@ -26,7 +26,9 @@ function renderCards() {
     card.tabIndex = 0;
 
     card.innerHTML = `
-      <div class="tag ${p.type}"></div>
+      <div class="tag ${p.type}">
+        <img src="icons/${p.type}.svg" alt="${p.type} icon">
+      </div>
       <div class="thumb"></div>
       <div class="info">
         <h3>${p.title}</h3>
