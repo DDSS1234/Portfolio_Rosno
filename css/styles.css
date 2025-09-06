@@ -92,6 +92,7 @@ h4{
   justify-content: center;
   align-items: flex-start;
   width: 100%;
+  margin: 0 auto;
   overflow: hidden;
   transition: transform 0.5s ease;
 }
@@ -112,6 +113,10 @@ h4{
 
 .card:first-child {
   margin-left: 25px;
+}
+
+.card:last-child {
+  margin-right: 25px;
 }
 
 /* Lift hovered/focused card and bring it to the front */
@@ -187,6 +192,9 @@ h4{
 @media (max-width: 600px) {
   .catalog {
     overflow: hidden;
+    width: 100%;
+    max-width: none;
+    margin: 0;
   }
   .card {
     margin-left: 0;
