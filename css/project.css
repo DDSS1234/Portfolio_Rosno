@@ -6,6 +6,18 @@ body {
   color: #333;
 }
 
+.home-link {
+  display: block;
+  opacity: 0.5;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.home-link:hover {
+  opacity: 1;
+}
+
 .slider {
   position: relative;
   width: 100%;
