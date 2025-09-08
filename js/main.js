@@ -1,38 +1,29 @@
-const projects = [
-  { id: 'p1', title: 'Project One', type: 'architecture' },
-  { id: 'p2', title: 'Project Two', type: 'product' },
-  { id: 'p3', title: 'Project Three', type: 'material' },
-  { id: 'p4', title: 'Project Four', type: 'uiux' },
-  { id: 'p5', title: 'Project Five', type: 'art' }, 
-  { id: 'p6', title: 'Project Six', type: 'product' }
-];
-
+let projects = [];
 let currentIndex = 0;
 const catalog = document.getElementById('catalog');
 const filterBar = document.getElementById('filterBar');
 const selectedTypes = new Set(['architecture','product','material','uiux','art']);
 
 function renderCards() {
+  catalog.innerHTML = '';
   const total = projects.length;
   projects.forEach((p, i) => {
-    const card = document.createElement('div');
+    const type = p.tags && p.tags.length ? p.tags[0] : 'product';
+    const card = document.createElement('a');
     card.className = 'card';
-    card.dataset.type = p.type;
-
-    // Assign higher z-index to leftmost card and decrease to the right
+    card.dataset.type = type;
     card.style.setProperty('--z', total - i);
-
-    // Make card focusable for keyboard users
-    card.tabIndex = 0;
+    card.href = `projects/${p.id}.html`;
 
     card.innerHTML = `
-      <div class="tag ${p.type}">
-        <img src="icons/${p.type}.svg" alt="${p.type} icon">
+      <div class="tag ${type}">
+        <img src="icons/${type}.svg" alt="${type} icon">
       </div>
-      <div class="thumb"></div>
+      <div class="thumb"><img src="${p.thumb}" alt="${p.title}"></div>
       <div class="info">
         <h3>${p.title}</h3>
       </div>`;
+
     catalog.appendChild(card);
   });
 }
@@ -105,7 +96,12 @@ filterBar.addEventListener('click', e => {
 });
 window.addEventListener('resize', updateMobilePosition);
 
-renderCards();
-setupSwipe();
-applyFilter();
+fetch('data/projects.json')
+  .then(res => res.json())
+  .then(data => {
+    projects = data;
+    renderCards();
+    setupSwipe();
+    applyFilter();
+  });
 
