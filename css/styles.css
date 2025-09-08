@@ -36,6 +36,7 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
   font-family: var(--font);
+  display: block;
 }
 
 .logo-mobile {
@@ -108,7 +109,8 @@ h4{
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  margin: 0 auto;
+  margin: 0px auto;
+  padding-top: 10px;
   overflow: hidden;
   transition: transform 0.5s ease;
 }
@@ -140,7 +142,7 @@ h4{
 .card:focus {
   transform: translateY(-10px);
   z-index: 999;
-  box-shadow: 8px 8px 8px rgba(0,0,0,0.2), -10px -10px 10px white;
+  box-shadow: 8px 8px 8px rgba(0,0,0,0.2);
   animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
