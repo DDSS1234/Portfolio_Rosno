@@ -3,7 +3,7 @@ const projects = [
   { id: 'p2', title: 'Project Two', type: 'product' },
   { id: 'p3', title: 'Project Three', type: 'material' },
   { id: 'p4', title: 'Project Four', type: 'uiux' },
-  { id: 'p5', title: 'Project Five', type: 'art' },
+  { id: 'p5', title: 'Project Five', type: 'art' }, 
   { id: 'p6', title: 'Project Six', type: 'product' }
 ];
 

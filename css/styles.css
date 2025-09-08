@@ -61,9 +61,13 @@ h4{
   background: none;
   border: none;
   font: inherit;
+  justify-content: center;
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  width: 75x;
+  height: 25px;
+  transition: transform 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
 .filter-btn::after {
@@ -71,9 +75,9 @@ h4{
   position: absolute;
   left: 0;
   top: 50%;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
+  width: 75px;
+  height: 25px;
+  background: none;
   transform: translateY(-50%) scaleX(0);
   transform-origin: left center;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -85,6 +89,10 @@ h4{
 
 .filter-btn:not(.active)::after {
   transform: translateY(-50%) scaleX(1);
+}
+.filter-btn:hover{
+  font-weight: bold;
+  transition: transform 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 
 .catalog {
@@ -108,7 +116,7 @@ h4{
   overflow: hidden;
   margin-left: calc(var(--overlap) * -1);
   margin-right: calc(var(--overlap) * -1);
-  transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.5s ease, opacity 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:first-child {
@@ -125,6 +133,7 @@ h4{
   transform: translateY(-10px);
   z-index: 999;
   box-shadow: 8px 8px 8px rgba(0,0,0,0.2), -10px -10px 10px white;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .card .thumb {
@@ -192,15 +201,14 @@ h4{
 @media (max-width: 600px) {
   .catalog {
     overflow: hidden;
-    width: 100%;
-    max-width: none;
+    width: min(var(--card-width), 90%);
     margin: 0;
   }
   .card {
     margin-left: 0;
     flex: 0 0 100%;
-    width: 100%;
-    height: 60vh;   
+    width: 90%;
+    height: 75vh;   
   }
 }
 
