@@ -27,7 +27,9 @@ body {
   color: #333;
 }
 
-h1 {
+.logo-desktop,
+.logo-mobile {
+  font-weight: 400;
   font-weight:400;
   text-align: left;
   margin-left: 25px;
@@ -35,6 +37,11 @@ h1 {
   margin-bottom: 10px;
   font-family: var(--font);
 }
+
+.logo-mobile {
+  display: none;
+}
+
 
 h3 {
   font-weight: 200;
@@ -54,7 +61,7 @@ h4{
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin: 0 auto 1rem;
+  margin: 0rem 25px 25px 1rem;
 }
 
 .filter-btn {
@@ -65,9 +72,9 @@ h4{
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  width: 75x;
+  width: 75px;
   height: 25px;
-  transition: transform 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+  transition: font-weight .2s ease;
 }
 
 .filter-btn::after {
@@ -80,7 +87,7 @@ h4{
   background: none;
   transform: translateY(-50%) scaleX(0);
   transform-origin: left center;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.2s ease;
 }
 
 .filter-btn:not(.active) {
@@ -92,7 +99,8 @@ h4{
 }
 .filter-btn:hover{
   font-weight: bold;
-  transition: transform 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+  transform: translateY(-10);
+  transition: .2s ease;
 }
 
 .catalog {
@@ -199,6 +207,12 @@ h4{
 
 /* Mobile layout */
 @media (max-width: 600px) {
+  .logo-desktop {
+    display: none;
+  }
+  .logo-mobile {
+    display: block;
+  }  
   .catalog {
     overflow: hidden;
     width: min(var(--card-width), 90%);
