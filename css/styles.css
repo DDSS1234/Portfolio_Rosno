@@ -127,6 +127,7 @@ h4{
   margin-left: calc(var(--overlap) * -1);
   margin-right: calc(var(--overlap) * -1);
   transition: transform 0.5s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+  transform: translateY(var(--ty, 0));
 }
 
 .card:first-child {
@@ -137,13 +138,19 @@ h4{
   margin-right: 25px;
 }
 
-/* Lift hovered/focused card and bring it to the front */
-.card:hover,
-.card:focus {
-  transform: translateY(-10px);
+.project-card.active {
   z-index: 999;
   box-shadow: 8px 8px 8px rgba(0,0,0,0.2);
-  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.project-card.tier1 { z-index: 998; }
+.project-card.tier2 { z-index: 997; }
+.project-card.tier3 { z-index: 996; }
+.project-card.tier4 { z-index: 995; }
+.project-card.tier5 { z-index: 994; }
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card { transition: none; }
 }
 
 .card .thumb {
