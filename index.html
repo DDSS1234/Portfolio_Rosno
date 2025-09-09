@@ -7,11 +7,20 @@
   <link rel="stylesheet" href="css/styles.css" />
   <script>window.ASSET_REV = '1';</script>
 </head>
-<header>
-  <h1 class="logo-desktop">RŌS-NŌ</h1>
-  <h2 class="logo-mobile">rōs-nō</h2>
-</header>
 <body>
+  <header>
+    <h1 class="logo"><a href="index.html">RŌS-NŌ</a></h1>
+    <nav id="navLinks">
+      <a href="mailto:alexrosno@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
   <div id="filterBar" class="filter-bar" aria-label="Filter projects">
     <button class="filter-btn active" data-type="architecture">Architecture</button>
     <button class="filter-btn active" data-type="product">Product</button>
@@ -23,10 +32,10 @@
   <div id="catalog" class="catalog" aria-live="polite">
     <!-- Cards injected by JavaScript -->
   </div>
-
+  <footer>
+    <h4>262.312.8934<br>alexrosno@gmail.com</h4>
+  </footer>
   <script src="js/main.js" defer></script>
+  <script src="js/menu.js" defer></script>
 </body>
-<footer>
-  <h4>262.312.8934<br>alexrosno@gmail.com</h4>
-</footer>
 </html>

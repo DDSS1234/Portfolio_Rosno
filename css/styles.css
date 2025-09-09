@@ -17,7 +17,72 @@
 }
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 25px;
   background: none;
+}
+
+.logo a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 400;
+}
+
+nav {
+  display: flex;
+  gap: 15px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 200;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: #333;
+  margin-bottom: 4px;
+  border-radius: 2px;
+}
+
+.hamburger span:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  nav {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 25px;
+    background: #f9f9f9;
+    border: 1px solid #ccc;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
 }
 body {
   font-weight:200;
