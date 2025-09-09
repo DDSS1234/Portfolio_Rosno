@@ -61,8 +61,9 @@ h4{
 .filter-bar {
   display: flex;
   justify-content: center;
+  margin-left: 25px;
   gap: 1rem;
-  margin: 0rem 25px 25px 1rem;
+  margin: 0rem 25px 25px 0.5rem;
 }
 
 .filter-btn {
@@ -121,7 +122,7 @@ h4{
   width: min(var(--card-width), 90%);
   height: var(--card-height);
   background: #f9f9f9;
-  border: 1px solid #ccc;
+  border: 2px solid #2a2a2a;
   border-radius: 8px;
   overflow: hidden;
   margin-left: calc(var(--overlap) * -1);
@@ -175,8 +176,8 @@ h4{
   position: absolute;
   top: 8px;
   right: 8px;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   background: #2a2a2a;
   color: #fff;
@@ -186,15 +187,15 @@ h4{
 }
 
 .tag img {
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
 }
 
-.tag.architecture { background: #ff6f61; }
-.tag.product { background: #6b5b95; }
-.tag.material { background: #2196f3; }
-.tag.uiux { background: #9c27b0; }
-.tag.art { background: #ff9800; }
+.tag.architecture { background: #2a2a2a; }
+.tag.product { background: #2a2a2a; }
+.tag.material { background: #2a2a2a; }
+.tag.uiux { background: #2a2a2a; }
+.tag.art { background: #2a2a2a; }
 
 /* Filtering animations */
 .card.filtering-out {
