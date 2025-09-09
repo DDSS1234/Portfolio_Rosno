@@ -237,13 +237,20 @@ h4{
   .catalog {
     overflow: hidden;
     width: min(var(--card-width), 90%);
-    margin: 0;
+    margin: 0 auto;
   }
   .card {
     margin-left: 0;
+    margin-right: 0;
     flex: 0 0 100%;
     width: 90%;
-    height: 75vh;   
+    height: 75vh;
+  }
+  .card:first-child {
+    margin-left: 0;
+  }
+  .card:last-child {
+    margin-right: 0;
   }
 }
 
