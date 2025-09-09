@@ -83,6 +83,10 @@ nav a {
   .hamburger {
     display: flex;
   }
+
+  .logo a {
+    text-transform: lowercase;
+  }
 }
 body {
   font-weight:200;

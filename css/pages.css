@@ -88,6 +88,10 @@ nav a {
   .hamburger {
     display: flex;
   }
+
+  .logo a {
+    text-transform: lowercase;
+  }
 }
 
 .about {
