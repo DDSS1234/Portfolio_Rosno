@@ -82,10 +82,25 @@ nav a {
 
   .hamburger {
     display: flex;
+    position: absolute;
+    right: 25px;
   }
 
   .logo a {
     text-transform: lowercase;
+  }
+
+  header {
+    position: relative;
+    justify-content: center;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
   }
 }
 body {
