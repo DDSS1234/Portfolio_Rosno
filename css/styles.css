@@ -301,7 +301,7 @@ h4{
     text-align: center;
   }
   .filter-bar {
-    margin: 0 auto 25px;
+    margin: 0 25px 25px 25px;
   }
   .catalog {
     overflow: hidden;
