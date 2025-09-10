@@ -80,7 +80,7 @@ nav a {
     position: absolute;
     top: 60px;
     right: 25px;
-    background: #f9f9f9;
+    background: #f3f3f3;
     border: 1px solid #ccc;
     flex-direction: column;
     padding: 10px;
@@ -123,15 +123,15 @@ nav a {
   text-align: center;
   gap: 20px;
   padding: 25px;
-  min-height: 100vh;
+  min-height: 50vh;
 }
 
 .about-image {
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   border-radius: 25%;
   object-fit: cover;
-  box-shadow: 8px 8px 12px #2a2a2a35, -8px 8px 15px #ffffff;
+  box-shadow: inset 8px 8px 12px #2a2a2a, 8px 8px 12px #2a2a2a35, 4px 4px 8px #2a2a2a50, -8px 8px 15px #ffffff;
 }
 
 .about-text {
