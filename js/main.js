@@ -4,6 +4,51 @@ const catalog = document.getElementById('catalog');
 const filterBar = document.getElementById('filterBar');
 const selectedTypes = new Set(['architecture','product','material','uiux','art']);
 
+function generateStrikeImage(widthPx, heightPx, squarePx) {
+  const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1));
+  // Normalize to perfectly fill with whole number of squares
+  const squares = Math.max(1, Math.round(widthPx / squarePx));
+  const step = widthPx / squares;
+  const canvas = document.createElement('canvas');
+  canvas.width = Math.max(1, Math.round(widthPx * dpr));
+  canvas.height = Math.max(1, Math.round(heightPx * dpr));
+  const ctx = canvas.getContext('2d');
+  ctx.scale(dpr, dpr);
+  // Progressive greys from black (left) to light grey (#d3d3d3) (right)
+  const max = 211; // 0xD3
+  for (let i = 0; i < squares; i++) {
+    const t = squares === 1 ? 1 : i / (squares - 1);
+    const v = Math.round(max * t);
+    ctx.fillStyle = `rgb(${v},${v},${v})`;
+    const x = i * step;
+    ctx.fillRect(x, 0, Math.ceil(step), heightPx);
+  }
+  return canvas.toDataURL('image/png');
+}
+
+function applyStrikeToButton(btn) {
+  const rootFont = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+  const square = 0.25 * rootFont; // 0.25rem in px
+  // Use content box width to match ::after positioning
+  const rect = btn.getBoundingClientRect();
+  const width = rect.width;
+  const height = 0.25 * rootFont;
+  const url = generateStrikeImage(width, height, square);
+  btn.style.setProperty('--strike-image', `url(${url})`);
+}
+
+function setupFilterStrikes() {
+  const buttons = filterBar ? Array.from(filterBar.querySelectorAll('.filter-btn')) : [];
+  buttons.forEach(applyStrikeToButton);
+}
+
+// Recompute on resize (debounced)
+let __strikeResizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(__strikeResizeTimer);
+  __strikeResizeTimer = setTimeout(setupFilterStrikes, 150);
+});
+
 function renderCards() {
   catalog.innerHTML = '';
   const total = projects.length;
@@ -149,6 +194,8 @@ filterBar.addEventListener('click', e => {
   applyFilter();
 });
 window.addEventListener('resize', updateMobilePosition);
+// Initialize strike images for filter buttons
+setupFilterStrikes();
 
 fetch('data/projects.json')
   .then(res => res.json())
