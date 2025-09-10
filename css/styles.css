@@ -163,6 +163,19 @@ h4{
   box-sizing: border-box;
   white-space: nowrap;
 }
+.filter-btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  height: 0;
+  background-color: currentColor;
+  transition: height 0.35s ease;
+}
+.filter-btn:hover::before {
+  height: 100%;
+}
 .filter-btn:not(.active) {
   opacity: 0.35;
 }
