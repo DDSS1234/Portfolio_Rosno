@@ -28,6 +28,7 @@ header {
   text-decoration: none;
   color: inherit;
   font-weight: 400;
+  text-transform: uppercase;
 }
 
 nav {
@@ -42,9 +43,6 @@ nav a {
 }
 
 @media (max-width: 600px) {
-  .logo a {
-    text-transform: lowercase;
-  }
 
   header {
     position: relative;
@@ -68,23 +66,6 @@ body {
   background: #f3f3f3;
   color: #333;
 }
-
-.logo-desktop,
-.logo-mobile {
-  font-weight: 400;
-  font-weight:400;
-  text-align: left;
-  margin-left: 25px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-family: var(--font);
-  display: block;
-}
-
-.logo-mobile {
-  display: none;
-}
-
 
 h3 {
   font-weight: 200;
@@ -277,14 +258,6 @@ h4{
 
 /* Mobile layout */
 @media (max-width: 600px) {
-  .logo-desktop {
-    display: none;
-  }
-  .logo-mobile {
-    display: block;
-    margin: 10px ;
-    text-align: center;
-  }
   .filter-bar {
     margin: 5px 25px 5px 25px;
   }
@@ -320,12 +293,13 @@ h4{
     overflow: hidden;
     width: min(var(--card-width), 90%);
     margin: 0 auto;
+    justify-content: flex-start;
   }
   .card {
     margin-left: 0;
     margin-right: 0;
     flex: 0 0 100%;
-    width: 90%;
+    width: 100%;
     height: 75vh;
   }
   .card:first-child {
@@ -352,7 +326,7 @@ h4{
   border-inline-start: none;
 }
 [dir="rtl"] .icon-group {
-  flex-direction: row-reverse;
+   flex-direction: row-reverse;
 }
 [dir="rtl"] .icon-group > .icon-btn {
   border-inline-start: 0;

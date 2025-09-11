@@ -101,18 +101,32 @@ function getVisibleCards() {
 
 function setupSwipe() {
   let startX = 0;
+  let dragging = false;
   catalog.addEventListener('touchstart', e => {
+    if (!window.matchMedia('(max-width: 600px)').matches) return;
     startX = e.touches[0].clientX;
+    dragging = true;
+    catalog.style.transition = 'none';
+  }, { passive: true });
+  catalog.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    const dx = e.touches[0].clientX - startX;
+    const width = catalog.clientWidth;
+    catalog.style.transform = `translateX(${-currentIndex * width + dx}px)`;
   }, { passive: true });
 
   catalog.addEventListener('touchend', e => {
+    if (!dragging) return;
+    dragging = false;
     const dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 50) {
+    const width = catalog.clientWidth;
+    if (Math.abs(dx) > width * 0.2) {
       const dir = dx < 0 ? 1 : -1;
       const visible = getVisibleCards();
       currentIndex = Math.min(Math.max(currentIndex + dir, 0), visible.length - 1);
-      updateMobilePosition();
     }
+    catalog.style.transition = 'transform 0.3s ease';
+    updateMobilePosition();
   });
 }
 

@@ -39,6 +39,7 @@ header {
   text-decoration: none;
   color: inherit;
   font-weight: 400;
+  text-transform: uppercase;
 }
 
 nav {
@@ -53,10 +54,6 @@ nav a {
 }
 
 @media (max-width: 600px) {
-  .logo a {
-    text-transform: lowercase;
-  }
-
   header {
     position: relative;
     justify-content: flex-end;
