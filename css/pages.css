@@ -73,43 +73,28 @@ nav a {
 
 .about {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
-  gap: 20px;
   padding: 25px;
-  min-height: 50vh;
+  min-height: 100vh;
+  --about-img-size: clamp(200px, 25vw, 300px);
 }
 
 .about-image {
-  position: relative;
-  width: 300px;
-  height: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: var(--about-img-size);
+  height: var(--about-img-size);
+  transform: translate(-50%, -50%);
   border-radius: 25%;
-  overflow: hidden;
-  box-shadow: 8px 8px 12px #2a2a2a35, 4px 4px 8px #2a2a2a50, -8px -8px 15px #ffffff;
-}
-
-.about-image img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-  display: block;
-}
-
-.about-image::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 4px 4px 8px #ffffff, inset -4px -4px 8px #2a2a2a35;
-  pointer-events: none;
+  box-shadow: 8px 8px 12px #2a2a2a35, 4px 4px 8px #2a2a2a50, -8px -8px 15px #ffffff;
 }
 
 .about-text {
   max-width: 500px;
   font-weight: 200;
+  margin-top: calc(50vh + (var(--about-img-size) / 2) + 20px);
 }
 
 .archive-grid {
@@ -139,13 +124,17 @@ footer {
   text-align: center;
   padding: 20px;
   font-weight: 200;
+  position: fixed;
+  bottom: 1rem;
+  left: 0;
+  right: 0;
 }
 /* Mobile footer icons */
 .icon-group {
-  display: flex;
+  display: inline-flex;
   overflow: hidden;
   background: #ffffff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #ffffff;
   border-radius: 0.5rem;
   isolation: isolate;
 }
@@ -160,7 +149,7 @@ footer {
 }
 [dir="rtl"] .icon-group > .icon-btn {
   border-inline-start: 0;
-  border-inline-end: 1px solid #e5e7eb;
+  border-inline-end: 1px solid #ffffff;
 }
 [dir="rtl"] .icon-group > .icon-btn:last-child {
   border-inline-end: none;
@@ -171,14 +160,11 @@ footer {
   justify-content: center;
   padding: 0.5rem 1rem;
   font-weight: 500;
-  color: #4b5563;
+  color: #ffffff;
   background: transparent;
   border: 0;
   cursor: pointer;
   transition: background-color 200ms ease, color 200ms ease;
-}
-.icon-btn:hover {
-  background: #f3f4f6;
 }
 .icon {
   width: 1.25rem;
@@ -195,28 +181,26 @@ footer {
 }
 @media (prefers-color-scheme: dark) {
   .icon-group {
-    background: #111827;
-    border-color: #374151;
-  }
-  .icon-group > .icon-btn,
-  [dir="rtl"] .icon-group > .icon-btn {
-    border-color: #374151;
+    background: #2a2a2a;
   }
   .icon-btn {
-    color: #d1d5db;
-  }
-  .icon-btn:hover {
-    background: #1f2937;
+    color: #ffffff;
   }
 }
 .mobile-footer {
   display: none;
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  justify-content: center;
 }
 @media (max-width: 600px) {
   footer .contact-info {
     display: none;
   }
   .mobile-footer {
-    display: flex;
+    display: inline-flex;
   }
 }

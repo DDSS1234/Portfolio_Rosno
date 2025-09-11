@@ -338,17 +338,12 @@ h4{
 
 /* Mobile footer icons */
 .icon-group {
-  display: flex;
+  display: inline-flex;
   overflow: hidden;
-  margin-left: 25px;
-  margin-right: 25px;
-  margin-bottom: 10px;
-  margin-top: 10px;
   background: #ffffff;
   border: 1px solid #ffffff;
   border-radius: 0.5rem;
   isolation: isolate;
-  justify-content: center;
 }
 .icon-group > .icon-btn {
   border-inline-start: 1px solid #e5e7eb;
@@ -401,7 +396,11 @@ h4{
 }
 .mobile-footer {
   display: none;
-  max-width: 25dvh;
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
   justify-content: center;
 }
 @media (max-width: 600px) {
@@ -409,7 +408,6 @@ h4{
     display: none;
   }
   .mobile-footer {
-    display: flex;
-    justify-content: center;
+    display: inline-flex;
   }
 }
