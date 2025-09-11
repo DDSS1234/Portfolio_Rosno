@@ -57,6 +57,8 @@ nav a {
     transform: translateX(-50%);
     width: 100%;
     text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
   }
 }
 body {
@@ -102,7 +104,7 @@ h4{
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin: 0rem 25px 25px 0.5rem;
+  margin: 10px 25px 10px 25px;
   flex-wrap: wrap;
 }
 
@@ -115,10 +117,10 @@ h4{
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: center;  
+  justify-content: left;  
   padding: 6px;
   height: 25px;
-  width: 120px;
+  width: 100px;
   box-sizing: border-box;
   white-space: nowrap;
 }
@@ -249,12 +251,6 @@ h4{
   height: 20px;
 }
 
-.tag.architecture { background: #2a2a2a; }
-.tag.product { background: #2a2a2a; }
-.tag.material { background: #2a2a2a; }
-.tag.uiux { background: #2a2a2a; }
-.tag.art { background: #2a2a2a; }
-
 /* Filtering animations */
 .card.filtering-out {
   animation: slideDown 0.5s forwards;
@@ -286,29 +282,32 @@ h4{
   }
   .logo-mobile {
     display: block;
-    margin: 10px auto;
+    margin: 10px ;
     text-align: center;
   }
   .filter-bar {
-    margin: 0 25px 25px 25px;
+    margin: 5px 25px 5px 25px;
   }
   .filter-btn {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     padding: 10px;
     border-radius: 8px;
-    background: #000;
+    background: #2a2a2a;
     color: #fff;
     transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 4px 4px 8px;
   }
   .filter-btn.active {
-    background: #ffd60a;
-    color: #000;
+    background: #2a2a2a;
+    color: #ffffff;
+    box-shadow: 4px 4px 8px;
   }
   .filter-btn .filter-icon {
     display: block;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
+    justify-content: center;
   }
   .filter-btn .filter-label {
     display: none;
@@ -344,10 +343,12 @@ h4{
   margin-left: 25px;
   margin-right: 25px;
   margin-bottom: 10px;
+  margin-top: 10px;
   background: #ffffff;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #ffffff;
   border-radius: 0.5rem;
   isolation: isolate;
+  justify-content: center;
 }
 .icon-group > .icon-btn {
   border-inline-start: 1px solid #e5e7eb;
@@ -360,7 +361,7 @@ h4{
 }
 [dir="rtl"] .icon-group > .icon-btn {
   border-inline-start: 0;
-  border-inline-end: 1px solid #e5e7eb;
+  border-inline-end: 1px solid #ffffff;
 }
 [dir="rtl"] .icon-group > .icon-btn:last-child {
   border-inline-end: none;
@@ -371,20 +372,17 @@ h4{
   justify-content: center;
   padding: 0.5rem 1rem;
   font-weight: 500;
-  color: #4b5563;
+  color: #ffffff;
   background: transparent;
   border: 0;
   cursor: pointer;
   transition: background-color 200ms ease, color 200ms ease;
 }
-.icon-btn:hover {
-  background: #f3f4f6;
-}
 .icon {
   width: 1.25rem;
   height: 1.25rem;
 }
-@media (min-width: 640px) {
+@media (min-width: 600px) {
   .icon-btn {
     padding: 0.5rem 1.5rem;
   }
@@ -395,22 +393,16 @@ h4{
 }
 @media (prefers-color-scheme: dark) {
   .icon-group {
-    background: #111827;
-    border-color: #374151;
-  }
-  .icon-group > .icon-btn,
-  [dir="rtl"] .icon-group > .icon-btn {
-    border-color: #374151;
+    background: #2a2a2a;
   }
   .icon-btn {
-    color: #d1d5db;
-  }
-  .icon-btn:hover {
-    background: #1f2937;
+    color: #ffffff;
   }
 }
 .mobile-footer {
   display: none;
+  max-width: 25dvh;
+  justify-content: center;
 }
 @media (max-width: 600px) {
   footer .contact-info {
@@ -418,5 +410,6 @@ h4{
   }
   .mobile-footer {
     display: flex;
+    justify-content: center;
   }
 }
