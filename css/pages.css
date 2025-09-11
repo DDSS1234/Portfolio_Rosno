@@ -59,7 +59,7 @@ nav a {
 
   header {
     position: relative;
-    justify-content: center;
+    justify-content: flex-end;
   }
 
   .logo {

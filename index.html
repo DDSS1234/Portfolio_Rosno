@@ -15,11 +15,40 @@
     </nav>
   </header>
   <div id="filterBar" class="filter-bar" aria-label="Filter projects">
-    <button type="button" class="filter-btn active" data-type="architecture">Architecture</button>
-    <button type="button" class="filter-btn active" data-type="product">Product</button>
-    <button type="button" class="filter-btn active" data-type="material">Material</button>
-    <button type="button" class="filter-btn active" data-type="uiux">UI/UX</button>
-    <button type="button" class="filter-btn active" data-type="art">Art</button>
+    <button type="button" class="filter-btn active" data-type="architecture">
+      <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-6 9 6" />
+        <path d="M4 10h16v10H4z" />
+      </svg>
+      <span class="filter-label">Architecture</span>
+    </button>
+    <button type="button" class="filter-btn active" data-type="product">
+      <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2" />
+        <path d="M3 9h18M9 3v18" />
+      </svg>
+      <span class="filter-label">Product</span>
+    </button>
+    <button type="button" class="filter-btn active" data-type="material">
+      <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 3 20 8 20 16 12 21 4 16 4 8" />
+      </svg>
+      <span class="filter-label">Material</span>
+    </button>
+    <button type="button" class="filter-btn active" data-type="uiux">
+      <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="14" rx="2" />
+        <path d="M8 20h8" />
+        <path d="M12 18v2" />
+      </svg>
+      <span class="filter-label">UI/UX</span>
+    </button>
+    <button type="button" class="filter-btn active" data-type="art">
+      <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2l3 7h7l-5.5 4.5 2 7L12 17l-6.5 4.5 2-7L2 9h7z" />
+      </svg>
+      <span class="filter-label">Art</span>
+    </button>
   </div>
 
   <div id="catalog" class="catalog" aria-live="polite">
