@@ -76,16 +76,17 @@ nav a {
   text-align: center;
   padding: 25px;
   min-height: 50vh;
-  --about-img-size: clamp(200px, 25vw, 300px);
 }
 
 .about-image {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: var(--about-img-size);
-  height: var(--about-img-size);
-  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  max-height: 300px;
+  transform: translate(-50%, -75%);
   border-radius: 25%;
   object-fit: cover;
   box-shadow: 8px 8px 12px #2a2a2a35, 4px 4px 8px #2a2a2a50, -8px -8px 15px #ffffff;
@@ -94,7 +95,8 @@ nav a {
 .about-text {
   max-width: 500px;
   font-weight: 200;
-  margin-top: calc(50vh + (var(--about-img-size) / 2) + 20px);
+  margin-top: calc(55vh);
+  text-align: center;
 }
 
 .archive-grid {
