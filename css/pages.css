@@ -75,7 +75,7 @@ nav a {
   position: relative;
   text-align: center;
   padding: 25px;
-  min-height: 100vh;
+  min-height: 50vh;
   --about-img-size: clamp(200px, 25vw, 300px);
 }
 
