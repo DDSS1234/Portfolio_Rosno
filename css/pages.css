@@ -56,11 +56,13 @@ nav a {
 
 .aboutDesktop {
   display: flex;
-  align-self: center;
   gap: 2rem;
   align-items: center;
   padding: 10px 25px 5px 25px;
+  height: 100dvh;
+  margin: auto;
   background: none;
+  align-items: center;
 }
 
 .aboutDesktop-image {
@@ -74,7 +76,7 @@ nav a {
 
 .aboutDesktop-text {
   position: relative;
-  max-width: 50%;
+  max-width: 60%;
   font-weight: 200;
   display: inline-block;
   flex-direction: row;
@@ -87,6 +89,7 @@ nav a {
     position: relative;
     justify-content: flex-end;
     padding: 10px 25px;
+    min-height: 60px;
   }
 
   .logo {
