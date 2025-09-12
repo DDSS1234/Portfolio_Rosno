@@ -4,6 +4,11 @@ const catalog = document.getElementById('catalog');
 const filterBar = document.getElementById('filterBar');
 const selectedTypes = new Set(['architecture','product','material','uiux','art']);
 
+// Ambient card state
+let ambientIndex = 0;
+let ambientTimer = null;
+
+
 function generateStrikeImage(widthPx, heightPx, squarePx) {
   const dpr = Math.max(1, Math.floor(window.devicePixelRatio || 1));
   // Normalize to perfectly fill with whole number of squares
@@ -57,7 +62,8 @@ function renderCards() {
     const card = document.createElement('a');
     card.className = 'card project-card';
     card.dataset.type = type;
-    card.style.setProperty('--z', total - i);
+    // Base stacking order starting at 991 for the bottom card
+    card.style.setProperty('--z', 991 + (total - i - 1));
     card.href = `projects/${p.id}.html`;
 
     card.innerHTML = `
@@ -67,10 +73,14 @@ function renderCards() {
       <div class="thumb"><img src="${p.thumb}" alt="${p.title}"></div>
       <div class="info">
         <h3>${p.title}</h3>
-      </div>`;
+      </div>
+      <svg class="ambient-outline" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <rect x="1" y="1" width="98" height="98" rx="8" ry="8"></rect>
+      </svg>`;
 
     catalog.appendChild(card);
   });
+  setupAmbientOutlines();
   updateEdgeClasses();
 }
 
@@ -97,6 +107,8 @@ function applyFilter() {
   currentIndex = Math.min(currentIndex, getVisibleCards().length - 1);
   updateMobilePosition();
   updateEdgeClasses();
+  stopAmbient();
+  startAmbient();
 }
 
 function getVisibleCards() {
@@ -153,6 +165,70 @@ function updateMobilePosition() {
   }
 }
 
+function setupAmbientOutlines() {
+  const cards = Array.from(catalog.querySelectorAll('.project-card'));
+  cards.forEach(card => {
+    card.style.zIndex = card.style.getPropertyValue('--z') || 991;
+    const rect = card.querySelector('.ambient-outline rect');
+    if (rect) {
+      const len = rect.getTotalLength();
+      rect.dataset.len = len;
+      rect.style.strokeDasharray = len;
+      rect.style.strokeDashoffset = len;
+    }
+  });
+}
+function startAmbient() {
+  if (window.matchMedia('(max-width: 600px)').matches) return;
+  stopAmbient();
+  const visible = getVisibleCards();
+  if (!visible.length) return;
+  const card = visible[ambientIndex % visible.length];
+  card.classList.add('ambient-active');
+  card.style.zIndex = 999;
+  const rect = card.querySelector('.ambient-outline rect');
+  if (rect) {
+    rect.style.animation = 'none';
+    rect.offsetWidth; // reset animation
+    rect.style.animation = '';
+  }
+  ambientTimer = setTimeout(advanceAmbient, 5000);
+}
+function advanceAmbient() {
+  const visible = getVisibleCards();
+  if (!visible.length) return;
+  const card = visible[ambientIndex % visible.length];
+  card.classList.remove('ambient-active');
+  card.style.zIndex = 991;
+  const rect = card.querySelector('.ambient-outline rect');
+  if (rect) {
+    const len = rect.dataset.len;
+    rect.style.strokeDashoffset = len;
+    rect.style.animation = 'none';
+    rect.offsetWidth;
+    rect.style.animation = '';
+  }
+  ambientIndex = (ambientIndex + 1) % visible.length;
+  startAmbient();
+}
+function stopAmbient() {
+  clearTimeout(ambientTimer);
+  const current = document.querySelector('.project-card.ambient-active');
+  if (current) {
+    current.classList.remove('ambient-active');
+    current.style.zIndex = 991;
+    const rect = current.querySelector('.ambient-outline rect');
+    if (rect) {
+      const len = rect.dataset.len;
+      rect.style.strokeDashoffset = len;
+      rect.style.animation = 'none';
+      rect.offsetWidth;
+      rect.style.animation = '';
+    }
+  }
+}
+
+
 function setupHover() {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const BASE_THRESHOLD = 100;
@@ -165,6 +241,7 @@ function setupHover() {
   }
 
   function onMove(e) {
+    stopAmbient();
     if (window.innerWidth < 600) {
       reset();
       return;
@@ -205,7 +282,8 @@ function setupHover() {
   }
 
   catalog.addEventListener('pointermove', onMove);
-  catalog.addEventListener('pointerleave', reset);
+  catalog.addEventListener('pointerenter', stopAmbient);
+  catalog.addEventListener('pointerleave', () => { reset(); startAmbient(); });
   window.addEventListener('resize', () => {
     if (window.innerWidth < 600) reset();
   });
@@ -236,5 +314,6 @@ fetch('data/projects.json')
     setupSwipe();
     applyFilter();
     setupHover();
+    startAmbient();
   });
 

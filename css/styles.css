@@ -182,6 +182,35 @@ h4{
   box-shadow: 8px 8px 8px rgba(0,0,0,0.2);
 }
 
+.project-card.ambient-active {
+  z-index: 999;
+  box-shadow: inset 0 0 8px rgba(255,0,0,0.4);
+}
+.project-card .ambient-outline {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.project-card .ambient-outline rect {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: red;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 0;
+  stroke-dashoffset: 0;
+}
+.project-card.ambient-active .ambient-outline rect {
+  animation: ambient-draw 5s linear forwards;
+  filter: drop-shadow(0 0 4px rgba(255,0,0,0.6));
+}
+@keyframes ambient-draw {
+  to { stroke-dashoffset: 0; }
+}
+
 .project-card.tier1 { z-index: 998; }
 .project-card.tier2 { z-index: 997; }
 .project-card.tier3 { z-index: 996; }
@@ -190,7 +219,7 @@ h4{
 .project-card.tier6 { z-index: 993; }
 .project-card.tier7 { z-index: 992; }
 .project-card.tier8 { z-index: 991; }
-.project-card.tier9 { z-index: 991; }
+.project-card.tier9 { z-index: 990; }
 
 @media (prefers-reduced-motion: reduce) {
   .project-card { transition: none; }
