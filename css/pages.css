@@ -55,21 +55,18 @@ nav a {
 }
 
 .aboutDesktop {
-  display: inline-block;
-  justify-content: space-between;
-  align-items: left;
+  display: flex;
+  align-self: center;
+  gap: 2rem;
+  align-items: center;
   padding: 10px 25px 5px 25px;
   background: none;
 }
 
 .aboutDesktop-image {
-  position: absolute;
-  top: 50dvh;
-  left: 25px;
+  max-width: 40%;
   justify-content: left;
-  max-width: clamp(33dvw, 50dvw, 50dvw);
-  max-height: clamp(33dvh, 50dvh, 50dvh);
-  transform: translateY(-50%);
+  justify-content: center;
   height: auto;
   display: inline-block;
   box-shadow: 8px 8px 12px #2a2a2a35, 4px 4px 8px #2a2a2a50, -8px -8px 15px #ffffff;
@@ -77,12 +74,12 @@ nav a {
 
 .aboutDesktop-text {
   position: relative;
-  max-width: 800px;
-  min-width: 400px;
+  max-width: 50%;
   font-weight: 200;
   display: inline-block;
   flex-direction: row;
   justify-content: left;
+  flex: 1;
 }
 
 @media (max-width: 600px) {
