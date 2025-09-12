@@ -20,7 +20,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 25px;
+  padding: 10px 25px 5px 25px;
   background: none;
 }
 
@@ -83,9 +83,9 @@ h4{
 
 .filter-bar {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  margin: 10px 25px 10px 25px;
+  justify-content: flex-start;
+  margin: 0 0 0 25px;
+  padding: 5px 0 5px 0;
   flex-wrap: wrap;
 }
 
@@ -98,10 +98,9 @@ h4{
   overflow: hidden;
   display: flex;
   align-items: center;
-  justify-content: left;  
-  padding: 6px;
+  justify-content: flex-start;
+  padding: 6px 0 6px 0;
   height: 25px;
-  width: 100px;
   box-sizing: border-box;
   white-space: nowrap;
 }
@@ -122,10 +121,7 @@ h4{
   opacity: 0.35;
 }
 
-/* Default desktop view hides icon so text appears */
-.filter-btn .filter-icon {
-  display: none;
-}
+
 
 .filter-btn::after {
   content: "";
@@ -153,7 +149,7 @@ h4{
   align-items: flex-start;
   width: 100%;
   margin: 0 auto;
-  padding: 10px 25px 0;
+  padding: 10px 25px 10px;
   box-sizing: border-box;
   overflow: hidden;
   transition: transform 0.5s ease;
@@ -191,6 +187,10 @@ h4{
 .project-card.tier3 { z-index: 996; }
 .project-card.tier4 { z-index: 995; }
 .project-card.tier5 { z-index: 994; }
+.project-card.tier6 { z-index: 993; }
+.project-card.tier7 { z-index: 992; }
+.project-card.tier8 { z-index: 991; }
+.project-card.tier9 { z-index: 991; }
 
 @media (prefers-reduced-motion: reduce) {
   .project-card { transition: none; }
@@ -260,35 +260,7 @@ h4{
 /* Mobile layout */
 @media (max-width: 600px) {
   .filter-bar {
-    margin: 5px 25px 5px 25px;
-  }
-  .filter-btn {
-    width: 40px;
-    height: 40px;
-    padding: 10px;
-    border-radius: 8px;
-    background: #2a2a2a;
-    color: #fff;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    box-shadow: 4px 4px 8px;
-  }
-  .filter-btn.active {
-    background: #2a2a2a;
-    color: #ffffff;
-    box-shadow: 4px 4px 8px;
-  }
-  .filter-btn .filter-icon {
-    display: block;
-    width: 20px;
-    height: 20px;
-    justify-content: center;
-  }
-  .filter-btn .filter-label {
-    display: none;
-  }
-  .filter-btn::before,
-  .filter-btn::after {
-    content: none;
+    margin: 5px 0 5px 25px;
   }
   .catalog {
     overflow: hidden;

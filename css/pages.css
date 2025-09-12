@@ -92,10 +92,17 @@ nav a {
 }
 
 .about-text {
-  max-width: 500px;
+  position: fixed;
+  top: calc(50% + 75px + 1.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 800px;
+  min-width: 400px;
   font-weight: 200;
-  margin-top: calc(55vh);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .archive-grid {

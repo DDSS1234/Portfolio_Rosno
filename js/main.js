@@ -159,7 +159,7 @@ function setupHover() {
 
   function reset() {
     Array.from(catalog.querySelectorAll('.project-card')).forEach(card => {
-      card.classList.remove('active', 'tier1', 'tier2', 'tier3', 'tier4', 'tier5', 'tier6', 'tier7', 'tier8');
+      card.classList.remove('active', 'tier1', 'tier2', 'tier3', 'tier4', 'tier5', 'tier6', 'tier7', 'tier8', 'tier9');
       card.style.setProperty('--ty', '0px');
     });
   }
@@ -182,7 +182,7 @@ function setupHover() {
       if (dist < minDist) { minDist = dist; closest = card; }
     });
     cards.forEach(card => {
-      card.classList.remove('active', 'tier1', 'tier2', 'tier3', 'tier4', 'tier5', 'tier6', 'tier7', 'tier8');
+      card.classList.remove('active', 'tier1', 'tier2', 'tier3', 'tier4', 'tier5', 'tier6', 'tier7', 'tier8', 'tier9');
       const dist = parseFloat(card.dataset.dist);
       if (card === closest) {
         card.classList.add('active');
@@ -198,7 +198,8 @@ function setupHover() {
         else if (dist < BASE_THRESHOLD * 5) card.classList.add('tier5');
         else if (dist < BASE_THRESHOLD * 6) card.classList.add('tier6');
         else if (dist < BASE_THRESHOLD * 7) card.classList.add('tier7');
-        else if (dist < BASE_THRESHOLD * 8) card.classList.add('tier8');        
+        else if (dist < BASE_THRESHOLD * 8) card.classList.add('tier8');      
+        else if (dist < BASE_THRESHOLD * 9) card.classList.add('tier9');          
       }
     });
   }
