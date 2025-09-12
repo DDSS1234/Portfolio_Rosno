@@ -104,13 +104,13 @@ nav a {
     text-align: center;
     margin: 0;
   }
+}
+.aboutDesktop{
+  display: none;
+}
 
-  .aboutDesktop {
-    display: none;
-  }
-  .about {
-    display: block;
-  }
+.about{
+  display: block;
 }
 
 .about {
