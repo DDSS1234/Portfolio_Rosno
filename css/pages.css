@@ -15,8 +15,9 @@
   font-display: swap;
 }
 
-body {
+html, body {
   font-family: var(--font);
+  height: 100%;
   background: #f3f3f3;
   color: #2a2a2a;
   font-weight: 200;
@@ -55,11 +56,14 @@ nav a {
 }
 
 .aboutDesktop {
+  flex: 1;
   display: flex;
   gap: 2rem;
   align-items: center;
   padding: 10px 25px 5px 25px;
-  height: 100dvh;
+  height: -moz-calc(100% - 120px);
+  height: -webkit-calc(100% - 120px);
+  height: calc(100% - 120px);
   margin: auto;
   background: none;
   align-items: center;
