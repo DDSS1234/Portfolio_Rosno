@@ -18,6 +18,7 @@
 html, body {
   font-family: var(--font);
   height: 100%;
+  width: 100%;
   background: #f3f3f3;
   color: #2a2a2a;
   font-weight: 200;
@@ -59,7 +60,6 @@ nav a {
   flex: 1;
   display: flex;
   gap: 2rem;
-  align-items: center;
   padding: 10px 25px 5px 25px;
   height: -moz-calc(100% - 120px);
   height: -webkit-calc(100% - 120px);
@@ -105,33 +105,31 @@ nav a {
     margin: 0;
   }
 }
-.aboutDesktop{
-  display: none;
-}
-
-.about{
-  display: block;
-}
-
 .about {
-  position: relative;
-  text-align: center;
-  padding: 25px;
-  min-height: 50vh;
-  display: none;
+  flex: 1;
+  display: flex;
+  gap: 2rem;
+  padding: 10px 25px 5px 25px;
+  height: -moz-calc(100% - 120px);
+  height: -webkit-calc(100% - 120px);
+  height: calc(100% - 120px);
+  margin: auto;
+  background: none;
+  align-items: center;
 }
 
 .about-image {
+
+  display: inline-block;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 100%;
+  width: 80%;
+  flex-direction: column;
   max-width: 300px;
   height: auto;
   max-height: 300px;
-  transform: translate(-50%, -75%);
   border-radius: 25%;
   object-fit: cover;
+  justify-content: center;
   box-shadow: 8px 8px 12px #2a2a2a35, 4px 4px 8px #2a2a2a50, -8px -8px 15px #ffffff;
 }
 
