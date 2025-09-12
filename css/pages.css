@@ -57,14 +57,16 @@ nav a {
   header {
     position: relative;
     justify-content: flex-end;
+    padding: 10px 25px;
   }
 
   .logo {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     text-align: center;
+    margin: 0;
   }
 }
 

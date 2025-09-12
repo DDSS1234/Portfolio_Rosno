@@ -71,6 +71,7 @@ function renderCards() {
 
     catalog.appendChild(card);
   });
+  updateEdgeClasses();
 }
 
 function applyFilter() {
@@ -82,21 +83,33 @@ function applyFilter() {
         card.style.display = 'none';
         card.classList.remove('filtering-out');
         updateMobilePosition();
+        updateEdgeClasses();
       }, { once: true });
     } else if (show && card.style.display === 'none') {
       card.style.display = '';
       card.classList.add('returning');
       card.addEventListener('animationend', () => {
         card.classList.remove('returning');
+        updateEdgeClasses();
       }, { once: true });
     }
   });
   currentIndex = Math.min(currentIndex, getVisibleCards().length - 1);
   updateMobilePosition();
+  updateEdgeClasses();
 }
 
 function getVisibleCards() {
   return Array.from(catalog.children).filter(c => c.style.display !== 'none');
+}
+
+function updateEdgeClasses() {
+  const visible = getVisibleCards();
+  visible.forEach(card => card.classList.remove('first-visible', 'last-visible'));
+  if (visible.length) {
+    visible[0].classList.add('first-visible');
+    visible[visible.length - 1].classList.add('last-visible');
+  }
 }
 
 function setupSwipe() {
@@ -146,7 +159,7 @@ function setupHover() {
 
   function reset() {
     Array.from(catalog.querySelectorAll('.project-card')).forEach(card => {
-      card.classList.remove('active', 'tier1', 'tier2', 'tier3', 'tier4', 'tier5');
+      card.classList.remove('active', 'tier1', 'tier2', 'tier3', 'tier4', 'tier5', 'tier6', 'tier7', 'tier8');
       card.style.setProperty('--ty', '0px');
     });
   }
@@ -169,20 +182,23 @@ function setupHover() {
       if (dist < minDist) { minDist = dist; closest = card; }
     });
     cards.forEach(card => {
-      card.classList.remove('active', 'tier1', 'tier2', 'tier3', 'tier4', 'tier5');
+      card.classList.remove('active', 'tier1', 'tier2', 'tier3', 'tier4', 'tier5', 'tier6', 'tier7', 'tier8');
       const dist = parseFloat(card.dataset.dist);
       if (card === closest) {
         card.classList.add('active');
         const ty = prefersReducedMotion ? 0 : -10;
         card.style.setProperty('--ty', `${ty}px`);
       } else {
-        const ty = prefersReducedMotion ? 0 : Math.min((dist / BASE_THRESHOLD) * 10, 40);
+        const ty = prefersReducedMotion ? 0 : Math.min((dist / BASE_THRESHOLD) * 10, 10);
         card.style.setProperty('--ty', `${ty}px`);
         if (dist < BASE_THRESHOLD) card.classList.add('tier1');
         else if (dist < BASE_THRESHOLD * 2) card.classList.add('tier2');
         else if (dist < BASE_THRESHOLD * 3) card.classList.add('tier3');
         else if (dist < BASE_THRESHOLD * 4) card.classList.add('tier4');
         else if (dist < BASE_THRESHOLD * 5) card.classList.add('tier5');
+        else if (dist < BASE_THRESHOLD * 6) card.classList.add('tier6');
+        else if (dist < BASE_THRESHOLD * 7) card.classList.add('tier7');
+        else if (dist < BASE_THRESHOLD * 8) card.classList.add('tier8');        
       }
     });
   }
