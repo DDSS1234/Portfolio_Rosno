@@ -57,7 +57,6 @@ nav a {
 }
 
 .aboutDesktop {
-  flex: 1;
   display: flex;
   gap: 2rem;
   padding: 10px 25px 5px 25px;
@@ -65,6 +64,7 @@ nav a {
   height: -webkit-calc(100% - 120px);
   height: calc(100% - 120px);
   margin: auto;
+  flex-direction: row;
   background: none;
   align-items: center;
 }
@@ -72,20 +72,16 @@ nav a {
 .aboutDesktop-image {
   max-width: 40%;
   justify-content: left;
-  justify-content: center;
   height: auto;
-  display: inline-block;
+  display: flex;
   box-shadow: 8px 8px 12px #2a2a2a35, 4px 4px 8px #2a2a2a50, -8px -8px 15px #ffffff;
 }
 
 .aboutDesktop-text {
-  position: relative;
   max-width: 60%;
   font-weight: 200;
-  display: inline-block;
-  flex-direction: row;
+  display: flex;
   justify-content: left;
-  flex: 1;
 }
 
 @media (max-width: 640px) {
@@ -95,6 +91,16 @@ nav a {
     padding: 10px 25px;
     min-height: 60px;
   }
+
+html, body {
+  font-family: var(--font);
+  height: 100%;
+  width: 100%;
+  height: 90%;
+  background: #f3f3f3;
+  color: #2a2a2a;
+  font-weight: 200;
+}
 
   .logo {
     position: absolute;
@@ -107,13 +113,14 @@ nav a {
 }
 .about {
   flex: 1;
-  display: flex;
-  gap: 2rem;
+  display: none;
+  gap: 1rem;
   padding: 10px 25px 5px 25px;
   height: -moz-calc(100% - 120px);
   height: -webkit-calc(100% - 120px);
   height: calc(100% - 120px);
   margin: auto;
+  flex-direction: column;
   background: none;
   align-items: center;
 }
@@ -121,12 +128,9 @@ nav a {
 .about-image {
 
   display: inline-block;
-  position: fixed;
-  width: 80%;
-  flex-direction: column;
-  max-width: 300px;
-  height: auto;
-  max-height: 300px;
+  position: relative;
+  max-width: 70vw;
+  max-height: 70vw;
   border-radius: 25%;
   object-fit: cover;
   justify-content: center;
@@ -134,17 +138,22 @@ nav a {
 }
 
 .about-text {
-  position: fixed;
+  display: inline-block;
   top: calc(50% + 75px + 1.5rem);
   left: 50%;
-  transform: translateX(-50%);
-  max-width: 800px;
-  min-width: 400px;
+  max-width: 80vw;
   font-weight: 200;
   text-align: center;
-  display: flex;
-  flex-direction: column;
   justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .aboutDesktop {
+    display: none;
+  }
+  .about {
+    display: flex;
+  }
 }
 
 .archive-grid {
@@ -183,13 +192,12 @@ footer {
 .icon-group {
   display: inline-flex;
   overflow: hidden;
-  background: #ffffff;
-  border: 1px solid #ffffff;
+  border: 1px solid #2a2a2a;
   border-radius: 0.5rem;
   isolation: isolate;
 }
 .icon-group > .icon-btn {
-  border-inline-start: 1px solid #e5e7eb;
+  border-inline-start: 1px solid #2a2a2a;
 }
 .icon-group > .icon-btn:first-child {
   border-inline-start: none;
@@ -199,7 +207,7 @@ footer {
 }
 [dir="rtl"] .icon-group > .icon-btn {
   border-inline-start: 0;
-  border-inline-end: 1px solid #ffffff;
+  border-inline-end: 1px solid #2a2a2a;
 }
 [dir="rtl"] .icon-group > .icon-btn:last-child {
   border-inline-end: none;
@@ -210,7 +218,7 @@ footer {
   justify-content: center;
   padding: 0.5rem 1rem;
   font-weight: 500;
-  color: #ffffff;
+  color: #2a2a2a;
   background: transparent;
   border: 0;
   cursor: pointer;
@@ -231,10 +239,10 @@ footer {
 }
 @media (prefers-color-scheme: dark) {
   .icon-group {
-    background: #2a2a2a;
+    background: none;
   }
   .icon-btn {
-    color: #ffffff;
+    color: #2a2a2a;
   }
 }
 .mobile-footer {
