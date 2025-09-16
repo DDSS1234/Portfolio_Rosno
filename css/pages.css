@@ -127,6 +127,16 @@ html, body {
   align-items: center;
 }
 
+.about-image-wrap{
+  position: relative;
+  display: inline-block;
+  max-width: 70vw;
+  max-height: 70vw;
+  object-fit: cover;
+  overflow: hidden;
+  box-shadow: 8px 8px 12px #2a2a2a35, 4px 4px 8px #2a2a2a50, -8px -8px 16px #ffffff;
+}
+
 .about-image {
   display: inline-block;
   position: relative;
@@ -134,8 +144,7 @@ html, body {
   max-height: 70vw;
   border-radius: 25%;
   object-fit: cover;
-  box-shadow: 8px 8px 12px #2a2a2a35, 4px 4px 8px #2a2a2a50, -8px -8px 16px #ffffff;
-}
+  overflow: hidden;}
 
 .about-text {
   display: inline-block;
