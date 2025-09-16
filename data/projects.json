@@ -11,11 +11,11 @@
     "hero": "assets/img/paper-brick-chair_hero.jpg"
   },
   {
-    "id": "fold-lamp",
-    "title": "Fold Lamp",
+    "id": "school-for-agriculture",
+    "title": "School for Agriculture",
     "year": "2024",
-    "tags": ["product", "lighting", "origami", "led"],
-    "hook": "Flat-packed folds become an ambient desk lamp.",
+    "tags": ["architecture", "farming","organic"],
+    "hook": "Farming schedule plans the school",
     "thumb": "assets/img/fold-lamp_thumb.png",
     "linework": "assets/img/fold-lamp_line.svg",
     "microLoop": "assets/video/fold-lamp_loop.mp4",
