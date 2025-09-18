@@ -5,6 +5,7 @@
 :root {
   --card-width: 512px;
   --card-height: 512px;
+  --background-main: #f2f2f2;
   --overlap: 160px;
   --header-footer-height: 60px;
   --filter-bar-height: 24px;
@@ -51,8 +52,8 @@ html, body {
   width: 100%;
   margin: 0;
   font-family: var(--font);
-  background: #f3f3f3;
-  color: #333;
+  background: var(--background-main);
+  color: #2a2a2a;
 }
 
 h3 {
@@ -147,7 +148,7 @@ h4{
   z-index: var(--z);
   width: min(var(--card-width));
   height: var(--card-height);
-  background: #f3f3f3;
+  background: var(--background-main);
   border: 1px solid #2a2a2a;
   border-radius: 8px;
   overflow: hidden;
