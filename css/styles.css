@@ -86,7 +86,7 @@ h4 {
   height: calc(100dvh - 120px);
   display: flex;
   gap: var(--card-gap);
-  padding: 24px;
+  padding: 12px 24px;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
@@ -239,8 +239,8 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 0 20px;
-  min-height: 44px;
+  padding: 0 16px;
+  min-height: 40px;
   border-radius: 999px;
   border: none;
   background: #2a2a2a;
