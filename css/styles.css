@@ -5,6 +5,7 @@
 
 :root {
   --background-main: #f2f2f2;
+  --background-secondary: #c4c4c4;
   --font: "Geist Variable", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --header-footer-height: 60px;
   --card-gap: 36px;
@@ -82,6 +83,7 @@ h4 {
 
 .catalog {
   --card-width: min(var(--mobile), calc((100% - (var(--cards-per-view) - 1) * var(--card-gap)) / var(--cards-per-view)));
+  height: calc(100dvh - 120px);
   display: flex;
   gap: var(--card-gap);
   padding: 24px;
@@ -106,8 +108,8 @@ h4 {
 }
 
 .catalog-indicator {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   border: none;
   padding: 0;
@@ -117,7 +119,7 @@ h4 {
 }
 
 .catalog-indicator.is-active {
-  background: #2a2a2a;
+  background: #ff484c;
   transform: scale(1.1);
 }
 
@@ -136,8 +138,8 @@ h4 {
   color: inherit;
   text-decoration: none;
   scroll-snap-align: start;
-  border-radius: 24px;
-  box-shadow: 8px 8px 16px #2a2a2a70;
+  border-radius: 20px;
+  box-shadow: 4px 4px 8px #2a2a2a70;
 }
 
 .card::after {
@@ -147,6 +149,7 @@ h4 {
   border-radius: inherit;
   box-shadow:
     inset .5px .5px 0 1px #ffffff85,
+    inset 4px 4px 8px #ffffff,
     inset -8px -8px 12px rgba(42, 42, 42, 0.12);
   pointer-events: none;
 }
