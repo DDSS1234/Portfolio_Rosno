@@ -7,14 +7,31 @@
   <link rel="stylesheet" href="css/pages.css" />
 </head>
 <body>
-<header>
-  <h1 class="logo"><a href="index.html">RŌS-NŌ</a></h1>
-  <nav id="navLinks">
-    <a href="index.html" target="_self" rel="noopener">Home</a>
+  <header>
+    <h1 class="logo"><a href="index.html">RŌS-NŌ</a></h1>
+    <button
+      id="menuBtn"
+      aria-label="Open menu"
+      aria-expanded="false"
+      aria-controls="siteMenu"
+      class="menu-btn"
+    >
+      <svg viewBox="0 0 20 20" width="24" height="24" class="burger">
+        <path class="l1" d="M3 10h16" />
+        <path class="l2" d="M3 14h16" />
+      </svg>
+    </button>
+  </header>
+
+  <nav id="siteMenu" class="menu" hidden data-open="false">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="archive.html">Archive</a></li>
+    </ul>
   </nav>
-</header>
-<main>
-  <div class="aboutDesktop">
+  <main>
+    <div class="aboutDesktop">
     <img class="aboutDesktop-image" src="images/headshot.jpg" alt="Portrait" />
     <div class="aboutDesktop-text">
       <p>Every material and process is an act of choice. I design to answer my own questions on meaning and beauty from what is at hand by crafting experiences that are thoughtful, creative and economically sound. Informed by my life as a collegiate athlete, amateur bodybuilder, and lifelong student in both psychology and philosophy, I anchor every design in the human experience.</p>
@@ -27,9 +44,9 @@
     <div class="about-text">
       <p>Every material and process is an act of choice. I design to answer my own questions on meaning and beauty from what is at hand by crafting experiences that are thoughtful, creative and economically sound. Informed by my life as a collegiate athlete, amateur bodybuilder, and lifelong student in both psychology and philosophy, I anchor every design in the human experience.</p>
     </div>
-  </div>
-</main>
- <footer>
+    </div>
+  </main>
+  <footer>
     <h4 class="contact-info">alexrosno@gmail.com<br>262.312.8934</h4>
     <div class="icon-group mobile-footer" dir="auto">
       <button class="icon-btn" aria-label="Call">
@@ -85,5 +102,6 @@
       </button>
     </div>
   </footer>
+  <script src="js/menu.js" defer></script>
 </body>
 </html>

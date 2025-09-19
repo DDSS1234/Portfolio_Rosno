@@ -8,9 +8,6 @@ const contactToggle = document.querySelector('[data-contact-toggle]');
 const contactDialog = document.querySelector('[data-contact-dialog]');
 const contactOverlay = contactDialog?.querySelector('[data-contact-overlay]') || null;
 const contactClose = contactDialog?.querySelector('[data-contact-close]') || null;
-const menuButton = document.getElementById('menuBtn');
-const siteMenu = document.getElementById('siteMenu');
-let menuHideTimeout = null;
 const focusableSelector = [
   'a[href]',
   'area[href]',
@@ -210,52 +207,6 @@ function updateCatalogIndicators() {
     const isActive = index === activeIndex;
     button.classList.toggle('is-active', isActive);
     button.setAttribute('aria-current', isActive ? 'true' : 'false');
-  });
-}
-
-function setMenuOpen(isOpen) {
-  if (!menuButton || !siteMenu) return;
-
-  if (menuHideTimeout !== null) {
-    window.clearTimeout(menuHideTimeout);
-    menuHideTimeout = null;
-  }
-
-  menuButton.setAttribute('aria-expanded', String(isOpen));
-
-  if (isOpen) {
-    siteMenu.hidden = false;
-    siteMenu.dataset.open = 'true';
-    document.documentElement.classList.add('menu-open');
-    document.body.classList.add('menu-open');
-  } else {
-    siteMenu.dataset.open = 'false';
-    document.documentElement.classList.remove('menu-open');
-    document.body.classList.remove('menu-open');
-    menuHideTimeout = window.setTimeout(() => {
-      if (!siteMenu) return;
-      siteMenu.hidden = true;
-      menuHideTimeout = null;
-    }, 400);
-  }
-}
-
-if (menuButton && siteMenu) {
-  menuButton.addEventListener('click', () => {
-    const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
-    setMenuOpen(!isOpen);
-  });
-
-  window.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
-      setMenuOpen(false);
-    }
-  });
-
-  siteMenu.addEventListener('click', (event) => {
-    if (event.target === siteMenu) {
-      setMenuOpen(false);
-    }
   });
 }
 

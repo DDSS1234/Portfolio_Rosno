@@ -58,7 +58,7 @@ main {
 .logo a {
   text-decoration: none;
   color: inherit;
-  font-weight: 400;
+  font-weight: 300;
   text-transform: uppercase;
 }
 
@@ -315,7 +315,8 @@ footer {
 }
 
 .site-footer {
-  display: none;
+  display: block;
+  height: var(--header-footer-height);
   padding: 0 24px calc(env(safe-area-inset-bottom, 0px));
   background: var(--background-main);
   border-top: 1px solid rgba(42, 42, 42, 0.08);
@@ -587,6 +588,7 @@ body.is-modal-open {
   width: max-content;
   justify-content: center;
 }
+
 
 @media (max-width: 1200px) {
   .catalog {
