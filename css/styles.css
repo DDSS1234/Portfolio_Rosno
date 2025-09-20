@@ -284,23 +284,45 @@ h4 {
   padding: 1rem;
 }
 
-.tag {
+.tag-chip {
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #2a2a2a;
-  color: #fff;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 6px 10px;
+  min-height: 24px;
+  max-width: calc(100% - 24px);
+  border: 1px solid var(--background-secondary);
+  border-radius: 16px;
+  background: transparent;
+  color: var(--background-secondary);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  white-space: nowrap;
+  box-sizing: border-box;
+  z-index: 1;
+  transition: border-color 160ms ease, color 160ms ease;
 }
 
-.tag img {
-  width: 20px;
-  height: 20px;
+.card:hover .tag-chip,
+.card:focus-visible .tag-chip {
+  border-color: color-mix(in srgb, var(--background-secondary) 90%, #2a2a2a 10%);
+  color: color-mix(in srgb, var(--background-secondary) 90%, #2a2a2a 10%);
+}
+
+@media (max-width: 480px) {
+  .tag-chip {
+    white-space: normal;
+    justify-content: flex-end;
+    text-align: right;
+  }
 }
 
 footer {

@@ -19,17 +19,41 @@ const focusableSelector = [
 ].join(', ');
 let lastFocusedElement = null;
 
+const categoryLabels = {
+  architecture: 'Architecture',
+  product: 'Product',
+  material: 'Material',
+  'ui/ux': 'UI/UX',
+  'uiux': 'UI/UX',
+  'ui-ux': 'UI/UX',
+  art: 'Art'
+};
+
+function getCategoryLabel(type) {
+  if (typeof type !== 'string' || !type.trim()) {
+    return 'Product';
+  }
+
+  const normalizedType = type.trim().toLowerCase();
+  if (categoryLabels[normalizedType]) {
+    return categoryLabels[normalizedType];
+  }
+
+  return type
+    .replace(/[-_]/g, ' ')
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
 function createCard(project) {
   const type = Array.isArray(project.tags) && project.tags.length
     ? project.tags[0]
     : 'product';
+  const categoryLabel = getCategoryLabel(type);
   const card = document.createElement('a');
   card.className = 'card';
   card.href = `projects/${project.id}.html`;
   card.innerHTML = `
-    <div class="tag ${type}">
-      <img src="icons/${type}.svg" alt="${type} icon">
-    </div>
+    <span class="tag-chip" role="note" aria-label="Category: ${categoryLabel}">${categoryLabel}</span>
     <div class="thumb"><img src="${project.thumb}" alt="${project.title}"></div>
     <div class="info">
       <h3>${project.title}</h3>
