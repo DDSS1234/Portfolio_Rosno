@@ -286,8 +286,8 @@ h4 {
 
 .tag-chip {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 16px;
+  right: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -297,7 +297,7 @@ h4 {
   min-height: 24px;
   max-width: calc(100% - 24px);
   border: 1px solid var(--background-secondary);
-  border-radius: 16px;
+  border-radius: 12px;
   background: transparent;
   color: var(--background-secondary);
   font-size: 0.6875rem;
