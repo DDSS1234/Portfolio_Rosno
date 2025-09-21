@@ -66,9 +66,8 @@ header {
 .logo a {
   text-decoration: none;
   color: inherit;
-  font-weight: 400;
+  font-weight: 300;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 
 .menu-btn {
@@ -193,8 +192,7 @@ h4 {
 }
 
 .aboutDesktop-image {
-  width: min(40%, 320px);
-  border-radius: 28px;
+  width: min(40%, 500px);
   box-shadow:
     8px 8px 24px color-mix(in srgb, var(--color-three) 18%, transparent),
     -8px -8px 24px rgba(255, 255, 255, 0.9);

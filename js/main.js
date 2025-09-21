@@ -4,6 +4,10 @@ let indicatorContainer = indicatorPortal || null;
 let indicatorButtons = [];
 let scrollAnimationFrame = null;
 let listenersAttached = false;
+const pointerFineQuery = typeof window !== 'undefined' && typeof window.matchMedia === 'function'
+  ? window.matchMedia('(pointer: fine)')
+  : null;
+let wheelListenerAttached = false;
 const contactToggle = document.querySelector('[data-contact-toggle]');
 const contactDialog = document.querySelector('[data-contact-dialog]');
 const contactOverlay = contactDialog?.querySelector('[data-contact-overlay]') || null;
@@ -62,12 +66,85 @@ function createCard(project) {
   return card;
 }
 
+function normalizeWheelDelta(event, element) {
+  if (event.deltaMode === 1) {
+    return event.deltaY * 32;
+  }
+
+  if (event.deltaMode === 2) {
+    return event.deltaY * element.clientWidth;
+  }
+
+  return event.deltaY;
+}
+
+function handleCatalogWheel(event) {
+  const target = event.currentTarget;
+  if (!(target instanceof HTMLElement)) {
+    return;
+  }
+
+  if (target.scrollWidth <= target.clientWidth) {
+    return;
+  }
+
+  if (event.ctrlKey || event.shiftKey) {
+    return;
+  }
+
+  const { deltaX, deltaY } = event;
+  if (deltaY === 0 || Math.abs(deltaY) <= Math.abs(deltaX)) {
+    return;
+  }
+
+  const scrollAmount = normalizeWheelDelta(event, target);
+  if (!Number.isFinite(scrollAmount) || scrollAmount === 0) {
+    return;
+  }
+
+  const maxScrollLeft = target.scrollWidth - target.clientWidth;
+  const epsilon = 0.5;
+  const atStart = target.scrollLeft <= epsilon;
+  const atEnd = target.scrollLeft >= maxScrollLeft - epsilon;
+  if ((scrollAmount < 0 && atStart) || (scrollAmount > 0 && atEnd)) {
+    return;
+  }
+
+  event.preventDefault();
+  target.scrollLeft += scrollAmount;
+}
+
+function updateCatalogWheelSupport() {
+  if (!catalog) {
+    return;
+  }
+
+  const shouldAttach = pointerFineQuery ? pointerFineQuery.matches : false;
+
+  if (shouldAttach && !wheelListenerAttached) {
+    catalog.addEventListener('wheel', handleCatalogWheel, { passive: false });
+    wheelListenerAttached = true;
+  } else if (!shouldAttach && wheelListenerAttached) {
+    catalog.removeEventListener('wheel', handleCatalogWheel);
+    wheelListenerAttached = false;
+  }
+}
+
+if (pointerFineQuery) {
+  if (typeof pointerFineQuery.addEventListener === 'function') {
+    pointerFineQuery.addEventListener('change', updateCatalogWheelSupport);
+  } else if (typeof pointerFineQuery.addListener === 'function') {
+    pointerFineQuery.addListener(updateCatalogWheelSupport);
+  }
+}
+
 function renderProjects(projects) {
   if (!catalog) return;
   const fragment = document.createDocumentFragment();
   projects.forEach(project => fragment.appendChild(createCard(project)));
   catalog.appendChild(fragment);
   setupCatalogIndicators();
+  updateCatalogWheelSupport();
 }
 
 function setupCatalogIndicators() {

@@ -16,6 +16,7 @@
   --cards-per-view: 3;
   --mobile: 640px;
   --side-margins: 24px;
+  --card-pad: 16px;
 }
 
 @font-face {
@@ -247,7 +248,7 @@ h4 {
   text-decoration: none;
   scroll-snap-align: start;
   border-radius: 20px;
-  box-shadow: 4px 4px 8px #2a2a2a70;
+  box-shadow: 4px 4px 8px #2a2a2a50;
   transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
 }
 
@@ -265,6 +266,7 @@ h4 {
 
 .card:hover{
     box-shadow: 2px 2px 2px #2a2a2a70;
+    transform: translateY(4px);
 }
 
 .card:focus-visible {
@@ -286,13 +288,17 @@ h4 {
 }
 
 .card .info {
-  padding: 1rem;
+  margin-top: auto;
+  padding: var(--card-pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .tag-chip {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: var(--card-pad);
+  right: var(--card-pad);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -300,7 +306,7 @@ h4 {
   gap: 2px;
   padding: 6px 10px;
   min-height: 24px;
-  max-width: calc(100% - 24px);
+  max-width: calc(100% - (var(--card-pad) * 2));
   border: 1px solid var(--background-secondary);
   border-radius: 12px;
   background: transparent;
