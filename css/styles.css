@@ -248,7 +248,7 @@ h4 {
   scroll-snap-align: start;
   border-radius: 20px;
   box-shadow: 4px 4px 8px #2a2a2a70;
-  transition: transform 180ms linear, box-shadow 180ms linear;
+  transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
 }
 
 .card::after {
