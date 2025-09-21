@@ -391,8 +391,21 @@ footer {
   font-weight: 400;
   cursor: pointer;
   white-space: nowrap;
-  transition: transform 120ms cubic-bezier(.2, .7, .2, 1), background-color 150ms ease;
-  box-shadow: 2px 2px 4px #2a2a2a70;
+  transition: transform 120ms cubic-bezier(.2, .7, .2, 1), background-color 150ms ease, box-shadow 150ms ease-in-out;
+  box-shadow: 2px 2px 4px #2a2a2a85;
+}
+
+.contact-pill::after{
+  content: "";
+  grid-column: 10 / span 3;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset .5px .5px 0 1px #ffffff85,
+    inset 2px 2px 4px #ffffff,
+    inset -2px -2px 4px rgba(42, 42, 42, 0.12);
+  pointer-events: none;
 }
 
 .contact-pill svg {
@@ -400,7 +413,11 @@ footer {
   margin-left: 0;
 }
 
-.contact-pill:hover,
+.contact-pill:hover{
+  transform: translateY(2px);
+  box-shadow: 1px 1px 2px #2a2a2a;
+}
+
 .contact-pill:focus-visible,
 .contact-pill:active {
   transform: scale(0.98);
