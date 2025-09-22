@@ -240,20 +240,29 @@ h4 {
 
 .card {
   position: relative;
-  display: flex;
-  flex-direction: column;
   flex: 0 0 var(--card-width);
-  background: #f3f3f3;
-  overflow: hidden;
   color: inherit;
   text-decoration: none;
   scroll-snap-align: start;
-  border-radius: 20px;
-  box-shadow: 4px 4px 8px #2a2a2a50;
-  transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
+  display: flex;
 }
 
-.card::after {
+.card__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  background: #f3f3f3;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 4px 4px 8px #2a2a2a50;
+  transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
+  will-change: transform;
+  transform-origin: center;
+}
+
+.card__inner::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -266,19 +275,17 @@ h4 {
   transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
 }
 
-.card:hover{
+.card:hover .card__inner {
   box-shadow: 2px 2px 2px #2a2a2a70;
-  transform: scale(99%);
-  transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
+  transform: scale(0.99);
 }
 
-.card:active{
-  transform: scale(98%);
+.card:active .card__inner {
+  transform: scale(0.98);
   box-shadow: inset 8px 8px 12px rgba(42, 42, 42, 0.12), inset -8px -8px 12px rgba(42, 42, 42, 0.25), inset 0px 0px 4px 0px #2a2a2a80;
-  transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
 }
 
-.card:active::after{
+.card:active .card__inner::after {
   box-shadow: none;
 }
 

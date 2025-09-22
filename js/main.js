@@ -57,10 +57,12 @@ function createCard(project) {
   card.className = 'card';
   card.href = `projects/${project.id}.html`;
   card.innerHTML = `
-    <span class="tag-chip" role="note" aria-label="Category: ${categoryLabel}">${categoryLabel}</span>
-    <div class="thumb"><img src="${project.thumb}" alt="${project.title}"></div>
-    <div class="info">
-      <h3>${project.title}</h3>
+    <div class="card__inner">
+      <span class="tag-chip" role="note" aria-label="Category: ${categoryLabel}">${categoryLabel}</span>
+      <div class="thumb"><img src="${project.thumb}" alt="${project.title}"></div>
+      <div class="info">
+        <h3>${project.title}</h3>
+      </div>
     </div>
   `;
   return card;

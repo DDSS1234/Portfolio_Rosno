@@ -1,7 +1,7 @@
 [
   {
     "id": "paper-brick-chair",
-    "title": "Italy",
+    "title": "Paper as Functional Objects",
     "year": "2023",
     "tags": ["architecture", "art", "compassion"],
     "hook": "Modular paper bricks form a compressive lounge structure.",
@@ -15,7 +15,7 @@
     "title": "School for Agriculture",
     "year": "2024",
     "tags": ["architecture", "farming","community"],
-    "hook": "Farming schedule plans the school",
+    "hook": "Farm planning plans the school",
     "thumb": "assets/img/fold-lamp_thumb.png",
     "linework": "assets/img/fold-lamp_line.svg",
     "microLoop": "assets/video/fold-lamp_loop.mp4",
@@ -23,10 +23,10 @@
   },
   {
     "id": "sand-clock",
-    "title": "Sand Clock",
+    "title": "Resurrection of Santa Maria in Passione",
     "year": "2023",
     "tags": ["art", "kinetic", "time"],
-    "hook": "An hourglass reimagined with magnetic grains.",
+    "hook": "Restorative re-use of 1300's Italian church",
     "thumb": "assets/img/sand-clock_thumb.png",
     "linework": "assets/img/sand-clock_line.svg",
     "microLoop": "assets/video/sand-clock_loop.mp4",
