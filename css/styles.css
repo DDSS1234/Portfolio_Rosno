@@ -263,11 +263,20 @@ h4 {
     inset 4px 4px 8px #ffffff,
     inset -8px -8px 12px rgba(42, 42, 42, 0.12);
   pointer-events: none;
+  transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
 }
 
 .card:hover{
-    box-shadow: 2px 2px 2px #2a2a2a70;
-    transform: translateY(4px);
+  box-shadow: 2px 2px 2px #2a2a2a70;
+  transform: scale(99%);
+  transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
+}
+
+.card:active{
+  transform: scale(98%);
+  box-shadow: inset 4px 4px 8px #2a2a2a50;
+  border: 1px #2a2a2a;
+  transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
 }
 
 .card:focus-visible {
@@ -325,8 +334,8 @@ h4 {
 
 .card:hover .tag-chip,
 .card:focus-visible .tag-chip {
-  border-color: color-mix(in srgb, var(--background-secondary) 90%, #2a2a2a 10%);
-  color: color-mix(in srgb, var(--background-secondary) 90%, #2a2a2a 10%);
+  border-color: color-mix(in srgb, var(--background-secondary) 70%, #2a2a2a 30%);
+  color: color-mix(in srgb, var(--background-secondary) 70%, #2a2a2a 30%);
 }
 
 @media (max-width: 480px) {
