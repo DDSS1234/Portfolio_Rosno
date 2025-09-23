@@ -66,10 +66,11 @@ main {
 .logo-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 4px;
 }
 
 .logo-quote {
+  justify-self: bottom;
   --logo-quote-width: 0px;
   --logo-quote-steps: 26;
   display: inline-block;
@@ -82,8 +83,8 @@ main {
 .logo-quote.is-animating {
   opacity: 1;
   animation-name: logoQuoteTyping, logoQuoteErase;
-  animation-duration: 0.5s, 0.5s;
-  animation-delay: 0s, 0.5s;
+  animation-duration: 1.0s, 1.0s;
+  animation-delay: 0s, 3.0s;
   animation-fill-mode: forwards, forwards;
   animation-timing-function: steps(var(--logo-quote-steps), end), steps(var(--logo-quote-steps), end);
 }
