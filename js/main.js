@@ -5,9 +5,10 @@ let indicatorButtons = [];
 let scrollAnimationFrame = null;
 let listenersAttached = false;
 const pointerFineQuery = typeof window !== 'undefined' && typeof window.matchMedia === 'function'
-  ? window.matchMedia('(pointer: fine)')
+  ? window.matchMedia('(any-pointer: fine)')
   : null;
 let wheelListenerAttached = false;
+let keyListenerAttached = false;
 const categoryLabels = {
   architecture: 'Architecture',
   product: 'Product',
@@ -101,12 +102,128 @@ function handleCatalogWheel(event) {
   target.scrollLeft += scrollAmount;
 }
 
+function getCatalogScrollAmount() {
+  if (!catalog) {
+    return 0;
+  }
+
+  const firstCard = catalog.querySelector('.card');
+  if (!firstCard) {
+    return catalog.clientWidth;
+  }
+
+  const cardRect = firstCard.getBoundingClientRect();
+  const styles = window.getComputedStyle(catalog);
+  const gapValue = styles.columnGap || styles.gap || '0px';
+  const parsedGap = parseFloat(gapValue);
+  const gap = Number.isFinite(parsedGap) ? parsedGap : 0;
+
+  return cardRect.width + gap;
+}
+
+function shouldIgnoreKeydownTarget(target) {
+  if (!(target instanceof HTMLElement)) {
+    return false;
+  }
+
+  if (target.closest('input, textarea, select') || target.closest('[contenteditable="true"]')) {
+    return true;
+  }
+
+  return target.closest('[data-contact-dialog]') !== null;
+}
+
+function handleCatalogKeydown(event) {
+  if (!catalog || event.defaultPrevented) {
+    return;
+  }
+
+  const { key, ctrlKey, metaKey, altKey, target } = event;
+  if (ctrlKey || metaKey || altKey) {
+    return;
+  }
+
+  if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(key)) {
+    return;
+  }
+
+  if (shouldIgnoreKeydownTarget(target)) {
+    return;
+  }
+
+  const forward = key === 'ArrowRight' || key === 'ArrowDown';
+  const maxScrollLeft = catalog.scrollWidth - catalog.clientWidth;
+  if (maxScrollLeft <= 0) {
+    return;
+  }
+
+  const epsilon = 0.5;
+  const atStart = catalog.scrollLeft <= epsilon;
+  const atEnd = catalog.scrollLeft >= maxScrollLeft - epsilon;
+  if ((forward && atEnd) || (!forward && atStart)) {
+    return;
+  }
+
+  const scrollAmount = getCatalogScrollAmount();
+  if (!Number.isFinite(scrollAmount) || scrollAmount <= 0) {
+    return;
+  }
+
+  const nextScrollLeft = Math.min(
+    Math.max(catalog.scrollLeft + (forward ? scrollAmount : -scrollAmount), 0),
+    maxScrollLeft
+  );
+
+  if (Math.abs(nextScrollLeft - catalog.scrollLeft) <= epsilon) {
+    return;
+  }
+
+  event.preventDefault();
+  catalog.scrollTo({ left: nextScrollLeft, behavior: 'smooth' });
+}
+
+function updateCatalogKeySupport() {
+  if (!catalog) {
+    if (keyListenerAttached) {
+      window.removeEventListener('keydown', handleCatalogKeydown);
+      keyListenerAttached = false;
+    }
+    return;
+  }
+
+  const hasOverflow = catalog.scrollWidth - catalog.clientWidth > 1;
+
+  if (hasOverflow && !keyListenerAttached) {
+    window.addEventListener('keydown', handleCatalogKeydown);
+    keyListenerAttached = true;
+  } else if (!hasOverflow && keyListenerAttached) {
+    window.removeEventListener('keydown', handleCatalogKeydown);
+    keyListenerAttached = false;
+  }
+}
+
+function shouldAttachWheelListener() {
+  if (!pointerFineQuery) {
+    return true;
+  }
+
+  if (pointerFineQuery.matches) {
+    return true;
+  }
+
+  const mediaText = typeof pointerFineQuery.media === 'string'
+    ? pointerFineQuery.media.toLowerCase()
+    : '';
+
+  return mediaText.startsWith('not all and') && mediaText.includes('any-pointer: fine');
+}
+
 function updateCatalogWheelSupport() {
   if (!catalog) {
     return;
   }
 
-  const shouldAttach = pointerFineQuery ? pointerFineQuery.matches : false;
+  const shouldAttach = shouldAttachWheelListener();
 
   if (shouldAttach && !wheelListenerAttached) {
     catalog.addEventListener('wheel', handleCatalogWheel, { passive: false });
@@ -115,6 +232,8 @@ function updateCatalogWheelSupport() {
     catalog.removeEventListener('wheel', handleCatalogWheel);
     wheelListenerAttached = false;
   }
+
+  updateCatalogKeySupport();
 }
 
 if (pointerFineQuery) {
@@ -132,12 +251,16 @@ function renderProjects(projects) {
   catalog.appendChild(fragment);
   setupCatalogIndicators();
   updateCatalogWheelSupport();
+  updateCatalogKeySupport();
 }
 
 function setupCatalogIndicators() {
   if (!catalog) return;
   const cards = Array.from(catalog.querySelectorAll('.card'));
-  if (!cards.length) return;
+  if (!cards.length) {
+    updateCatalogKeySupport();
+    return;
+  }
 
   if (!indicatorContainer) {
     indicatorContainer = document.createElement('div');
@@ -197,11 +320,17 @@ function updateCatalogIndicators() {
     button.classList.toggle('is-active', isActive);
     button.setAttribute('aria-current', isActive ? 'true' : 'false');
   });
+
+  updateCatalogKeySupport();
 }
 
-fetch('data/projects.json')
-  .then(response => response.json())
-  .then(data => renderProjects(data))
-  .catch(error => {
-    console.error('Failed to load projects', error);
-  });
+if (catalog) {
+  fetch('data/projects.json')
+    .then(response => response.json())
+    .then(data => renderProjects(data))
+    .catch(error => {
+      console.error('Failed to load projects', error);
+    });
+} else {
+  updateCatalogKeySupport();
+}
