@@ -59,6 +59,25 @@ header {
   background: none;
 }
 
+h3 {
+  font-weight: 200;
+  font-family: var(--font);
+  margin: 0;
+}
+
+h4 {
+  font-weight: 200;
+  text-align: left;
+  font-family: var(--font);
+  font-size: clamp(12px, 2vh, 16px);
+}
+
+h5{
+  font-weight: 100;
+  text-align: left;
+  font-family: var(--font);
+  color: #2a2a2a80;
+}
 .logo {
   margin: 0;
 }

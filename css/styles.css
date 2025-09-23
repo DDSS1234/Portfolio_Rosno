@@ -65,7 +65,7 @@ main {
 
 .logo-group {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 4px;
 }
 
@@ -83,7 +83,7 @@ main {
 .logo-quote.is-animating {
   opacity: 1;
   animation-name: logoQuoteTyping, logoQuoteErase;
-  animation-duration: 1.0s, 1.0s;
+  animation-duration: 1.5s, 1.0s;
   animation-delay: 0s, 3.0s;
   animation-fill-mode: forwards, forwards;
   animation-timing-function: steps(var(--logo-quote-steps), end), steps(var(--logo-quote-steps), end);
@@ -234,6 +234,13 @@ h4 {
   text-align: left;
   font-family: var(--font);
   font-size: clamp(12px, 2vh, 16px);
+}
+
+h5{
+  font-weight: 100;
+  text-align: left;
+  font-family: var(--font);
+  color: #2a2a2a80;
 }
 
 .catalog {
