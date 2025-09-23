@@ -1,6 +1,6 @@
 [
   {
-    "id": "paper-brick-chair",
+    "id": "paper-as-functional-objects",
     "title": "Paper as Functional Objects",
     "year": "2023",
     "tags": ["Material", "art", "compassion"],
@@ -22,7 +22,7 @@
     "hero": "assets/img/fold-lamp_hero.jpg"
   },
   {
-    "id": "sand-clock",
+    "id": "custodes-passionis",
     "title": "Custodes Passionis",
     "year": "2023",
     "tags": ["architecture", "restoration", "community"],
@@ -33,7 +33,7 @@
     "hero": "assets/img/sand-clock_hero.jpg"
   },
   {
-    "id": "brick-drone",
+    "id": "alta-sea-robotics",
     "title": "Alta Sea Robotics",
     "year": "2024",
     "tags": ["Architecture", "automation", "AI"],
@@ -44,10 +44,10 @@
     "hero": "assets/img/brick-drone_hero.jpg"
   },
   {
-    "id": "paper-kettle",
-    "title": "Paper Kettle",
+    "id": "screen-house",
+    "title": "Screen House",
     "year": "2025",
-    "tags": ["material", "kitchen", "paper"],
+    "tags": ["Architecture", "UI", "AI"],
     "hook": "Boils water in disposable paper vessel.",
     "thumb": "assets/img/paper-kettle_thumb.png",
     "linework": "assets/img/paper-kettle_line.svg",
@@ -55,7 +55,7 @@
     "hero": "assets/img/paper-kettle_hero.jpg"
   },
   {
-    "id": "modular-shelf",
+    "id": "polyopoly",
     "title": "Polyopoly",
     "year": "2024-Present",
     "tags": ["Architecture"],

@@ -174,11 +174,10 @@ h5{
   display: inline-block;
   font-family: var(--font);
   font-weight: 400;
-  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  font-size: clamp(1.5rem, 5vw, 1.75rem);
   color: var(--menu-text);
   text-decoration: none;
   padding: 0.4em 0;
-  letter-spacing: 0.06em;
 }
 
 .menu a:hover,
