@@ -334,3 +334,53 @@ if (catalog) {
 } else {
   updateCatalogKeySupport();
 }
+
+const logoLink = document.querySelector('.logo a');
+const logoQuote = document.querySelector('.logo-quote');
+const LOGO_QUOTE_ANIMATION_CLASS = 'is-animating';
+const LOGO_QUOTE_ERASE_ANIMATION = 'logoQuoteErase';
+let logoQuoteAnimating = false;
+
+function updateLogoQuoteMetrics() {
+  if (!logoQuote) {
+    return;
+  }
+
+  const quoteWidth = logoQuote.scrollWidth;
+  if (Number.isFinite(quoteWidth) && quoteWidth > 0) {
+    logoQuote.style.setProperty('--logo-quote-width', `${quoteWidth}px`);
+  }
+
+  const quoteText = logoQuote.textContent ? logoQuote.textContent.trim() : '';
+  if (quoteText) {
+    logoQuote.style.setProperty('--logo-quote-steps', `${quoteText.length}`);
+  }
+}
+
+function startLogoQuoteAnimation() {
+  if (!logoQuote || logoQuoteAnimating) {
+    return;
+  }
+
+  updateLogoQuoteMetrics();
+  logoQuoteAnimating = true;
+  logoQuote.classList.add(LOGO_QUOTE_ANIMATION_CLASS);
+}
+
+function handleLogoQuoteAnimationEnd(event) {
+  if (!logoQuote || event.target !== logoQuote || event.animationName !== LOGO_QUOTE_ERASE_ANIMATION) {
+    return;
+  }
+
+  logoQuote.classList.remove(LOGO_QUOTE_ANIMATION_CLASS);
+  logoQuoteAnimating = false;
+}
+
+if (logoLink && logoQuote) {
+  updateLogoQuoteMetrics();
+  window.addEventListener('resize', updateLogoQuoteMetrics);
+  window.addEventListener('load', updateLogoQuoteMetrics);
+  logoLink.addEventListener('mouseenter', startLogoQuoteAnimation);
+  logoLink.addEventListener('focus', startLogoQuoteAnimation);
+  logoQuote.addEventListener('animationend', handleLogoQuoteAnimationEnd);
+}

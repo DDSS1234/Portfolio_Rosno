@@ -63,6 +63,51 @@ main {
   text-transform: uppercase;
 }
 
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-quote {
+  --logo-quote-width: 0px;
+  --logo-quote-steps: 26;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  opacity: 0;
+}
+
+.logo-quote.is-animating {
+  opacity: 1;
+  animation-name: logoQuoteTyping, logoQuoteErase;
+  animation-duration: 0.5s, 0.5s;
+  animation-delay: 0s, 0.5s;
+  animation-fill-mode: forwards, forwards;
+  animation-timing-function: steps(var(--logo-quote-steps), end), steps(var(--logo-quote-steps), end);
+}
+
+@keyframes logoQuoteTyping {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: var(--logo-quote-width);
+  }
+}
+
+@keyframes logoQuoteErase {
+  from {
+    width: var(--logo-quote-width);
+  }
+
+  to {
+    width: 0;
+  }
+}
+
 nav {
   display: flex;
   gap: 16px;
