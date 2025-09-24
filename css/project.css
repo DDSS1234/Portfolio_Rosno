@@ -25,6 +25,23 @@ main {
   overflow: hidden;
 }
 
+.slide-container {
+  height: calc(100dvh - 120px);
+  display: flex;
+  gap: var(--card-gap);
+  padding: 12px 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 24px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.slide-container::-webkit-scrollbar {
+  display: none;
+}
+
 .slide {
   position: absolute;
   inset: 0;
