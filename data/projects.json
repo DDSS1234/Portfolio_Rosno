@@ -4,11 +4,11 @@
     "title": "Paper as Functional Objects",
     "year": "2023",
     "tags": ["Material", "art", "compassion"],
-    "hook": "Modular paper bricks form a compressive lounge structure.",
-    "thumb": "assets/img/paper-brick-chair_thumb.png",
-    "linework": "assets/img/paper-brick-chair_line.svg",
-    "microLoop": "assets/video/paper-brick-chair_loop.mp4",
-    "hero": "assets/img/paper-brick-chair_hero.jpg"
+    "hook": "Cast paper as functional objects",
+    "thumb": "images/paper/paper_thumb.png",
+    "linework": "images/paper/paper_thumb_line.png",
+    "microLoop": "images/paper/paper-brick-chair_loop.mp4",
+    "hero": "images/paper/paper-brick-chair_hero.jpg"
   },
   {
     "id": "school-for-agriculture",
@@ -16,10 +16,10 @@
     "year": "2024",
     "tags": ["architecture", "farming","community"],
     "hook": "Farm planning plans the school",
-    "thumb": "assets/img/fold-lamp_thumb.png",
-    "linework": "assets/img/fold-lamp_line.svg",
-    "microLoop": "assets/video/fold-lamp_loop.mp4",
-    "hero": "assets/img/fold-lamp_hero.jpg"
+    "thumb": "images/school-for-agriculture/agriculture_thumb.png",
+    "linework": "images/school-for-agriculture/fold-lamp_line.svg",
+    "microLoop": "images/school-for-agriculture/fold-lamp_loop.mp4",
+    "hero": "images/school-for-agriculture/fold-lamp_hero.jpg"
   },
   {
     "id": "custodes-passionis",
