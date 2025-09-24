@@ -297,6 +297,7 @@ h5{
   text-decoration: none;
   scroll-snap-align: start;
   display: flex;
+  aspect-ratio: 3/4;
 }
 
 .card__inner {
@@ -356,7 +357,7 @@ h5{
   margin: 56px 16px 4px 16px;
   border-radius: 16px;
   background: #000;
-  aspect-ratio: 4/3;
+  aspect-ratio: 3/4;
   overflow: hidden;
 }
 
