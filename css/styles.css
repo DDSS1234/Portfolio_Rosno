@@ -250,8 +250,6 @@ h5{
   padding: 12px 24px;
   overflow-x: auto;
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: 24px;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -756,6 +754,8 @@ body.is-modal-open {
   .catalog {
     --cards-per-view: 1;
     padding-inline: 24px;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 24px;
   }
 
   footer .contact-info {

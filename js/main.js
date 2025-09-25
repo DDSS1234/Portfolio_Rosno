@@ -4,9 +4,6 @@ let indicatorContainer = indicatorPortal || null;
 let indicatorButtons = [];
 let scrollAnimationFrame = null;
 let listenersAttached = false;
-const pointerFineQuery = typeof window !== 'undefined' && typeof window.matchMedia === 'function'
-  ? window.matchMedia('(any-pointer: fine)')
-  : null;
 let wheelListenerAttached = false;
 let keyListenerAttached = false;
 const categoryLabels = {
@@ -66,40 +63,70 @@ function normalizeWheelDelta(event, element) {
   return event.deltaY;
 }
 
-function handleCatalogWheel(event) {
-  const target = event.currentTarget;
+function isWheelEventAllowedTarget(target) {
   if (!(target instanceof HTMLElement)) {
+    return true;
+  }
+
+  if (target.closest('input, textarea, select') || target.closest('[contenteditable="true"]')) {
+    return false;
+  }
+
+  const contactDialog = target.closest('[data-contact-dialog]');
+  if (contactDialog && !contactDialog.hasAttribute('hidden')) {
+    return false;
+  }
+
+  const siteMenu = target.closest('#siteMenu');
+  if (siteMenu && siteMenu.dataset.open === 'true') {
+    return false;
+  }
+
+  return true;
+}
+
+function handleCatalogWheel(event) {
+  if (!catalog) {
     return;
   }
 
-  if (target.scrollWidth <= target.clientWidth) {
+  if (catalog.scrollWidth <= catalog.clientWidth) {
     return;
   }
 
-  if (event.ctrlKey || event.shiftKey) {
+  if (event.defaultPrevented || event.ctrlKey || event.shiftKey) {
     return;
   }
 
-  const { deltaX, deltaY } = event;
-  if (deltaY === 0 || Math.abs(deltaY) <= Math.abs(deltaX)) {
+  const target = event.target;
+  if (!isWheelEventAllowedTarget(target)) {
     return;
   }
 
-  const scrollAmount = normalizeWheelDelta(event, target);
+  const { deltaY } = event;
+  if (deltaY === 0) {
+    return;
+  }
+
+  const scrollAmount = normalizeWheelDelta(event, catalog);
   if (!Number.isFinite(scrollAmount) || scrollAmount === 0) {
     return;
   }
 
-  const maxScrollLeft = target.scrollWidth - target.clientWidth;
+  const maxScrollLeft = catalog.scrollWidth - catalog.clientWidth;
   const epsilon = 0.5;
-  const atStart = target.scrollLeft <= epsilon;
-  const atEnd = target.scrollLeft >= maxScrollLeft - epsilon;
+  const atStart = catalog.scrollLeft <= epsilon;
+  const atEnd = catalog.scrollLeft >= maxScrollLeft - epsilon;
+
   if ((scrollAmount < 0 && atStart) || (scrollAmount > 0 && atEnd)) {
     return;
   }
 
   event.preventDefault();
-  target.scrollLeft += scrollAmount;
+  catalog.scrollLeft = Math.min(
+    Math.max(catalog.scrollLeft + scrollAmount, 0),
+    maxScrollLeft
+  );
 }
 
 function getCatalogScrollAmount() {
@@ -202,46 +229,22 @@ function updateCatalogKeySupport() {
   }
 }
 
-function shouldAttachWheelListener() {
-  if (!pointerFineQuery) {
-    return true;
-  }
-
-  if (pointerFineQuery.matches) {
-    return true;
-  }
-
-  const mediaText = typeof pointerFineQuery.media === 'string'
-    ? pointerFineQuery.media.toLowerCase()
-    : '';
-
-  return mediaText.startsWith('not all and') && mediaText.includes('any-pointer: fine');
-}
-
 function updateCatalogWheelSupport() {
   if (!catalog) {
     return;
   }
 
-  const shouldAttach = shouldAttachWheelListener();
+  const hasOverflow = catalog.scrollWidth - catalog.clientWidth > 1;
 
-  if (shouldAttach && !wheelListenerAttached) {
+  if (hasOverflow && !wheelListenerAttached) {
     catalog.addEventListener('wheel', handleCatalogWheel, { passive: false });
     wheelListenerAttached = true;
-  } else if (!shouldAttach && wheelListenerAttached) {
+  } else if (!hasOverflow && wheelListenerAttached) {
     catalog.removeEventListener('wheel', handleCatalogWheel);
     wheelListenerAttached = false;
   }
 
   updateCatalogKeySupport();
-}
-
-if (pointerFineQuery) {
-  if (typeof pointerFineQuery.addEventListener === 'function') {
-    pointerFineQuery.addEventListener('change', updateCatalogWheelSupport);
-  } else if (typeof pointerFineQuery.addListener === 'function') {
-    pointerFineQuery.addListener(updateCatalogWheelSupport);
-  }
 }
 
 function renderProjects(projects) {
@@ -321,6 +324,7 @@ function updateCatalogIndicators() {
     button.setAttribute('aria-current', isActive ? 'true' : 'false');
   });
 
+  updateCatalogWheelSupport();
   updateCatalogKeySupport();
 }
 
@@ -334,6 +338,8 @@ if (catalog) {
 } else {
   updateCatalogKeySupport();
 }
+
+window.addEventListener('resize', updateCatalogWheelSupport);
 
 const logoLink = document.querySelector('.logo a');
 const logoQuote = document.querySelector('.logo-quote');
