@@ -46,7 +46,7 @@ main {
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: clamp(1.25rem, 5vw, 2.5rem);
