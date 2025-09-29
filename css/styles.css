@@ -484,14 +484,14 @@ footer {
   min-height: 40px;
   border-radius: 999px;
   border: none;
-  background: #2a2a2a;
+  background: #f3f3f3;
   color: #f2f2f2;
   font: inherit;
   font-weight: 400;
   cursor: pointer;
   white-space: nowrap;
   transition: transform 120ms cubic-bezier(.2, .7, .2, 1), background-color 150ms ease, box-shadow 150ms ease-in-out;
-  box-shadow: 2px 2px 4px #2a2a2a85;
+  box-shadow: 2px 2px 4px #2a2a2a50;
   position: relative;
 }
 
@@ -503,8 +503,8 @@ footer {
   border-radius: inherit;
   box-shadow:
     inset 1px 1px 1px #ffffff85,
-    inset 2px 2px 2px #ffffff50,
-    inset -1px -1px 2px rgba(20, 20, 20);
+    inset 2px 2px 4px #ffffff,
+    inset -1px -1px 2px rgba(42, 42, 42, 0.12);
   pointer-events: none;
   transition: transform 150ms ease-in-out, scale 150ms ease-in-out, scale 150ms ease-in-out, box-shadow 150ms ease-in-out;
 }
@@ -516,7 +516,7 @@ footer {
 
 .contact-pill:hover{
   transform: scale(97.5%);
-  box-shadow: 1px 1px 2px #2a2a2a;
+  box-shadow: 1px 1px 2px #2a2a2a75;
   transition: transform 150ms ease-in-out, scale 150ms ease-in-out, scale 150ms ease-in-out, box-shadow 150ms ease-in-out;
 }
 
@@ -537,6 +537,7 @@ footer {
 
 .contact-pill__label {
   line-height: 1;
+  color: #2a2a2a;
 }
 
 .site-footer__spacer {
