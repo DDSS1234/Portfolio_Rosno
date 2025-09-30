@@ -2,6 +2,8 @@
   --card-gap: clamp(16px, 3vw, 48px);
   --cards-per-view: 3;
   --catalog-padding-inline: clamp(16px, 4vw, var(--side-margins));
+  --font: "Geist Variable", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
 }
 
 body {
@@ -13,7 +15,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow: hidden;
 }
 
 main {
@@ -28,23 +29,33 @@ h3 {
   margin: 0;
 }
 
-p{
-  
+p {
+  justify-content: center;
+  align-content: center;
+  padding: 4px 0px;
+  font-weight: 50;
+  font-size: small;
 }
 
 .slider {
   position: relative;
   flex: 1;
   width: 100%;
-  height: calc(100dvh - var(--header-footer-height));
-  min-height: calc(100vh - var(--header-footer-height));
+  height: calc(
+    100dvh - (var(--header-footer-height) * 2) - env(safe-area-inset-bottom, 0px)
+  );
+  min-height: calc(
+    100vh - (var(--header-footer-height) * 2) - env(safe-area-inset-bottom, 0px)
+  );
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .slide-container {
-  --card-max-height: calc(100dvh - 120px);
+  --card-max-height: calc(
+    100dvh - (var(--header-footer-height) * 2) - env(safe-area-inset-bottom, 0px)
+  );
   --card-available-width: calc(
     (
       100%
@@ -66,9 +77,7 @@ p{
   overflow-y: hidden;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--catalog-padding-inline);
-  align-items: stretch;
+  align-items: center;
 }
 
 .slide-container::-webkit-scrollbar {
@@ -87,7 +96,7 @@ p{
   flex-direction: column;
   background: none;
   overflow: hidden;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   aspect-ratio: 3 / 4;
 }
@@ -112,13 +121,17 @@ p{
 
 @media (max-width: 640px) {
   .slider {
-    height: calc(100dvh - var(--header-footer-height));
+    height: calc(
+      100dvh - (var(--header-footer-height) * 2) - env(safe-area-inset-bottom, 0px)
+    );
   }
 
   .slide-container {
     --cards-per-view: 1;
     padding-inline: 24px;
+    scroll-snap-type: x mandatory;
     scroll-padding-inline: 24px;
+    align-items: stretch;
   }
 
   .slide {

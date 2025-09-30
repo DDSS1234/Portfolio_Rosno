@@ -17,7 +17,7 @@
   --mobile: 640px;
   --side-margins: 24px;
   --page-gutter: var(--side-margins);
-  --content-max-width: min(1100px, calc(100% - (var(--page-gutter) * 2)));
+  --content-max-width: min(calc(100dvw - (var(--page-gutter) * 2)));
 }
 
 @font-face {
