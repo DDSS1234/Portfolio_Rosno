@@ -24,12 +24,30 @@ main {
 }
 
 h3 {
+  font-weight: bold;
+  font-family: var(--font);
+  margin: 0;
+  padding: 0px 20px;
+}
+
+h3slide {
   font-weight: 200;
   font-family: var(--font);
   margin: 0;
+  padding: 0px 20px;
+  text-justify: left;
+  text-align: top;
 }
 
 p {
+  justify-content: center;
+  align-content: center;
+  padding: 4px 20px;
+  font-weight: 50;
+  font-size: small;
+}
+
+pCaption {
   justify-content: center;
   align-content: center;
   padding: 4px 0px;
@@ -96,9 +114,19 @@ p {
   flex-direction: column;
   background: none;
   overflow: hidden;
+  overflow-wrap: anywhere;
   justify-content: center;
   align-items: flex-start;
   aspect-ratio: 3 / 4;
+}
+
+.slideimg{
+  width: 90%;
+}
+
+.slideimgborder{
+  width: 90%;
+  border: 1px #2a2a2a;
 }
 
 .slide img.hero {
@@ -140,6 +168,10 @@ p {
   }
 
   .slide img.hero {
+    border-radius: 20px;
+  }
+
+  .slideimg{
     border-radius: 20px;
   }
 }

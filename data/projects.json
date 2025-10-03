@@ -1,7 +1,7 @@
 [
   {
     "id": "paper-as-functional-objects",
-    "title": "Paper as Functional Objects",
+    "title": "Paper as Architectural Objects",
     "year": "2025-Present",
     "tags": ["Material", "art", "compassion"],
     "hook": "Cast paper as functional objects",
@@ -57,10 +57,10 @@
   {
     "id": "polyopoly",
     "title": "Polyopoly",
-    "year": "2024-Present",
+    "year": "2022",
     "tags": ["Architecture"],
-    "hook": "Stackable shelves that click together.",
-    "thumb": "assets/img/modular-shelf_thumb.png",
+    "hook": "A vertical Neighborhood",
+    "thumb": "images/polyopoly/polyopoly_thumb.png",
     "linework": "assets/img/modular-shelf_line.svg",
     "microLoop": "assets/video/modular-shelf_loop.mp4",
     "hero": "assets/img/modular-shelf_hero.jpg"
