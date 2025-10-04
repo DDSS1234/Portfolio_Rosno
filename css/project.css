@@ -49,6 +49,14 @@ p {
 
 pCaption {
   justify-content: center;
+  text-align: bottom;
+  padding: 4px 0px;
+  font-weight: 50;
+  font-size: small;
+}
+
+pI{
+  justify-content: center;
   align-content: center;
   padding: 4px 0px;
   font-weight: 50;
