@@ -306,26 +306,63 @@ h4 {
 }
 
 .essay-archive {
+  --essay-archive-padding-block: clamp(0.75rem, 3vh, 2rem);
+  --essay-wrapper-height: max(
+    0px,
+    calc(
+      100dvh - (var(--header-footer-height) * 2)
+      - (var(--essay-archive-padding-block) * 2)
+    )
+  );
   display: flex;
   flex-direction: column;
-  gap: clamp(1.5rem, 4vw, 2.5rem);
-  min-height: calc(100dvh - 120px);
+  gap: clamp(1rem, 3vw, 2rem);
   width: 100%;
+  height: calc(100dvh - (var(--header-footer-height) * 2));
+  min-height: 0;
   margin: 0;
-  padding: clamp(1rem, 4vw, 2.5rem) clamp(1.25rem, 5vw, 3.5rem);
+  padding-block: var(--essay-archive-padding-block);
+  padding-inline: 24px;
+  justify-content: center;
 }
 
 .essay-wrapper {
-  --essay-card-gap: clamp(18px, 3.2vw, 40px);
+  --essay-row-count: 2;
+  --essay-card-gap: clamp(18px, 3vh, 32px);
+  --essay-card-max: clamp(220px, 26vh, 260px);
+  --essay-wrapper-padding-block: clamp(0.75rem, 2.5vh, 1.35rem);
+  --essay-wrapper-padding-inline: 24px;
+  --essay-wrapper-usable-height: calc(
+    var(--essay-wrapper-height)
+    - (var(--essay-wrapper-padding-block) * 2)
+    - ((var(--essay-row-count) - 1) * var(--essay-card-gap))
+  );
+  --essay-card-size-raw: calc(var(--essay-wrapper-usable-height) / var(--essay-row-count));
+  --essay-card-size: min(
+    var(--essay-card-max),
+    max(var(--essay-card-size-raw), 0px)
+  );
   width: min(1120px, 100%);
-  margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 20vw, 260px), 1fr));
-  grid-auto-rows: 1fr;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, var(--essay-card-size));
+  grid-template-rows: repeat(var(--essay-row-count), minmax(0, var(--essay-card-size)));
+  grid-auto-rows: minmax(0, var(--essay-card-size));
   gap: var(--essay-card-gap);
-  justify-content: center;
-  align-content: center;
-  padding: clamp(0.5rem, 2vw, 1.5rem);
+  justify-content: flex-start;
+  align-content: stretch;
+  align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 24px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  min-height: 0;
+}
+
+.essay-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .essay-card {
@@ -337,18 +374,23 @@ h4 {
   padding: clamp(1rem, 2.8vw, 1.75rem);
   color: inherit;
   text-decoration: none;
-  background: linear-gradient(160deg, #ffffff, rgba(230, 230, 230, 0.85));
+  background: #f3f3f3;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 4px 6px 18px rgba(42, 42, 42, 0.18);
+  box-shadow: 4px 4px 8px #2a2a2a50;
   transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
   will-change: transform;
   transform-origin: center;
-  border: 1px solid rgba(42, 42, 42, 0.08);
+  border: none;
   cursor: pointer;
   align-items: flex-start;
   text-align: left;
-  aspect-ratio: 1/1;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  appearance: none;
+  scroll-snap-align: start;
 }
 
 .essay-card::after {
@@ -356,26 +398,29 @@ h4 {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  background: linear-gradient(200deg, rgba(255, 255, 255, 0.55), transparent 70%);
+  box-shadow:
+    inset 0.5px 0.5px 0 1px #ffffff85,
+    inset 4px 4px 8px #ffffff,
+    inset -8px -8px 12px rgba(42, 42, 42, 0.12);
   pointer-events: none;
-  transition: opacity 150ms ease-in-out;
-  opacity: 0;
+  transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
   z-index: 0;
 }
 
 .essay-card:hover,
 .essay-card:focus-visible {
-  box-shadow: 3px 5px 18px rgba(42, 42, 42, 0.3);
-  transform: translateY(-2px);
+  box-shadow: 2px 2px 2px #2a2a2a70;
+  transform: scale(0.99);
 }
 
 .essay-card:active {
-  transform: translateY(0);
-  box-shadow: inset 0 0 0 1px rgba(42, 42, 42, 0.2);
+  transform: scale(0.98);
+  box-shadow: inset 8px 8px 12px rgba(42, 42, 42, 0.12), inset -8px -8px 12px rgba(42, 42, 42, 0.25),
+    inset 0 0 4px 0 #2a2a2a80;
 }
 
 .essay-card:active::after {
-  opacity: 1;
+  box-shadow: none;
 }
 
 .essay-card:focus-visible {
@@ -479,22 +524,36 @@ h4 {
 }
 
 @media (max-width: 1024px) {
+  .essay-archive {
+    --essay-archive-padding-inline: clamp(1rem, 5vw, 2.75rem);
+  }
+
   .essay-wrapper {
     width: min(960px, 100%);
-    grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 26vw, 240px), 1fr));
+    --essay-row-count: 2;
+    --essay-card-gap: clamp(16px, 3vh, 28px);
+    --essay-card-max: clamp(200px, 32vh, 240px);
   }
 }
 
 @media (max-width: 768px) {
+  .essay-archive {
+    --essay-archive-padding-block: clamp(0.5rem, 4vh, 1.35rem);
+    --essay-archive-padding-inline: clamp(0.75rem, 6vw, 2.25rem);
+  }
+
   .essay-wrapper {
     width: min(640px, 100%);
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(16px, 5vw, 24px);
+    --essay-row-count: 4;
+    --essay-card-gap: clamp(12px, 4vw, 20px);
+    --essay-wrapper-padding-block: clamp(0.5rem, 3vh, 1rem);
+    --essay-wrapper-padding-inline: clamp(0.5rem, 5vw, 1.25rem);
+    --essay-card-max: clamp(180px, 36vh, 220px);
+    scroll-snap-type: x mandatory;
   }
 
   .essay-card {
     padding: clamp(0.85rem, 3.5vw, 1.25rem);
-    box-shadow: 3px 5px 14px rgba(42, 42, 42, 0.18);
   }
 
   .essay-card__content {
@@ -507,9 +566,16 @@ h4 {
 }
 
 @media (max-width: 480px) {
+  .essay-archive {
+    --essay-archive-padding-inline: clamp(0.75rem, 6vw, 1.75rem);
+  }
+
   .essay-wrapper {
     width: min(400px, 100%);
-    gap: clamp(14px, 6vw, 20px);
+    --essay-card-gap: clamp(10px, 6vw, 18px);
+    --essay-wrapper-padding-inline: clamp(0.5rem, 6vw, 1rem);
+    --essay-card-max: clamp(160px, 42vh, 200px);
+    scroll-padding-inline: clamp(0.75rem, 6vw, 1.25rem);
   }
 
   .essay-card {
