@@ -4,20 +4,35 @@
     "title": "Field Notes on Honest Interfaces",
     "slug": "field-notes-honest-interfaces",
     "publishedAt": "2024-03-18T08:15:00-05:00",
-    "summary": "Why the best digital spaces feel like a well-loved sketchbook, and the small rituals that keep interfaces honest to the people using them."
+    "summary": "Why the best digital spaces feel like a well-loved sketchbook, and the small rituals that keep interfaces honest to the people using them.",
+    "content": [
+      "The interfaces I trust most borrow their posture from sketchbooks. They are a little messy, easy to open, and unafraid of eraser marks. When I trace back the moments that made me fall in love with digital tools, every highlight came from tiny honest details—buttons that revealed their history with a soft patina, panels that remembered my last scribble, or a menu that breathed at the same pace as I did.",
+      "Honesty in an interface starts with friction. Not the frustrating kind, but the gentle pauses that ask a person if they are sure. I build micro-rituals into flows: a confirmation card that slides in like a postcard, a form that lets you rest your cursor before committing. These pauses become small anchors of accountability.",
+      "I am constantly relearning that design systems are living documents. They need notes in the margins, taped-in Polaroids, and folded corners to mark what matters. We keep honesty alive by letting the humans behind the interface leave their fingerprints in every release." 
+    ]
   },
   {
     "id": "essay-2024-01-night-walks",
     "title": "Night Walks & Neighborhood Frequencies",
     "slug": "night-walks-neighborhood-frequencies",
     "publishedAt": "2024-01-27T22:40:00-06:00",
-    "summary": "Reflections gathered from late-night walks—on listening to streetlight hum, catching conversations mid-sentence, and designing for the in-between moments."
+    "summary": "Reflections gathered from late-night walks—on listening to streetlight hum, catching conversations mid-sentence, and designing for the in-between moments.",
+    "content": [
+      "Most nights I leave the studio when the block settles into its hush. The city feels like it exhales right as the streetlights kick on, casting gradients that no color picker can capture. I carry a pen and postcard-sized notebook to catch the temperature of the sidewalks and the fragments of dialogue that float out of late diners.",
+      "The walk is research. I map the cadence of crosswalks, the rumble of passing trains, and the rhythm of neon reflections. Each texture helps me sketch interfaces that don’t shout for attention but hum along with their surroundings. Even the cracks in the pavement are notes about how people reroute when the official path fails them.",
+      "By the time I circle home, my notebook is layered with tiny diagrams and questions for tomorrow’s build. Night walks remind me to leave generous margins in every layout—for the unplanned detours and the neighbors who will inevitably remix the experience in ways I never expected."
+    ]
   },
   {
     "id": "essay-2023-11-warm-start",
     "title": "A Warm Start in a Cold Studio",
     "slug": "warm-start-cold-studio",
     "publishedAt": "2023-11-05T07:05:00-06:00",
-    "summary": "A short meditation on seasonal rituals, tactile materials, and keeping momentum when the daylight fades early."
+    "summary": "A short meditation on seasonal rituals, tactile materials, and keeping momentum when the daylight fades early.",
+    "content": [
+      "When November drifts in, the studio grows quiet and the windows sweat with frost. I start each session by boiling water for tea and stacking a fresh trio of notebooks—one for lists, one for sketches, and one for thoughts that don’t belong anywhere yet. That ritual is the spark that flips my mindset from hibernation to making.",
+      "Cold months ask more of our materials. I reach for wool desk pads, warm-toned lighting, and palettes that feel like brass instruments. Every texture is a reminder that digital canvases are still physical experiences. The cursor may glide, but our shoulders, wrists, and eyes need pacing cues to stay grounded.",
+      "Momentum in winter is a conversation with light. I chase it across the room, shifting my workspace every few weeks to capture the soft angles of morning. The work that comes out of these months is slower, yes, but it’s also more intentional—steeped like the tea that keeps refilling the cup beside my keyboard." 
+    ]
   }
 ]

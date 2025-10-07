@@ -1,25 +1,103 @@
+const OVERLAY_ACTIVE_CLASS = 'is-active';
+
+function getEssayParagraphs(essay) {
+  if (!essay) {
+    return [];
+  }
+
+  if (Array.isArray(essay.content)) {
+    return essay.content.filter((paragraph) => typeof paragraph === 'string' && paragraph.trim().length);
+  }
+
+  if (typeof essay.content === 'string') {
+    return essay.content
+      .split(/\n{2,}/)
+      .map((paragraph) => paragraph.trim())
+      .filter(Boolean);
+  }
+
+  if (typeof essay.summary === 'string') {
+    return [essay.summary];
+  }
+
+  return [];
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  const list = document.querySelector('[data-essay-list]');
-  if (!list) {
+  const wrapper = document.querySelector('[data-essay-wrapper]');
+  if (!wrapper) {
     return;
   }
 
-  const emptyState = list.querySelector('[data-essay-empty]');
-  const dateFormatter = new Intl.DateTimeFormat(undefined, {
-    dateStyle: 'long',
-    timeStyle: 'short',
-  });
+  const emptyState = wrapper.querySelector('[data-essay-empty]');
+  const indicatorPortal = document.querySelector('[data-catalog-indicators]');
+  const overlay = document.querySelector('[data-essay-overlay]');
+  const overlayPanel = overlay?.querySelector('[data-essay-overlay-panel]');
+  const overlayTitle = overlay?.querySelector('[data-essay-title]');
+  const overlayDate = overlay?.querySelector('[data-essay-date]');
+  const overlayBody = overlay?.querySelector('[data-essay-body]');
+  const closeButton = overlay?.querySelector('[data-essay-close]');
 
-  function showEmpty(message) {
-    if (!emptyState) {
+  const catalogManager = window.catalogManager;
+  const catalogController =
+    catalogManager && typeof catalogManager.register === 'function'
+      ? catalogManager.register(wrapper, {
+          indicatorPortal,
+          cardSelector: '.essay-card',
+          getIndicatorLabel: (card, index, total) => {
+            const titleElement = card.querySelector('.essay-card__title');
+            const essayTitle = titleElement ? titleElement.textContent.trim() : '';
+            const baseLabel = `Slide ${index + 1} of ${total}`;
+            return essayTitle ? `${baseLabel} — ${essayTitle}` : baseLabel;
+          },
+        })
+      : typeof window.setupCatalog === 'function'
+      ? window.setupCatalog(wrapper, {
+          indicatorPortal,
+          cardSelector: '.essay-card',
+          getIndicatorLabel: (card, index, total) => {
+            const titleElement = card.querySelector('.essay-card__title');
+            const essayTitle = titleElement ? titleElement.textContent.trim() : '';
+            const baseLabel = `Slide ${index + 1} of ${total}`;
+            return essayTitle ? `${baseLabel} — ${essayTitle}` : baseLabel;
+          },
+        })
+      : null;
+
+  function refreshCatalog() {
+    if (catalogManager && typeof catalogManager.refresh === 'function') {
+      catalogManager.refresh(wrapper);
       return;
     }
 
-    if (message) {
-      emptyState.textContent = message;
+    if (catalogController && typeof catalogController.refresh === 'function') {
+      catalogController.refresh();
+    }
+  }
+
+  const dateFormatter = new Intl.DateTimeFormat(undefined, {
+    dateStyle: 'long',
+  });
+
+  const essaysById = new Map();
+  let lastFocusedElement = null;
+  let closeTimeoutId = null;
+
+  function clearEssayCards() {
+    wrapper.querySelectorAll('.essay-card').forEach((card) => card.remove());
+  }
+
+  function showEmpty(message) {
+    clearEssayCards();
+
+    if (emptyState) {
+      if (message) {
+        emptyState.textContent = message;
+      }
+      emptyState.hidden = false;
     }
 
-    emptyState.hidden = false;
+    refreshCatalog();
   }
 
   function hideEmpty() {
@@ -28,24 +106,130 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function closeOverlay({ restoreFocus = true } = {}) {
+    if (!overlay || overlay.hidden) {
+      return;
+    }
+
+    overlay.classList.remove(OVERLAY_ACTIVE_CLASS);
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('essay-overlay-open');
+
+    if (closeTimeoutId) {
+      window.clearTimeout(closeTimeoutId);
+      closeTimeoutId = null;
+    }
+
+    let finalized = false;
+    const finalizeClose = () => {
+      if (finalized) {
+        return;
+      }
+      if (overlay.classList.contains(OVERLAY_ACTIVE_CLASS)) {
+        overlay.removeEventListener('transitionend', finalizeClose);
+        return;
+      }
+      finalized = true;
+      overlay.hidden = true;
+      overlay.removeEventListener('transitionend', finalizeClose);
+      closeTimeoutId = null;
+    };
+
+    overlay.addEventListener('transitionend', finalizeClose);
+    closeTimeoutId = window.setTimeout(finalizeClose, 650);
+
+    if (restoreFocus && lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+    }
+
+    lastFocusedElement = null;
+  }
+
+  function openOverlay(essay, triggerElement) {
+    if (!overlay || !overlayPanel || !overlayBody || !essay) {
+      return;
+    }
+
+    const paragraphs = getEssayParagraphs(essay);
+
+    overlayBody.innerHTML = '';
+    if (paragraphs.length) {
+      paragraphs.forEach((text) => {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = text;
+        overlayBody.appendChild(paragraph);
+      });
+    } else {
+      const paragraph = document.createElement('p');
+      paragraph.textContent = 'Essay content coming soon.';
+      overlayBody.appendChild(paragraph);
+    }
+
+    if (overlayTitle) {
+      overlayTitle.textContent = essay.title || '';
+    }
+
+    if (overlayDate) {
+      const publishedDate = new Date(essay.publishedAt);
+      if (!Number.isNaN(publishedDate.valueOf())) {
+        overlayDate.dateTime = essay.publishedAt;
+        overlayDate.textContent = dateFormatter.format(publishedDate);
+        overlayDate.hidden = false;
+      } else {
+        overlayDate.textContent = '';
+        overlayDate.removeAttribute('dateTime');
+        overlayDate.hidden = true;
+      }
+    }
+
+    lastFocusedElement = triggerElement || document.activeElement;
+    overlay.hidden = false;
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('essay-overlay-open');
+
+    if (closeTimeoutId) {
+      window.clearTimeout(closeTimeoutId);
+      closeTimeoutId = null;
+    }
+
+    requestAnimationFrame(() => {
+      overlay.classList.add(OVERLAY_ACTIVE_CLASS);
+      if (closeButton) {
+        closeButton.focus();
+      } else if (overlayPanel instanceof HTMLElement) {
+        overlayPanel.focus();
+      }
+    });
+  }
+
+  function handleCardClick(event) {
+    const button = event.currentTarget;
+    const essayId = button?.getAttribute('data-essay-id');
+    if (!essayId || !essaysById.has(essayId)) {
+      return;
+    }
+
+    const essay = essaysById.get(essayId);
+    openOverlay(essay, button);
+  }
+
   function renderEssayCard(essay) {
-    const article = document.createElement('article');
-    article.className = 'essay-card';
+    if (!essay || typeof essay.title !== 'string') {
+      return null;
+    }
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'essay-card';
+    button.dataset.essayId = essay.id || essay.slug || essay.title;
+
+    const heading = document.createElement('div');
+    heading.className = 'essay-card__heading';
 
     const title = document.createElement('h3');
     title.className = 'essay-card__title';
-
-    if (essay.url) {
-      const link = document.createElement('a');
-      link.className = 'essay-card__link';
-      link.href = essay.url;
-      link.textContent = essay.title;
-      title.appendChild(link);
-    } else {
-      title.textContent = essay.title;
-    }
-
-    article.appendChild(title);
+    title.textContent = essay.title;
+    heading.appendChild(title);
 
     const meta = document.createElement('div');
     meta.className = 'essay-card__meta';
@@ -53,7 +237,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const publishedDate = new Date(essay.publishedAt);
     if (!Number.isNaN(publishedDate.valueOf())) {
       const time = document.createElement('time');
-      time.className = 'essay-card__time';
       time.dateTime = essay.publishedAt;
       time.textContent = dateFormatter.format(publishedDate);
       meta.appendChild(time);
@@ -63,28 +246,52 @@ document.addEventListener('DOMContentLoaded', () => {
       const updatedDate = new Date(essay.updatedAt);
       if (!Number.isNaN(updatedDate.valueOf())) {
         const updated = document.createElement('span');
-        updated.className = 'essay-card__updated';
-        const time = document.createElement('time');
-        time.dateTime = essay.updatedAt;
-        time.textContent = dateFormatter.format(updatedDate);
-        updated.append('Updated ', time);
+        updated.textContent = `Updated ${dateFormatter.format(updatedDate)}`;
         meta.appendChild(updated);
       }
     }
 
-    if (meta.childNodes.length > 0) {
-      article.appendChild(meta);
+    if (meta.childNodes.length) {
+      heading.appendChild(meta);
     }
+
+    button.appendChild(heading);
 
     if (essay.summary) {
       const summary = document.createElement('p');
       summary.className = 'essay-card__summary';
       summary.textContent = essay.summary;
-      article.appendChild(summary);
+      button.appendChild(summary);
     }
 
-    return article;
+    button.addEventListener('click', handleCardClick);
+
+    return button;
   }
+
+  function hydrateOverlayEvents() {
+    if (!overlay) {
+      return;
+    }
+
+    overlay.addEventListener('click', (event) => {
+      if (!overlay.hidden && event.target === overlay) {
+        closeOverlay();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !overlay?.hidden) {
+        closeOverlay();
+      }
+    });
+
+    if (closeButton) {
+      closeButton.addEventListener('click', () => closeOverlay());
+    }
+  }
+
+  hydrateOverlayEvents();
 
   fetch('data/essays.json', { cache: 'no-store' })
     .then((response) => {
@@ -102,8 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
         : [];
 
       const validEssays = essays.filter(
-        (essay) =>
-          essay && typeof essay.title === 'string' && typeof essay.publishedAt === 'string',
+        (essay) => essay && typeof essay.title === 'string' && typeof essay.publishedAt === 'string',
       );
 
       if (!validEssays.length) {
@@ -112,15 +318,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       hideEmpty();
+      clearEssayCards();
 
+      const fragment = document.createDocumentFragment();
       validEssays
         .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
         .forEach((essay) => {
           const card = renderEssayCard(essay);
           if (card) {
-            list.appendChild(card);
+            const essayId = card.dataset.essayId;
+            if (essayId) {
+              essaysById.set(essayId, essay);
+            }
+            fragment.appendChild(card);
           }
         });
+
+      wrapper.appendChild(fragment);
+
+    refreshCatalog();
     })
     .catch((error) => {
       console.error(error);

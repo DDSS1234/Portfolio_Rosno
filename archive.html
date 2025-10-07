@@ -31,17 +31,31 @@
     </ul>
   </nav>
   <main>
-    <section class="essay-archive" aria-labelledby="essayArchiveTitle">
-      <header class="essay-archive__header">
-        <h2 class="essay-archive__title" id="essayArchiveTitle">Essay archive</h2>
-        <p class="essay-archive__description">
-          Mini essays about interface craft, slow publishing, and keeping analog rituals alive inside digital work.
-        </p>
-      </header>
-      <div class="essay-list" data-essay-list>
+    <section class="essay-archive" aria-label="Essay archive">
+      <div class="essay-wrapper" data-essay-wrapper aria-live="polite">
         <p class="essay-list__empty" data-essay-empty hidden>
           Essays will live here soon. Check back for fresh notes.
         </p>
+      </div>
+      <div
+        class="essay-overlay"
+        data-essay-overlay
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="essayOverlayTitle"
+        hidden
+        aria-hidden="true"
+      >
+        <div class="essay-overlay__panel" data-essay-overlay-panel tabindex="-1">
+          <button type="button" class="essay-overlay__close" data-essay-close>
+            Close
+          </button>
+          <header class="essay-overlay__header">
+            <h2 class="essay-overlay__title" id="essayOverlayTitle" data-essay-title></h2>
+            <time class="essay-overlay__date" data-essay-date></time>
+          </header>
+          <div class="essay-overlay__body" data-essay-body></div>
+        </div>
       </div>
       <noscript>
         <p class="essay-list__noscript">
@@ -104,6 +118,7 @@
 
   <script src="js/menu.js" defer></script>
   <script src="js/contact.js" defer></script>
+  <script src="js/main.js" defer></script>
   <script src="js/essays.js" defer></script>
 </body>
 </html>
