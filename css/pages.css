@@ -356,9 +356,9 @@ h4 {
 
 .essay-card {
   position: relative;
-  flex: 0 0 var(--card-width, 280px);
-  width: var(--card-width, 280px);
-  height: var(--card-width, 280px);
+  flex: 0 0 var(--card-width, 240px);
+  width: var(--card-width, 240px);
+  height: var(--card-width, 240px);
   max-height: var(--card-max-height, calc(100dvh - 120px));
   display: flex;
   flex-direction: column;
@@ -379,6 +379,7 @@ h4 {
   cursor: pointer;
   align-items: flex-start;
   text-align: left;
+  aspect-ratio: 1/1;
 }
 
 .essay-card::after {
@@ -814,13 +815,15 @@ body.is-modal-open {
 
 .essay-overlay {
   position: fixed;
+  height: calc(100dvh - (var(--header-footer-height) * 2));
+  align-self: center;
   inset: 0;
   display: grid;
   place-items: center;
-  background: rgba(0, 0, 0, 0.92);
+  background: #2a2a2a;
   color: #fff;
   z-index: 1100;
-  transform: translateX(-100%);
+  transform: translateX(-110%);
   transition: transform 600ms cubic-bezier(0.22, 0.61, 0.36, 1);
   padding: clamp(1.5rem, 3vw, 2.5rem);
 }
@@ -832,11 +835,12 @@ body.is-modal-open {
 .essay-overlay__panel {
   width: min(1100px, 90dvw);
   max-height: min(900px, 90dvh);
-  overflow-y: auto;
+  margin: 16px 24px;
+  overflow-y: hidden;
   padding: clamp(1.25rem, 3vw, 2.5rem);
   border-radius: 28px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.65);
+  background: #2a2a2a50;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   position: relative;
