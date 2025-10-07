@@ -34,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const overlay = document.querySelector('[data-essay-overlay]');
   const overlayPanel = overlay?.querySelector('[data-essay-overlay-panel]');
   const overlayTitle = overlay?.querySelector('[data-essay-title]');
-  const overlayDate = overlay?.querySelector('[data-essay-date]');
   const overlayBody = overlay?.querySelector('[data-essay-body]');
   const closeButton = overlay?.querySelector('[data-essay-close]');
 
@@ -74,10 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
       catalogController.refresh();
     }
   }
-
-  const dateFormatter = new Intl.DateTimeFormat(undefined, {
-    dateStyle: 'long',
-  });
 
   const essaysById = new Map();
   let lastFocusedElement = null;
@@ -169,19 +164,6 @@ document.addEventListener('DOMContentLoaded', () => {
       overlayTitle.textContent = essay.title || '';
     }
 
-    if (overlayDate) {
-      const publishedDate = new Date(essay.publishedAt);
-      if (!Number.isNaN(publishedDate.valueOf())) {
-        overlayDate.dateTime = essay.publishedAt;
-        overlayDate.textContent = dateFormatter.format(publishedDate);
-        overlayDate.hidden = false;
-      } else {
-        overlayDate.textContent = '';
-        overlayDate.removeAttribute('dateTime');
-        overlayDate.hidden = true;
-      }
-    }
-
     lastFocusedElement = triggerElement || document.activeElement;
     overlay.hidden = false;
     overlay.setAttribute('aria-hidden', 'false');
@@ -233,30 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
     title.className = 'essay-card__title';
     title.textContent = essay.title;
     heading.appendChild(title);
-
-    const meta = document.createElement('div');
-    meta.className = 'essay-card__meta';
-
-    const publishedDate = new Date(essay.publishedAt);
-    if (!Number.isNaN(publishedDate.valueOf())) {
-      const time = document.createElement('time');
-      time.dateTime = essay.publishedAt;
-      time.textContent = dateFormatter.format(publishedDate);
-      meta.appendChild(time);
-    }
-
-    if (essay.updatedAt) {
-      const updatedDate = new Date(essay.updatedAt);
-      if (!Number.isNaN(updatedDate.valueOf())) {
-        const updated = document.createElement('span');
-        updated.textContent = `Updated ${dateFormatter.format(updatedDate)}`;
-        meta.appendChild(updated);
-      }
-    }
-
-    if (meta.childNodes.length) {
-      heading.appendChild(meta);
-    }
 
     desktopContent.appendChild(heading);
 
