@@ -563,16 +563,12 @@ body.is-modal-open {
 @media (max-width: 640px) {
   header {
     position: relative;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 8px var(--page-gutter);
   }
 
   .logo {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    margin:0;
   }
 
   main {

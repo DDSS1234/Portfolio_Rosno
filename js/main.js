@@ -38,6 +38,25 @@ function createCard(project) {
   const categoryLabel = getCategoryLabel(type);
   const card = document.createElement('a');
   card.className = 'card';
+  const thumbAspect = project.thumbAspect;
+
+  if (typeof thumbAspect === 'string') {
+    const normalizedAspect = thumbAspect.trim().toLowerCase();
+
+    if (normalizedAspect === 'square' || normalizedAspect === '1:1' || normalizedAspect === '1/1') {
+      card.classList.add('card--square');
+    } else if (/^\d+(?:\.\d+)?\s*\/\s*\d+(?:\.\d+)?$/.test(normalizedAspect)) {
+      card.style.setProperty('--card-thumb-aspect', normalizedAspect.replace(/\s+/g, ''));
+    } else {
+      const numericAspect = Number.parseFloat(normalizedAspect);
+      if (Number.isFinite(numericAspect) && numericAspect > 0) {
+        card.style.setProperty('--card-thumb-aspect', String(numericAspect));
+      }
+    }
+  } else if (typeof thumbAspect === 'number' && Number.isFinite(thumbAspect) && thumbAspect > 0) {
+    card.style.setProperty('--card-thumb-aspect', String(thumbAspect));
+  }
+
   card.href = `projects/${project.id}.html`;
   card.innerHTML = `
     <div class="card__inner">

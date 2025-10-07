@@ -17,6 +17,9 @@
   --mobile: 640px;
   --side-margins: 24px;
   --card-pad: 16px;
+  --card-content-gap: 16px;
+  --card-thumb-radius: 16px;
+  --card-square-aspect: 2 / 3;
 }
 
 @font-face {
@@ -318,13 +321,16 @@ h5{
   text-decoration: none;
   scroll-snap-align: start;
   display: flex;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: var(--card-aspect, 3 / 4);
 }
 
 .card__inner {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  gap: var(--card-content-gap);
+  padding: var(--card-pad);
   flex: 1;
   height: 100%;
   background: #f3f3f3;
@@ -334,6 +340,11 @@ h5{
   transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
   will-change: transform;
   transform-origin: center;
+}
+
+.card__inner > * {
+  position: relative;
+  z-index: 1;
 }
 
 .card__inner::after {
@@ -347,6 +358,7 @@ h5{
     inset -8px -8px 12px rgba(42, 42, 42, 0.12);
   pointer-events: none;
   transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
+  z-index: 0;
 }
 
 .card:hover .card__inner {
@@ -369,16 +381,19 @@ h5{
 }
 
 .card .thumb {
-  flex: 1 1 auto;
-  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: calc(var(--card-pad) + var(--card-chip-clearance)) var(--card-pad) 0;
-  margin: 56px 16px 4px 16px;
-  border-radius: 16px;
+  flex: 1 1 auto;
+  min-height: 0;
+  width: auto;
+  max-width: 100%;
+  align-self: center;
+  margin: 0;
+  border-radius: var(--card-thumb-radius);
   background: #000;
-  aspect-ratio: 3/4;
+  aspect-ratio: var(--card-thumb-aspect, 3 / 4);
+  max-height: 100%;
   overflow: hidden;
 }
 
@@ -390,17 +405,19 @@ h5{
 }
 
 .card .info {
-  margin-top: auto;
-  padding: var(--card-pad);
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: auto;
+  width: 100%;
 }
 
 .tag-chip {
-  position: absolute;
-  top: var(--card-pad);
-  right: var(--card-pad);
+  position: static;
+  align-self: flex-end;
+  margin: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -408,7 +425,7 @@ h5{
   gap: 2px;
   padding: 6px 10px;
   min-height: 24px;
-  max-width: calc(100% - (var(--card-pad) * 2));
+  max-width: 100%;
   border: 1px solid var(--background-secondary);
   border-radius: 12px;
   background: transparent;
@@ -422,6 +439,11 @@ h5{
   box-sizing: border-box;
   z-index: 1;
   transition: border-color 160ms ease, color 160ms ease;
+}
+
+.card--square {
+  --card-aspect: var(--card-square-aspect, 2 / 3);
+  --card-thumb-aspect: 1;
 }
 
 .card:hover .tag-chip,
@@ -758,16 +780,11 @@ body.is-modal-open {
 @media (max-width: 640px) {
   header {
     position: relative;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 8px 24px;
   }
 
   .logo {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
     margin: 0;
   }
 

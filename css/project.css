@@ -128,6 +128,31 @@ pI{
   aspect-ratio: 3 / 4;
 }
 
+.slide-container > .slide:first-child {
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: clamp(12px, 2vh, 28px);
+  padding: clamp(24px, 6vw, 40px);
+}
+
+.slide-container > .slide:first-child h3 {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.slide-container > .slide:first-child p {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  margin-top: auto;
+}
+
+
 .slideimg{
   width: 90%;
 }

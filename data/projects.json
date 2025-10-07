@@ -63,6 +63,7 @@
     "thumb": "images/polyopoly/polyopoly_thumb.png",
     "linework": "assets/img/modular-shelf_line.svg",
     "microLoop": "assets/video/modular-shelf_loop.mp4",
-    "hero": "assets/img/modular-shelf_hero.jpg"
+    "hero": "assets/img/modular-shelf_hero.jpg",
+    "thumbAspect": "square"
   }
 ]
