@@ -223,6 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
     button.className = 'essay-card';
     button.dataset.essayId = essay.id || essay.slug || essay.title;
 
+    const desktopContent = document.createElement('div');
+    desktopContent.className = 'essay-card__content';
+
     const heading = document.createElement('div');
     heading.className = 'essay-card__heading';
 
@@ -255,14 +258,39 @@ document.addEventListener('DOMContentLoaded', () => {
       heading.appendChild(meta);
     }
 
-    button.appendChild(heading);
+    desktopContent.appendChild(heading);
 
     if (essay.summary) {
       const summary = document.createElement('p');
       summary.className = 'essay-card__summary';
       summary.textContent = essay.summary;
-      button.appendChild(summary);
+      desktopContent.appendChild(summary);
     }
+
+    button.appendChild(desktopContent);
+
+    const mobileContent = document.createElement('div');
+    mobileContent.className = 'essay-card__mobile';
+
+    const microTitleText = typeof essay.microTitle === 'string' && essay.microTitle.trim().length
+      ? essay.microTitle.trim()
+      : essay.title;
+    const microTitle = document.createElement('span');
+    microTitle.className = 'essay-card__micro-title';
+    microTitle.textContent = microTitleText;
+    mobileContent.appendChild(microTitle);
+
+    const labelText = typeof essay.label === 'string' && essay.label.trim().length
+      ? essay.label.trim()
+      : essay.summary || '';
+    if (labelText) {
+      const label = document.createElement('span');
+      label.className = 'essay-card__label';
+      label.textContent = labelText;
+      mobileContent.appendChild(label);
+    }
+
+    button.appendChild(mobileContent);
 
     button.addEventListener('click', handleCardClick);
 

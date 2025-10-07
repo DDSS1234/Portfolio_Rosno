@@ -309,73 +309,42 @@ h4 {
   display: flex;
   flex-direction: column;
   gap: clamp(1.5rem, 4vw, 2.5rem);
-  height: calc(100dvh - 120px);
+  min-height: calc(100dvh - 120px);
   width: 100%;
   margin: 0;
-  padding: 16px 24px;
+  padding: clamp(1rem, 4vw, 2.5rem) clamp(1.25rem, 5vw, 3.5rem);
 }
 
 .essay-wrapper {
-  --essay-card-gap: clamp(16px, 3vw, 48px);
-  --catalog-height: calc(100dvh - (var(--header-footer-height) * 2));
-  --card-max-height: calc(var(--catalog-height) - 16px);
-  --card-available-width: calc(
-    (
-      100%
-      - (var(--cards-per-view) - 1) * var(--essay-card-gap)
-      - (var(--catalog-padding-inline) * 2)
-    ) / var(--cards-per-view)
-  );
-  --card-mobile-width: clamp(0px, calc(var(--mobile) - 12px), var(--mobile));
-  --card-available-width-trimmed: clamp(
-    0px,
-    calc(var(--card-available-width) - 12px),
-    var(--card-available-width)
-  );
-  --card-width: min(
-    var(--card-mobile-width),
-    var(--card-available-width-trimmed),
-    var(--card-max-height)
-  );
-  display: flex;
-  align-items: center;
+  --essay-card-gap: clamp(18px, 3.2vw, 40px);
+  width: min(1120px, 100%);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 20vw, 260px), 1fr));
+  grid-auto-rows: 1fr;
   gap: var(--essay-card-gap);
-  padding-inline: var(--catalog-padding-inline);
-  height: var(--catalog-height);
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--catalog-padding-inline);
-}
-
-.essay-wrapper::-webkit-scrollbar {
-  display: none;
+  justify-content: center;
+  align-content: center;
+  padding: clamp(0.5rem, 2vw, 1.5rem);
 }
 
 .essay-card {
   position: relative;
-  flex: 0 0 var(--card-width, 240px);
-  width: var(--card-width, 240px);
-  height: var(--card-width, 240px);
-  max-height: var(--card-max-height, calc(100dvh - 120px));
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  gap: var(--card-content-gap);
-  padding: var(--card-pad);
+  justify-content: space-between;
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  padding: clamp(1rem, 2.8vw, 1.75rem);
   color: inherit;
   text-decoration: none;
-  scroll-snap-align: start;
-  background: #f3f3f3;
+  background: linear-gradient(160deg, #ffffff, rgba(230, 230, 230, 0.85));
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 4px 4px 8px #2a2a2a50;
+  box-shadow: 4px 6px 18px rgba(42, 42, 42, 0.18);
   transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
   will-change: transform;
   transform-origin: center;
-  border: 0;
+  border: 1px solid rgba(42, 42, 42, 0.08);
   cursor: pointer;
   align-items: flex-start;
   text-align: left;
@@ -387,35 +356,40 @@ h4 {
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  box-shadow:
-    inset 0.5px 0.5px 0 1px #ffffff85,
-    inset 4px 4px 8px #ffffff,
-    inset -8px -8px 12px rgba(42, 42, 42, 0.12);
+  background: linear-gradient(200deg, rgba(255, 255, 255, 0.55), transparent 70%);
   pointer-events: none;
-  transition: transform 150ms ease-in-out, box-shadow 150ms ease-in-out;
+  transition: opacity 150ms ease-in-out;
+  opacity: 0;
   z-index: 0;
 }
 
 .essay-card:hover,
 .essay-card:focus-visible {
-  box-shadow: 2px 2px 2px #2a2a2a70;
-  transform: scale(0.99);
+  box-shadow: 3px 5px 18px rgba(42, 42, 42, 0.3);
+  transform: translateY(-2px);
 }
 
 .essay-card:active {
-  transform: scale(0.98);
-  box-shadow: inset 8px 8px 12px rgba(42, 42, 42, 0.12),
-    inset -8px -8px 12px rgba(42, 42, 42, 0.25),
-    inset 0px 0px 4px 0px #2a2a2a80;
+  transform: translateY(0);
+  box-shadow: inset 0 0 0 1px rgba(42, 42, 42, 0.2);
 }
 
 .essay-card:active::after {
-  box-shadow: none;
+  opacity: 1;
 }
 
 .essay-card:focus-visible {
   outline: 2px solid #2a2a2a;
   outline-offset: 4px;
+}
+
+.essay-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.65rem, 1.6vw, 1rem);
+  position: relative;
+  z-index: 1;
+  width: 100%;
 }
 
 .essay-card__heading {
@@ -429,7 +403,7 @@ h4 {
 
 .essay-card__title {
   margin: 0;
-  font-size: clamp(1.1rem, 2.6vw, 1.35rem);
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
   font-weight: 300;
   letter-spacing: 0.01em;
   display: -webkit-box;
@@ -455,13 +429,35 @@ h4 {
   line-height: 1.4;
   color: rgba(42, 42, 42, 0.8);
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   position: relative;
   z-index: 1;
   width: 100%;
+}
+
+.essay-card__mobile {
+  display: none;
+  flex-direction: column;
+  gap: 0.35rem;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.essay-card__micro-title {
+  font-size: clamp(0.95rem, 5vw, 1.35rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.essay-card__label {
+  font-size: clamp(0.75rem, 3.4vw, 0.95rem);
+  line-height: 1.35;
+  color: rgba(42, 42, 42, 0.78);
 }
 
 .essay-list__empty,
@@ -482,30 +478,42 @@ h4 {
   font-style: italic;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .essay-wrapper {
-    --cards-per-view: 3;
+    width: min(960px, 100%);
+    grid-template-columns: repeat(auto-fit, minmax(clamp(180px, 26vw, 240px), 1fr));
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 768px) {
   .essay-wrapper {
-    --cards-per-view: 2;
+    width: min(640px, 100%);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(16px, 5vw, 24px);
+  }
+
+  .essay-card {
+    padding: clamp(0.85rem, 3.5vw, 1.25rem);
+    box-shadow: 3px 5px 14px rgba(42, 42, 42, 0.18);
+  }
+
+  .essay-card__content {
+    display: none;
+  }
+
+  .essay-card__mobile {
+    display: flex;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 480px) {
   .essay-wrapper {
-    --cards-per-view: 1;
-    padding-inline: 24px;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: 24px;
+    width: min(400px, 100%);
+    gap: clamp(14px, 6vw, 20px);
   }
 
-  .essay-card__meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+  .essay-card {
+    border-radius: 16px;
   }
 }
 
