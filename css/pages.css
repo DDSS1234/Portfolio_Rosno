@@ -325,20 +325,22 @@ footer {
 .site-footer__inner {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-areas:
+    "spacer spacer spacer indicators indicators indicators indicators indicators indicators contact contact contact";
   align-items: center;
   height: var(--header-footer-height);
   column-gap: 12px;
 }
 
 .site-footer__indicators {
-  grid-column: 4 / span 6;
+  grid-area: indicators;
   justify-self: center;
   min-width: 0;
 }
 
 .contact-pill {
-  grid-column: 1 / span 1;
-  justify-self: start;
+  grid-area: contact;
+  justify-self: end;
   display: inline-flex;
   align-items: center;
   justify-items: center;
@@ -398,7 +400,7 @@ footer {
 }
 
 .site-footer__spacer {
-  grid-column: 10 / span 3;
+  grid-area: spacer;
 }
 
 .catalog-indicators {

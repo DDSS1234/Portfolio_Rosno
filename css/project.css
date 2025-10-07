@@ -168,7 +168,7 @@ pI{
   display: block;
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 1200px) {
   .slide-container {
     --cards-per-view: 3;
   }
