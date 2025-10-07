@@ -31,23 +31,23 @@
     </ul>
   </nav>
   <main>
-    <section class="archive-grid">
-    <div class="project">
-      <div class="thumb"></div>
-      <h3>Project One</h3>
-    </div>
-    <div class="project">
-      <div class="thumb"></div>
-      <h3>Project Two</h3>
-    </div>
-    <div class="project">
-      <div class="thumb"></div>
-      <h3>Project Three</h3>
-    </div>
-    <div class="project">
-      <div class="thumb"></div>
-      <h3>Project Four</h3>
-    </div>
+    <section class="essay-archive" aria-labelledby="essayArchiveTitle">
+      <header class="essay-archive__header">
+        <h2 class="essay-archive__title" id="essayArchiveTitle">Essay archive</h2>
+        <p class="essay-archive__description">
+          Mini essays about interface craft, slow publishing, and keeping analog rituals alive inside digital work.
+        </p>
+      </header>
+      <div class="essay-list" data-essay-list>
+        <p class="essay-list__empty" data-essay-empty hidden>
+          Essays will live here soon. Check back for fresh notes.
+        </p>
+      </div>
+      <noscript>
+        <p class="essay-list__noscript">
+          Enable JavaScript to load the latest essays.
+        </p>
+      </noscript>
     </section>
   </main>
   <footer class="site-footer" role="contentinfo">
@@ -104,5 +104,6 @@
 
   <script src="js/menu.js" defer></script>
   <script src="js/contact.js" defer></script>
+  <script src="js/essays.js" defer></script>
 </body>
 </html>

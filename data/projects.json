@@ -6,7 +6,6 @@
     "tags": ["Material", "art", "compassion"],
     "hook": "Cast paper as functional objects",
     "thumb": "images/paper/paper_thumb.png",
-    "linework": "images/paper/paper_thumb_line.png",
     "microLoop": "images/paper/paper-brick-chair_loop.mp4",
     "hero": "images/paper/Wall_Panel_1.png"
   },
@@ -17,7 +16,6 @@
     "tags": ["architecture", "farming","community"],
     "hook": "Farm planning plans the school",
     "thumb": "images/school-for-agriculture/agriculture_thumb.png",
-    "linework": "images/school-for-agriculture/fold-lamp_line.svg",
     "microLoop": "images/school-for-agriculture/fold-lamp_loop.mp4",
     "hero": "images/school-for-agriculture/fold-lamp_hero.jpg"
   },
@@ -28,7 +26,6 @@
     "tags": ["architecture", "restoration", "community"],
     "hook": "Restorative re-use of bombed 1300's Italian church",
     "thumb": "assets/img/sand-clock_thumb.png",
-    "linework": "assets/img/sand-clock_line.svg",
     "microLoop": "assets/video/sand-clock_loop.mp4",
     "hero": "assets/img/sand-clock_hero.jpg"
   },
@@ -39,7 +36,6 @@
     "tags": ["Architecture", "automation", "AI"],
     "hook": "Automated architectural design for client outcomes",
     "thumb": "assets/img/brick-drone_thumb.png",
-    "linework": "assets/img/brick-drone_line.svg",
     "microLoop": "assets/video/brick-drone_loop.mp4",
     "hero": "assets/img/brick-drone_hero.jpg"
   },
@@ -50,7 +46,6 @@
     "tags": ["Architecture", "UI", "AI"],
     "hook": "Boils water in disposable paper vessel.",
     "thumb": "assets/img/paper-kettle_thumb.png",
-    "linework": "assets/img/paper-kettle_line.svg",
     "microLoop": "assets/video/paper-kettle_loop.mp4",
     "hero": "assets/img/paper-kettle_hero.jpg"
   },
@@ -61,9 +56,18 @@
     "tags": ["Architecture"],
     "hook": "A vertical Neighborhood",
     "thumb": "images/polyopoly/polyopoly_thumb.png",
-    "linework": "assets/img/modular-shelf_line.svg",
     "microLoop": "assets/video/modular-shelf_loop.mp4",
     "hero": "assets/img/modular-shelf_hero.jpg",
     "thumbAspect": "square"
+  },
+  {
+    "id": "photography",
+    "title": "Photography",
+    "year": "2025",
+    "tags": ["Art"],
+    "hook": "Boils water in disposable paper vessel.",
+    "thumb": "assets/img/paper-kettle_thumb.png",
+    "microLoop": "assets/video/paper-kettle_loop.mp4",
+    "hero": "assets/img/paper-kettle_hero.jpg"
   }
 ]

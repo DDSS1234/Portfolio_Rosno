@@ -248,7 +248,8 @@ h5{
 .catalog {
   --card-gap: clamp(16px, 3vw, 48px);
   --catalog-padding-inline: clamp(16px, 4vw, var(--side-margins));
-  --card-max-height: calc(100dvh - 120px);
+  --catalog-height: calc(100dvh - (var(--header-footer-height) * 2));
+  --card-max-height: calc(var(--catalog-height) - 16px);
   --card-available-width: calc(
     (
       100%
@@ -256,12 +257,18 @@ h5{
       - (var(--catalog-padding-inline) * 2)
     ) / var(--cards-per-view)
   );
+  --card-mobile-width: clamp(0px, calc(var(--mobile) - 12px), var(--mobile));
+  --card-available-width-trimmed: clamp(
+    0px,
+    calc(var(--card-available-width) - 12px),
+    var(--card-available-width)
+  );
   --card-width: min(
-    var(--mobile),
-    var(--card-available-width),
+    var(--card-mobile-width),
+    var(--card-available-width-trimmed),
     calc(var(--card-max-height) * 3 / 4)
   );
-  height: var(--card-max-height);
+  height: var(--catalog-height);
   display: flex;
   gap: var(--card-gap);
   padding-block: 12px;
@@ -442,7 +449,6 @@ h5{
 }
 
 .card--square {
-  --card-aspect: var(--card-square-aspect, 2 / 3);
   --card-thumb-aspect: 1;
 }
 
