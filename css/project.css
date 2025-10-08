@@ -222,15 +222,25 @@ pI{
   }
 
   .slide-container {
+    --card-gap: max(48px, 8vw);
     --cards-per-view: 1;
-    padding-inline: 24px;
+    --card-width: min(
+      calc(100vw - 48px),
+      calc(var(--card-max-height) * 3 / 4)
+    );
+    --slide-mobile-side-padding: max(24px, calc((100vw - var(--card-width)) / 2));
+    --catalog-padding-inline: var(--slide-mobile-side-padding);
+    padding-inline: var(--slide-mobile-side-padding);
     scroll-snap-type: x mandatory;
-    scroll-padding-inline: 24px;
+    scroll-padding-inline: var(--slide-mobile-side-padding);
     align-items: stretch;
   }
 
   .slide {
-    border-radius: 20px;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    justify-content: center;
+    align-content: center;
     padding: 4px 0 0 0;
   }
 
@@ -244,6 +254,19 @@ pI{
   }
 
   .slideimg{
-    border-radius: 20px;
+    align-self: center;
   }
+  pCaption{
+    align-self: center;
+  }
+
+  h2{
+    align-self: center;
+    justify-self: center;
+  }
+
+  h3d{
+    align-self: center;
+  }
+
 }
