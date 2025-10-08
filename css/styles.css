@@ -4,7 +4,7 @@
 }
 
 :root {
-  --background-main: #f2f2f2;
+  --background-main: #ffffff;
   --background-secondary: #c4c4c4;
   --color-three: #2a2a2a;
   --color-attention: #ff484c;
@@ -340,7 +340,7 @@ h5{
   padding: var(--card-pad);
   flex: 1;
   height: 100%;
-  background: #f3f3f3;
+  background: var(--background-main);
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 4px 4px 8px #2a2a2a50;

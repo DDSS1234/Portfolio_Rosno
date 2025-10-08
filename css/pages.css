@@ -4,7 +4,7 @@
 }
 
 :root {
-  --background-main: #f2f2f2;
+  --background-main: #ffffff;
   --background-secondary: #c4c4c4;
   --color-three: #2a2a2a;
   --color-attention: #ff484c;
@@ -53,6 +53,10 @@ main {
   padding-bottom: calc(var(--header-footer-height) + env(safe-area-inset-bottom, 0px));
 }
 
+body.essays-page main {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 header {
   display: flex;
   justify-content: space-between;
@@ -67,6 +71,13 @@ h3 {
   font-weight: 200;
   font-family: var(--font);
   margin: 0;
+}
+
+h3d{
+  font-weight: 200;
+  font-family: var(--font);
+  margin: 0;
+  padding: 0 0 0 0px;
 }
 
 h4 {
@@ -308,10 +319,14 @@ h4 {
 .essay-archive {
   --essay-archive-padding-block: clamp(0.75rem, 3vh, 2rem);
   --essay-archive-padding-inline: var(--page-gutter);
+  --essay-safe-area-offset: calc(
+    env(safe-area-inset-top, 0px) + env(safe-area-inset-bottom, 0px)
+  );
   --essay-wrapper-height: max(
     0px,
     calc(
       100dvh - (var(--header-footer-height) * 2)
+      - var(--essay-safe-area-offset)
       - (var(--essay-archive-padding-block) * 2)
     )
   );
@@ -319,7 +334,14 @@ h4 {
   flex-direction: column;
   gap: clamp(1rem, 3vw, 2rem);
   width: 100%;
-  height: calc(100dvh - (var(--header-footer-height) * 2));
+  height: max(
+    0px,
+    calc(
+      100dvh - (var(--header-footer-height) * 2)
+      - var(--essay-safe-area-offset)
+      - (var(--essay-archive-padding-block) * 2)
+    )
+  );
   min-height: 0;
   margin: 0;
   padding-block: var(--essay-archive-padding-block);
@@ -376,7 +398,7 @@ h4 {
   padding: 16px;
   color: inherit;
   text-decoration: none;
-  background: #f3f3f3;
+  background: #ffffff;
   border-radius: 20px;
   overflow: visible;
   box-shadow: 4px 4px 8px #2a2a2a50;
@@ -624,8 +646,8 @@ footer {
   min-height: 40px;
   border-radius: 999px;
   border: none;
-  background: #f3f3f3;
-  color: #f2f2f2;
+  background: #f0f0f0;
+  color: #ffffff;
   font: inherit;
   font-weight: 400;
   cursor: pointer;
