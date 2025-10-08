@@ -801,10 +801,22 @@ body.is-modal-open {
   }
 
   .catalog {
+    --card-gap: max(48px, 8vw);
     --cards-per-view: 1;
-    padding-inline: 24px;
+    --card-width: min(
+      calc(100vw - 48px),
+      calc(var(--card-max-height) * 3 / 4)
+    );
+    --catalog-mobile-side-padding: max(24px, calc((100vw - var(--card-width)) / 2));
+    --catalog-padding-inline: var(--catalog-mobile-side-padding);
+    padding-inline: var(--catalog-mobile-side-padding);
     scroll-snap-type: x mandatory;
-    scroll-padding-inline: 24px;
+    scroll-padding-inline: var(--catalog-mobile-side-padding);
+  }
+
+  .card {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
   }
 
   footer .contact-info {
