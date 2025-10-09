@@ -216,10 +216,10 @@ h4 {
 .aboutDesktop {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   gap: clamp(2rem, 6vw, 4rem);
   max-width: var(--content-max-width);
-  margin: 0 auto;
+  margin: 0;
   padding: clamp(2rem, 6vw, 3.5rem) var(--page-gutter);
   min-height: calc(100dvh - (var(--header-footer-height) * 2));
 }
@@ -246,9 +246,16 @@ h4 {
   display: none;
   flex-direction: column;
   align-items: center;
+<<<<<<< ours
   align-content: center;
   gap: clamp(1.25rem, 5vw, 2rem);
   padding: 24px;
+=======
+  justify-content: center;
+  gap: clamp(1.25rem, 5vw, 2rem);
+  padding: clamp(2rem, 6vw, 3.5rem) var(--page-gutter) clamp(5rem, 10vw, 6rem);
+  text-align: center;
+  min-height: calc(100dvh - (var(--header-footer-height) * 2));
 }
 
 .about-image-wrap {
