@@ -216,10 +216,10 @@ h4 {
 .aboutDesktop {
   display: flex;
   align-items: center;
-  justify-content: left;
+  justify-content: center;
   gap: clamp(2rem, 6vw, 4rem);
   max-width: var(--content-max-width);
-  margin: 0;
+  margin: 0 auto;
   padding: clamp(2rem, 6vw, 3.5rem) var(--page-gutter);
   min-height: calc(100dvh - (var(--header-footer-height) * 2));
 }
