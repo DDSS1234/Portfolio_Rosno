@@ -9,7 +9,31 @@
 </head>
 <body>
   <header>
-    <h1 class="logo"><a href="../index.html">RŌS-NŌ</a></h1>
+    <div class="logo-group">
+      <h1 class="logo"><a href="../index.html">RŌS-NŌ</a></h1>
+    </div>
+    <nav class="site-links" aria-label="Primary">
+      <ul class="site-links__list">
+        <li class="site-links__item">
+          <a class="site-links__link" href="../essays.html">Mini Essays</a>
+        </li>
+        <li class="site-links__item">
+          <a class="site-links__link" href="../about.html">About</a>
+        </li>
+        <li class="site-links__item">
+          <button
+            type="button"
+            class="site-links__link site-links__link--contact"
+            data-contact-toggle
+            aria-haspopup="dialog"
+            aria-expanded="false"
+            aria-controls="contactSheet"
+          >
+            Contact
+          </button>
+        </li>
+      </ul>
+    </nav>
     <button
       id="menuBtn"
       aria-label="Open menu"
@@ -26,9 +50,20 @@
 
   <nav id="siteMenu" class="menu" hidden data-open="false">
     <ul>
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../about.html">About</a></li>
+      <li>
+        <button
+          type="button"
+          class="menu__contact"
+          data-contact-toggle
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="contactSheet"
+        >
+          Contact
+        </button>
+      </li>
       <li><a href="../essays.html">Mini Essays</a></li>
+      <li><a href="../about.html">About</a></li>
     </ul>
   </nav>
 
@@ -50,21 +85,9 @@
   </main>
   <footer class="site-footer" role="contentinfo">
     <div class="site-footer__inner">
-      <button
-        type="button"
-        class="contact-pill"
-        data-contact-toggle
-        role="button"
-        aria-haspopup="dialog"
-        aria-expanded="false"
-        aria-controls="contactSheet"
-      >
-        <span class="contact-pill__label">Contact &rarr;</span>
-      </button>
       <div class="site-footer__indicators">
         <div class="catalog-indicators" data-catalog-indicators></div>
       </div>
-      <div class="site-footer__spacer" aria-hidden="true"></div>
     </div>
   </footer>
 

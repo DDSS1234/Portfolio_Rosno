@@ -1,4 +1,4 @@
-const contactToggle = document.querySelector('[data-contact-toggle]');
+const contactToggles = Array.from(document.querySelectorAll('[data-contact-toggle]'));
 const contactDialog = document.querySelector('[data-contact-dialog]');
 const contactOverlay = contactDialog?.querySelector('[data-contact-overlay]') || null;
 const contactClose = contactDialog?.querySelector('[data-contact-close]') || null;
@@ -12,6 +12,7 @@ const focusableSelector = [
   '[tabindex]:not([tabindex="-1"])'
 ].join(', ');
 let lastFocusedElement = null;
+let activeToggle = null;
 
 function getFocusableElements(container) {
   if (!container) return [];
@@ -51,12 +52,13 @@ function handleDialogKeydown(event) {
   }
 }
 
-function openContactDialog() {
+function openContactDialog(trigger) {
   if (!contactDialog || contactDialog.classList.contains('is-visible')) return;
   lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  activeToggle = trigger instanceof HTMLElement ? trigger : null;
   contactDialog.hidden = false;
   document.body.classList.add('is-modal-open');
-  contactToggle?.setAttribute('aria-expanded', 'true');
+  contactToggles.forEach((toggle) => toggle.setAttribute('aria-expanded', 'true'));
 
   requestAnimationFrame(() => {
     contactDialog.classList.add('is-visible');
@@ -74,7 +76,7 @@ function closeContactDialog() {
   if (!contactDialog || contactDialog.hidden) return;
   contactDialog.classList.remove('is-visible');
   document.body.classList.remove('is-modal-open');
-  contactToggle?.setAttribute('aria-expanded', 'false');
+  contactToggles.forEach((toggle) => toggle.setAttribute('aria-expanded', 'false'));
   document.removeEventListener('keydown', handleDialogKeydown);
 
   let fallbackTimeout;
@@ -93,27 +95,36 @@ function closeContactDialog() {
 
   contactDialog.addEventListener('transitionend', handleTransitionEnd);
 
+  const fallbackToggle = activeToggle || contactToggles[0] || null;
   const focusTarget = lastFocusedElement && typeof lastFocusedElement.focus === 'function'
     ? lastFocusedElement
-    : contactToggle;
+    : fallbackToggle;
 
   requestAnimationFrame(() => {
     focusTarget?.focus({ preventScroll: true });
     lastFocusedElement = null;
+    activeToggle = null;
   });
 }
 
-function toggleContactDialog() {
+function toggleContactDialog(trigger) {
   if (!contactDialog) return;
   if (contactDialog.hidden || !contactDialog.classList.contains('is-visible')) {
-    openContactDialog();
+    openContactDialog(trigger);
   } else {
     closeContactDialog();
   }
 }
 
-if (contactToggle && contactDialog) {
-  contactToggle.addEventListener('click', toggleContactDialog);
+if (contactToggles.length && contactDialog) {
+  contactToggles.forEach((toggle) => {
+    toggle.addEventListener('click', (event) => {
+      if (toggle.tagName === 'A') {
+        event.preventDefault();
+      }
+      toggleContactDialog(toggle);
+    });
+  });
 }
 
 contactOverlay?.addEventListener('click', closeContactDialog);

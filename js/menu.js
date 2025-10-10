@@ -50,7 +50,7 @@
     }
   });
 
-  const menuLinks = siteMenu.querySelectorAll('a');
+  const menuLinks = siteMenu.querySelectorAll('a, button');
   menuLinks.forEach((link) => {
     link.addEventListener('click', () => setMenuOpen(false));
   });

@@ -60,11 +60,17 @@ body.essays-page main {
 header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   padding: 8px var(--page-gutter) 8px;
   height: var(--header-footer-height);
   border-bottom: 1px solid rgba(42, 42, 42, 0.08);
   background: none;
+}
+
+.logo-group {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
 }
 
 h3 {
@@ -148,6 +154,65 @@ h5{
   stroke: var(--color-attention);
 }
 
+.site-links {
+  display: none;
+}
+
+.site-links__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+}
+
+.site-links__link {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: var(--color-three);
+  font: inherit;
+  font-weight: 300;
+  text-decoration: none;
+  padding: 4px 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.site-links__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 150ms ease-in-out;
+}
+
+.site-links__link:hover::after,
+.site-links__link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.site-links__link:active {
+  transform: translateY(1px);
+}
+
+.site-links__link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.site-links__link--contact {
+  color: var(--color-attention);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .burger path {
     transition: none;
@@ -195,14 +260,47 @@ h5{
   padding: 0.4em 0;
 }
 
+.menu button {
+  display: inline-block;
+  font-family: var(--font);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 5vw, 1.75rem);
+  background: transparent;
+  border: none;
+  color: var(--menu-text);
+  padding: 0.4em 0;
+  cursor: pointer;
+}
+
+.menu [data-contact-toggle] {
+  color: var(--color-attention);
+}
+
 .menu a:hover,
-.menu a:focus-visible {
+.menu a:focus-visible,
+.menu button:hover,
+.menu button:focus-visible {
   text-decoration: underline;
 }
 
 html.menu-open,
 body.menu-open {
   overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .site-links {
+    display: block;
+    min-width: 0;
+  }
+
+  .menu-btn {
+    display: none;
+  }
+
+  .menu {
+    display: none !important;
+  }
 }
 
 h4 {
@@ -623,18 +721,14 @@ footer {
 }
 
 .site-footer__inner {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-areas:
-    "spacer spacer spacer indicators indicators indicators indicators indicators indicators contact contact contact";
+  display: flex;
   align-items: center;
+  justify-content: center;
   height: var(--header-footer-height);
-  column-gap: 12px;
+  gap: 12px;
 }
 
 .site-footer__indicators {
-  grid-area: indicators;
-  justify-self: center;
   min-width: 0;
 }
 
