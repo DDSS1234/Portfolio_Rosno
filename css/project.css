@@ -26,8 +26,9 @@ main {
 h2 {
   font-weight: bold;
   font-family: var(--font);
-  padding: 0 0 20px 0;
+  padding: 20px;
   text-align: left;
+  align-self: flex-start;
 }
 
 h3 {
@@ -44,6 +45,14 @@ h3slide {
   padding: 0px 20px;
   text-justify: left;
   text-align: top;
+}
+
+h3d {
+  font-weight: 200;
+  font-family: var(--font);
+  margin: 0;
+  padding: 0px 20px;
+  text-align: left;
 }
 
 p {
@@ -166,7 +175,18 @@ pI{
   overflow: hidden;
   overflow-wrap: anywhere;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  aspect-ratio: 3 / 4;
+}
+
+.slideEmpty {
+  position: relative;
+  flex: 0 0 var(--card-width, 280px);
+  width: var(--card-width, 280px);
+  max-height: var(--card-max-height, calc(100dvh - 120px));
+  scroll-snap-align: start;
+  background: none;
+  pointer-events: none;
   aspect-ratio: 3 / 4;
 }
 
@@ -285,14 +305,21 @@ pI{
     align-self: center;
   }
 
+  .slideTitle {
+    align-items: center;
+  }
+
   h2{
+    text-align: center;
     align-self: center;
-    justify-self: center;
   }
 
   h3d{
-    text-justify: center;
     text-align: center;
+  }
+
+  .slideEmpty {
+    display: none;
   }
 
 }
