@@ -58,7 +58,7 @@
       root,
       indicatorPortal: options.indicatorPortal instanceof HTMLElement ? options.indicatorPortal : null,
       indicatorContainer: options.indicatorPortal instanceof HTMLElement ? options.indicatorPortal : null,
-      indicatorButtons: [],
+      indicatorFill: null,
       scrollAnimationFrame: null,
       listenersAttached: false,
       wheelListenerAttached: false,
@@ -208,11 +208,18 @@
     }
 
     function clearIndicators() {
-      state.indicatorButtons = [];
+      state.indicatorFill = null;
       if (state.indicatorContainer && state.indicatorContainer !== state.indicatorPortal) {
         state.indicatorContainer.innerHTML = '';
       } else if (state.indicatorContainer && state.indicatorPortal) {
         state.indicatorContainer.innerHTML = '';
+      }
+      if (state.indicatorContainer) {
+        state.indicatorContainer.removeAttribute('role');
+        state.indicatorContainer.removeAttribute('aria-valuemin');
+        state.indicatorContainer.removeAttribute('aria-valuemax');
+        state.indicatorContainer.removeAttribute('aria-valuenow');
+        state.indicatorContainer.removeAttribute('aria-valuetext');
       }
     }
 
@@ -248,20 +255,33 @@
     }
 
     function updateIndicators() {
-      if (!state.indicatorButtons.length) {
+      if (!state.indicatorFill) {
         updateWheelSupport();
         return;
       }
 
       const maxScroll = state.root.scrollWidth - state.root.clientWidth;
       const progress = maxScroll > 0 ? state.root.scrollLeft / maxScroll : 0;
-      const activeIndex = Math.round(progress * (state.indicatorButtons.length - 1));
+      const clampedProgress = Math.max(0, Math.min(progress, 1));
 
-      state.indicatorButtons.forEach((button, index) => {
-        const isActive = index === activeIndex;
-        button.classList.toggle('is-active', isActive);
-        button.setAttribute('aria-current', isActive ? 'true' : 'false');
-      });
+      if (state.indicatorContainer) {
+        const containerWidth = state.indicatorContainer.clientWidth;
+        const thumbWidth = state.indicatorFill.offsetWidth;
+        const maxOffset = Math.max(containerWidth - thumbWidth, 0);
+        const offset = maxOffset * clampedProgress;
+        state.indicatorFill.style.transform = `translateX(${offset}px) translateY(-50%)`;
+      }
+
+      if (state.indicatorContainer) {
+        state.indicatorContainer.setAttribute('aria-valuenow', String(Math.round(clampedProgress * 100)));
+        const cards = getCards();
+        if (cards.length > 1) {
+          const approxIndex = Math.round(clampedProgress * (cards.length - 1)) + 1;
+          state.indicatorContainer.setAttribute('aria-valuetext', `Slide ${approxIndex} of ${cards.length}`);
+        } else {
+          state.indicatorContainer.removeAttribute('aria-valuetext');
+        }
+      }
 
       updateWheelSupport();
     }
@@ -277,21 +297,14 @@
 
       const container = ensureIndicatorContainer();
       container.innerHTML = '';
+      container.setAttribute('role', 'progressbar');
+      container.setAttribute('aria-valuemin', '0');
+      container.setAttribute('aria-valuemax', '100');
 
-      state.indicatorButtons = cards.map((card, index) => {
-        const indicator = document.createElement('button');
-        indicator.type = 'button';
-        indicator.className = 'catalog-indicator';
-        indicator.dataset.index = String(index);
-        const label = state.getIndicatorLabel(card, index, cards.length);
-        indicator.setAttribute('aria-label', label);
-        indicator.title = label;
-        indicator.addEventListener('click', () => {
-          card.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-        });
-        container.appendChild(indicator);
-        return indicator;
-      });
+      const fill = document.createElement('div');
+      fill.className = 'catalog-indicator__fill';
+      container.appendChild(fill);
+      state.indicatorFill = fill;
 
       if (!state.listenersAttached) {
         state.root.addEventListener('scroll', handleScroll, { passive: true });

@@ -6,65 +6,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const slides = Array.from(catalog.querySelectorAll('.slide'));
   const indicatorContainer = document.querySelector('[data-catalog-indicators]');
-  let indicatorButtons = [];
+  let indicatorFill = null;
   let scrollAnimationFrame = null;
   let wheelListenerAttached = false;
   let keyListenerAttached = false;
 
   function createIndicators() {
     if (!indicatorContainer || !slides.length) {
-      indicatorButtons = [];
+      indicatorFill = null;
       return;
     }
 
     indicatorContainer.innerHTML = '';
-    indicatorButtons = slides.map((slide, slideIndex) => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'catalog-indicator';
-      button.dataset.index = String(slideIndex);
-      const heading = slide.querySelector('h1, h2, h3, h4, h5, h6');
-      const title = heading ? heading.textContent.trim() : '';
-      const label = `Slide ${slideIndex + 1} of ${slides.length}${title ? ` — ${title}` : ''}`;
-      button.setAttribute('aria-label', label);
-      button.title = title || `Slide ${slideIndex + 1}`;
-      button.addEventListener('click', () => {
-        slide.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-      });
-      indicatorContainer.appendChild(button);
-      return button;
-    });
-  }
+    indicatorContainer.setAttribute('role', 'progressbar');
+    indicatorContainer.setAttribute('aria-valuemin', '0');
+    indicatorContainer.setAttribute('aria-valuemax', '100');
 
-  function getActiveSlideIndex() {
-    if (!slides.length) {
-      return -1;
-    }
-
-    const containerCenter = catalog.scrollLeft + catalog.clientWidth / 2;
-    let closestIndex = 0;
-    let closestDistance = Infinity;
-
-    slides.forEach((slide, index) => {
-      const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
-      const distance = Math.abs(slideCenter - containerCenter);
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = index;
-      }
-    });
-
-    return closestIndex;
+    const fill = document.createElement('div');
+    fill.className = 'catalog-indicator__fill';
+    indicatorContainer.appendChild(fill);
+    indicatorFill = fill;
   }
 
   function updateIndicatorState() {
-    const activeIndex = indicatorButtons.length ? getActiveSlideIndex() : -1;
+    if (!indicatorFill) {
+      updateWheelSupport();
+      updateKeySupport();
+      return;
+    }
 
-    indicatorButtons.forEach((button, index) => {
-      const isActive = index === activeIndex;
-      button.classList.toggle('is-active', isActive);
-      button.setAttribute('aria-current', isActive ? 'true' : 'false');
-    });
+    const maxScroll = catalog.scrollWidth - catalog.clientWidth;
+    const progress = maxScroll > 0 ? catalog.scrollLeft / maxScroll : 0;
+    const clampedProgress = Math.max(0, Math.min(progress, 1));
+
+    const containerWidth = indicatorContainer ? indicatorContainer.clientWidth : 0;
+    const thumbWidth = indicatorFill.offsetWidth;
+    const maxOffset = Math.max(containerWidth - thumbWidth, 0);
+    const offset = maxOffset * clampedProgress;
+    indicatorFill.style.transform = `translateX(${offset}px) translateY(-50%)`;
+    indicatorContainer.setAttribute('aria-valuenow', String(Math.round(clampedProgress * 100)));
+
+    if (slides.length > 1) {
+      const approxIndex = Math.round(clampedProgress * (slides.length - 1)) + 1;
+      indicatorContainer.setAttribute('aria-valuetext', `Slide ${approxIndex} of ${slides.length}`);
+    } else {
+      indicatorContainer.removeAttribute('aria-valuetext');
+    }
 
     updateWheelSupport();
     updateKeySupport();
