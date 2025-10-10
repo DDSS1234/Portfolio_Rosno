@@ -73,42 +73,13 @@ main {
 }
 
 .logo-quote {
-  justify-self: bottom;
-  --logo-quote-width: 0px;
-  --logo-quote-steps: 26;
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 0;
-  opacity: 0;
+  display: none;
 }
 
-.logo-quote.is-animating {
-  opacity: 1;
-  animation-name: logoQuoteTyping, logoQuoteErase;
-  animation-duration: 1.5s, 1.0s;
-  animation-delay: 0s, 3.0s;
-  animation-fill-mode: forwards, forwards;
-  animation-timing-function: steps(var(--logo-quote-steps), end), steps(var(--logo-quote-steps), end);
-}
-
-@keyframes logoQuoteTyping {
-  from {
-    width: 0;
-  }
-
-  to {
-    width: var(--logo-quote-width);
-  }
-}
-
-@keyframes logoQuoteErase {
-  from {
-    width: var(--logo-quote-width);
-  }
-
-  to {
-    width: 0;
+@media (min-width: 640px) {
+  .logo-quote {
+    display: inline-block;
+    white-space: nowrap;
   }
 }
 
@@ -243,6 +214,7 @@ h5{
   text-align: left;
   font-family: var(--font);
   color: #2a2a2a80;
+  margin: 0;
 }
 
 .catalog {

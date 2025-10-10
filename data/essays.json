@@ -1,86 +1,92 @@
 [
   {
-    "id": "essay-2024-03-field-notes",
-    "title": "Field Notes on Honest Interfaces",
-    "slug": "field-notes-honest-interfaces",
-    "publishedAt": "2024-03-18T08:15:00-05:00",
-    "microTitle": "Honest UI",
-    "label": "Sketchbook rituals for trustworthy digital spaces.",
-    "summary": "Why the best digital spaces feel like a well-loved sketchbook, and the small rituals that keep interfaces honest to the people using them.",
-    "content": [
-      "The interfaces I trust most borrow their posture from sketchbooks. They are a little messy, easy to open, and unafraid of eraser marks. When I trace back the moments that made me fall in love with digital tools, every highlight came from tiny honest details—buttons that revealed their history with a soft patina, panels that remembered my last scribble, or a menu that breathed at the same pace as I did.",
-      "Honesty in an interface starts with friction. Not the frustrating kind, but the gentle pauses that ask a person if they are sure. I build micro-rituals into flows: a confirmation card that slides in like a postcard, a form that lets you rest your cursor before committing. These pauses become small anchors of accountability.",
-      "I am constantly relearning that design systems are living documents. They need notes in the margins, taped-in Polaroids, and folded corners to mark what matters. We keep honesty alive by letting the humans behind the interface leave their fingerprints in every release." 
-    ]
+    "id": "essay-placeholder-1",
+    "title": "More coming soon",
+    "slug": "more-coming-soon-1",
+    "publishedAt": "2024-01-01T00:00:00-05:00",
+    "microTitle": "More coming soon",
+    "label": "More coming soon.",
+    "summary": "More coming soon.",
+    "content": ["More coming soon."]
   },
   {
-    "id": "essay-2024-01-night-walks",
-    "title": "Night Walks & Neighborhood Frequencies",
-    "slug": "night-walks-neighborhood-frequencies",
-    "publishedAt": "2024-01-27T22:40:00-06:00",
-    "microTitle": "Night Walks",
-    "label": "Field recordings from after-dark research strolls.",
-    "summary": "Reflections gathered from late-night walks—on listening to streetlight hum, catching conversations mid-sentence, and designing for the in-between moments.",
-    "content": [
-      "Most nights I leave the studio when the block settles into its hush. The city feels like it exhales right as the streetlights kick on, casting gradients that no color picker can capture. I carry a pen and postcard-sized notebook to catch the temperature of the sidewalks and the fragments of dialogue that float out of late diners.",
-      "The walk is research. I map the cadence of crosswalks, the rumble of passing trains, and the rhythm of neon reflections. Each texture helps me sketch interfaces that don’t shout for attention but hum along with their surroundings. Even the cracks in the pavement are notes about how people reroute when the official path fails them.",
-      "By the time I circle home, my notebook is layered with tiny diagrams and questions for tomorrow’s build. Night walks remind me to leave generous margins in every layout—for the unplanned detours and the neighbors who will inevitably remix the experience in ways I never expected."
-    ]
+    "id": "essay-placeholder-2",
+    "title": "More coming soon",
+    "slug": "more-coming-soon-2",
+    "publishedAt": "2024-01-02T00:00:00-05:00",
+    "microTitle": "More coming soon",
+    "label": "More coming soon.",
+    "summary": "More coming soon.",
+    "content": ["More coming soon."]
   },
   {
-    "id": "essay-2023-11-warm-start",
-    "title": "A Warm Start in a Cold Studio",
-    "slug": "warm-start-cold-studio",
-    "publishedAt": "2023-11-05T07:05:00-06:00",
-    "microTitle": "Warm Start",
-    "label": "Winter studio rituals to stay grounded.",
-    "summary": "A short meditation on seasonal rituals, tactile materials, and keeping momentum when the daylight fades early.",
-    "content": [
-      "When November drifts in, the studio grows quiet and the windows sweat with frost. I start each session by boiling water for tea and stacking a fresh trio of notebooks—one for lists, one for sketches, and one for thoughts that don’t belong anywhere yet. That ritual is the spark that flips my mindset from hibernation to making.",
-      "Cold months ask more of our materials. I reach for wool desk pads, warm-toned lighting, and palettes that feel like brass instruments. Every texture is a reminder that digital canvases are still physical experiences. The cursor may glide, but our shoulders, wrists, and eyes need pacing cues to stay grounded.",
-      "Momentum in winter is a conversation with light. I chase it across the room, shifting my workspace every few weeks to capture the soft angles of morning. The work that comes out of these months is slower, yes, but it’s also more intentional—steeped like the tea that keeps refilling the cup beside my keyboard." 
-    ]
+    "id": "essay-placeholder-3",
+    "title": "More coming soon",
+    "slug": "more-coming-soon-3",
+    "publishedAt": "2024-01-03T00:00:00-05:00",
+    "microTitle": "More coming soon",
+    "label": "More coming soon.",
+    "summary": "More coming soon.",
+    "content": ["More coming soon."]
   },
   {
-    "id": "essay-2024-05-prototype-garden",
-    "title": "Prototype Garden: Growing Ideas in 48 Hours",
-    "slug": "prototype-garden-48-hours",
-    "publishedAt": "2024-05-12T09:30:00-05:00",
-    "microTitle": "Prototype",
-    "label": "Time-boxed builds for faster learning loops.",
-    "summary": "How a two-day prototyping sprint turned a messy moodboard into a working tool, and the rituals that kept the team nimble.",
-    "content": [
-      "Every sprint starts as a garden plot. You clear a space, stake a boundary, and decide what can realistically bloom in two days. For this prototype, the soil was a notebook of sticky notes, audio memos, and screenshots—raw material begging for order.",
-      "We sketched in rounds of fifteen minutes, pushing quantity over polish. By sunset, the best fragments layered into a navigable flow. The real win wasn’t the glossy surface—it was the shared confidence that emerged from building together under a clock.",
-      "A prototype garden is never permanent. We composted half the ideas, archived learnings in a tidy doc, and scheduled the next planting. Speed makes room for generosity when the whole team knows the sprint will reset soon."
-    ]
+    "id": "essay-placeholder-4",
+    "title": "More coming soon",
+    "slug": "more-coming-soon-4",
+    "publishedAt": "2024-01-04T00:00:00-05:00",
+    "microTitle": "More coming soon",
+    "label": "More coming soon.",
+    "summary": "More coming soon.",
+    "content": ["More coming soon."]
   },
   {
-    "id": "essay-2024-04-signal-kit",
-    "title": "Signal Kits for Calm Collaboration",
-    "slug": "signal-kits-calm-collaboration",
-    "publishedAt": "2024-04-08T14:10:00-05:00",
-    "microTitle": "Signal Kit",
-    "label": "Cues that keep async teams in rhythm.",
-    "summary": "Designing a shared set of signals—colors, chimes, and microcopy—that let a distributed team stay synchronized without shouting.",
-    "content": [
-      "The noisiest part of async work isn’t the messages—it’s the guesswork. We built a signal kit to give every project a shared heartbeat: status colors mapped to clarity, subtle chimes for handoffs, and a lexicon of phrases that keep expectations humane.",
-      "Signals only work when they feel friendly. We tested palettes until the shades felt like soft Post-its, not warning lights. A gentle marimba cue replaced the default ping. The result lowered inbox anxiety and invited thoughtful pacing.",
-      "When teams adopt a signal kit, meetings get shorter because the cues carry context. We review the kit monthly, pruning anything that turns into noise. The goal is calm collaboration, not another notification stream."
-    ]
+    "id": "essay-placeholder-5",
+    "title": "More coming soon",
+    "slug": "more-coming-soon-5",
+    "publishedAt": "2024-01-05T00:00:00-05:00",
+    "microTitle": "More coming soon",
+    "label": "More coming soon.",
+    "summary": "More coming soon.",
+    "content": ["More coming soon."]
   },
   {
-    "id": "essay-2023-09-analog-cache",
-    "title": "Analog Cache & Digital Recall",
-    "slug": "analog-cache-digital-recall",
-    "publishedAt": "2023-09-18T11:20:00-05:00",
-    "microTitle": "Analog Cache",
-    "label": "Bridging notebook scribbles with searchable archives.",
-    "summary": "Bringing together pen-and-paper rituals and digital tools to keep ideas findable without losing their texture.",
-    "content": [
-      "My studio wall is lined with pocket shelves that hold tiny notebooks. They’re a living cache of sketches, borrowed phrases, and to-do lists that never make it into formal docs. None of it is searchable, yet all of it matters.",
-      "To bridge that gap, I photograph spreads at the end of each week, tag them with two-word anchors, and drop them into a lightweight archive app. The combination keeps the analog warmth intact while giving future-me a way back to the origin story.",
-      "The magic lives in the ritual: fifteen minutes on Friday with a scanner app, a playlist, and a cup of tea. It keeps the cache active and my digital recall honest without sanding off the rough edges that make ideas feel alive."
-    ]
+    "id": "essay-placeholder-6",
+    "title": "More coming soon",
+    "slug": "more-coming-soon-6",
+    "publishedAt": "2024-01-06T00:00:00-05:00",
+    "microTitle": "More coming soon",
+    "label": "More coming soon.",
+    "summary": "More coming soon.",
+    "content": ["More coming soon."]
+  },
+  {
+    "id": "essay-placeholder-7",
+    "title": "More coming soon",
+    "slug": "more-coming-soon-7",
+    "publishedAt": "2024-01-07T00:00:00-05:00",
+    "microTitle": "More coming soon",
+    "label": "More coming soon.",
+    "summary": "More coming soon.",
+    "content": ["More coming soon."]
+  },
+  {
+    "id": "essay-placeholder-8",
+    "title": "More coming soon",
+    "slug": "more-coming-soon-8",
+    "publishedAt": "2024-01-08T00:00:00-05:00",
+    "microTitle": "More coming soon",
+    "label": "More coming soon.",
+    "summary": "More coming soon.",
+    "content": ["More coming soon."]
+  },
+  {
+    "id": "essay-placeholder-9",
+    "title": "More coming soon",
+    "slug": "more-coming-soon-9",
+    "publishedAt": "2024-01-09T00:00:00-05:00",
+    "microTitle": "More coming soon",
+    "label": "More coming soon.",
+    "summary": "More coming soon.",
+    "content": ["More coming soon."]
   }
 ]
