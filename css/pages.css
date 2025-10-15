@@ -175,7 +175,8 @@ h5{
   background: transparent;
   color: var(--color-three);
   font: inherit;
-  font-weight: 300;
+  font-size: .85rem;
+  font-weight: 500;
   text-decoration: none;
   padding: 4px 0;
   position: relative;
