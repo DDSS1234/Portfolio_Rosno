@@ -35,17 +35,17 @@
     "year": "2024",
     "tags": ["Architecture", "automation", "AI"],
     "hook": "Automated architectural design for client outcomes",
-    "thumb": "assets/img/brick-drone_thumb.png",
+    "thumb": "images/alta/Heroshot.png",
     "microLoop": "assets/video/brick-drone_loop.mp4",
     "hero": "assets/img/brick-drone_hero.jpg"
   },
   {
     "id": "screen-house",
-    "title": "Screen House",
+    "title": "Aegis ADU",
     "year": "2025",
     "tags": ["Architecture", "UI", "AI"],
     "hook": "Boils water in disposable paper vessel.",
-    "thumb": "assets/img/paper-kettle_thumb.png",
+    "thumb": "images/aegis/aegis_thumb.png",
     "microLoop": "assets/video/paper-kettle_loop.mp4",
     "hero": "assets/img/paper-kettle_hero.jpg"
   },
@@ -55,7 +55,7 @@
     "year": "2022",
     "tags": ["Architecture"],
     "hook": "A vertical Neighborhood",
-    "thumb": "images/polyopoly/polyopoly_thumb.png",
+    "thumb": "images/polyopoly/polyopoly_thumb1.png",
     "microLoop": "assets/video/modular-shelf_loop.mp4",
     "hero": "assets/img/modular-shelf_hero.jpg",
     "thumbAspect": "3/4"
