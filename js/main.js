@@ -460,7 +460,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <span class="tag-chip" role="note" aria-label="Category: ${categoryLabel}">${categoryLabel}</span>
         <div class="thumb"><img src="${project.thumb}" alt="${project.title}"></div>
         <div class="info">
-          <h3>${project.title}</h3>
+          <h3Title>${project.title}</h3Title>
         </div>
       </div>
     `;
@@ -490,7 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
       indicatorPortal,
       cardSelector: '.card',
       getIndicatorLabel: (card, index, total) => {
-        const titleElement = card.querySelector('h3');
+        const titleElement = card.querySelector('h3Title');
         const projectTitle = titleElement ? titleElement.textContent.trim() : '';
         const baseLabel = `Slide ${index + 1} of ${total}`;
         return projectTitle ? `${baseLabel} — ${projectTitle}` : baseLabel;
