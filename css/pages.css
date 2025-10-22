@@ -26,7 +26,7 @@
 
 @font-face {
   font-family: "Geist Variable";
-  src: url("/fonts/geist/Geist-Variable.woff2") format("woff2-variations");
+  src: url("/fonts/geist/geist-latin-wght-normal.woff2") format("woff2-variations");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -106,7 +106,7 @@ h5{
 .logo a {
   text-decoration: none;
   color: inherit;
-  font-weight: 300;
+  font-weight: 200;
   text-transform: uppercase;
 }
 
@@ -211,7 +211,7 @@ h5{
 }
 
 .site-links__link--contact {
-  color: var(--color-attention);
+  color: var(--color-three);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -274,7 +274,7 @@ h5{
 }
 
 .menu [data-contact-toggle] {
-  color: var(--color-attention);
+  color: var(--color-three);
 }
 
 .menu a:hover,
