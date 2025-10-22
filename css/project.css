@@ -309,15 +309,6 @@ pI{
     align-items: center;
   }
 
-  h2{
-    text-align: center;
-    align-self: center;
-  }
-
-  h3d{
-    text-align: center;
-  }
-
   .slideEmpty {
     display: none;
   }
