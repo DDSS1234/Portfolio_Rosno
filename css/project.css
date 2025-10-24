@@ -3,7 +3,6 @@
   --cards-per-view: 3;
   --catalog-padding-inline: clamp(16px, 4vw, var(--side-margins));
   --font: "Geist Variable", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
 }
 
 body {
@@ -14,13 +13,13 @@ body {
   background: var(--background-main);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 main {
   flex: 1;
   display: flex;
   padding: 0;
+  min-height: 0;
 }
 
 h2 {
@@ -100,21 +99,32 @@ pI{
   position: relative;
   flex: 1;
   width: 100%;
-  height: calc(
-    100dvh - (var(--header-footer-height) * 2) - env(safe-area-inset-bottom, 0px)
-  );
-  min-height: calc(
-    100vh - (var(--header-footer-height) * 2) - env(safe-area-inset-bottom, 0px)
-  );
+  --slider-chrome-offset: calc((var(--header-footer-height) * 2) + env(safe-area-inset-bottom, 0px));
+  --slider-viewport-size: calc(100vh - var(--slider-chrome-offset));
+  height: var(--slider-viewport-size);
+  min-height: var(--slider-viewport-size);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
+@supports (height: 100dvh) {
+  .slider {
+    --slider-viewport-size: calc(100dvh - var(--slider-chrome-offset));
+  }
+}
+
+@supports (height: 100svh) {
+  .slider {
+    --slider-viewport-size: min(
+      calc(100dvh - var(--slider-chrome-offset)),
+      calc(100svh - var(--slider-chrome-offset))
+    );
+  }
+}
+
 .slide-container {
-  --card-max-height: calc(
-    100dvh - (var(--header-footer-height) * 2) - env(safe-area-inset-bottom, 0px)
-  );
+  --card-max-height: var(--slider-viewport-size);
   --card-available-width: calc(
     (
       100%
@@ -260,12 +270,6 @@ pI{
 }
 
 @media (max-width: 640px) {
-  .slider {
-    height: calc(
-      100dvh - (var(--header-footer-height) * 2) - env(safe-area-inset-bottom, 0px)
-    );
-  }
-
   .slide-container {
     --card-gap: max(48px, 8vw);
     --cards-per-view: 1;
