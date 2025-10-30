@@ -193,7 +193,7 @@ h5{
   background: currentColor;
   transform-origin: left;
   transform: scaleX(0);
-  transition: transform 150ms ease-in-out;
+  transition: transform 400ms cubic-bezier(.2,.51,.56,.44);
 }
 
 .site-links__link:hover::after,
@@ -324,7 +324,7 @@ h4 {
 }
 
 .aboutDesktop-image {
-  width: min(40%, 500px);
+  width: min(40%, 400px);
   height: --var(width);
   box-shadow:
     8px 8px 24px color-mix(in srgb, var(--color-three) 18%, transparent),

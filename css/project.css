@@ -313,6 +313,12 @@ pI{
     align-items: center;
   }
 
+  .slideTitle > h2,
+  .slideTitle > h3d {
+    align-self: flex-start;
+    text-align: left;
+  }
+
   .slideEmpty {
     display: none;
   }
