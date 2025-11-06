@@ -243,11 +243,14 @@ pI{
 
 
 .slideimg{
-  width: 90%;
+  width: 80%;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 .slideimgborder{
-  width: 90%;
+  width: 80%;
   border: 1px #2a2a2a;
 }
 
@@ -262,6 +265,48 @@ pI{
     --cards-per-view: 3;
   }
 }
+
+@media (min-width: 641px) {
+  .slide--media {
+    --caption-reserved-height: clamp(56px, 6vw, 120px);
+    --slide-media-padding: clamp(12px, 2vh, 28px);
+    flex: 0 0 auto;
+    width: max-content;
+    max-width: 80%;
+    min-width: var(--card-width, 280px);
+    max-height: var(--card-max-height, calc(100dvh - 120px));
+    height: 100%;
+    aspect-ratio: auto;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(12px, 2vh, 28px);
+    padding-block: var(--slide-media-padding);
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .slide--media .slideimg {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: max(
+      0px,
+      calc(
+        var(--card-max-height, calc(100dvh - 120px))
+        - var(--caption-reserved-height)
+        - (var(--slide-media-padding) * 2)
+      )
+    );
+  }
+
+  .slide--media pCaption {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
 
 @media (max-width: 1000px) {
   .slide-container {
@@ -304,6 +349,7 @@ pI{
 
   .slideimg{
     align-self: center;
+    width: 100%;
   }
   pCaption{
     align-self: center;

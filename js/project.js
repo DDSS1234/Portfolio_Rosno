@@ -5,6 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const slides = Array.from(catalog.querySelectorAll('.slide'));
+    slides.forEach((slide) => {
+    if (slide.querySelector('.slideimg')) {
+      slide.classList.add('slide--media');
+    } else {
+      slide.classList.add('slide--text');
+    }
+  });
   const indicatorContainer = document.querySelector('[data-catalog-indicators]');
   let indicatorFill = null;
   let scrollAnimationFrame = null;
